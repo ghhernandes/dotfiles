@@ -12,8 +12,8 @@ configs.setup {
 }
 
 -- Fold expressions. command: zo, zc
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+--vim.opt.foldmethod = "expr"
+--vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 local cmp_nvim_lsp_config = require("cmp_nvim_lsp")
 

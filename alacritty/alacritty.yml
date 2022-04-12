@@ -1,61 +1,60 @@
-# Dracula theme for Alacritty
-# https://draculatheme.com/alacritty
-#
-# Color palette
-# https://spec.draculatheme.com
-#
-# Template
-# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
-
+# Colors (Terminal.app)
 colors:
+  # Default colors
   primary:
-    background: '#111111'
-    foreground: '#f8f8f2'
-    bright_foreground: '#ffffff'
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
-  search:
-    matches:
-      foreground: '#44475a'
-      background: '#50fa7b'
-    focused_match:
-      foreground: '#44475a'
-      background: '#ffb86c'
-    bar:
-      background: '#282a36'
-      foreground: '#f8f8f2'
-  hints:
-    start:
-      foreground: '#282a36'
-      background: '#f1fa8c'
-    end:
-      foreground: '#f1fa8c'
-      background: '#282a36'
-  line_indicator:
-    foreground: None
-    background: None
-  selection:
-    text: CellForeground
-    background: '#44475a'
+    background: '0x000000'
+    foreground: '0xb6b6b6'
+
+  # Normal colors
   normal:
-    black: '#21222c'
-    red: '#ff5555'
-    green: '#50fa7b'
-    yellow: '#f1fa8c'
-    blue: '#bd93f9'
-    magenta: '#ff79c6'
-    cyan: '#8be9fd'
-    white: '#f8f8f2'
+    black:   '0x000000'
+    red:     '0x990000'
+    green:   '0x00a600'
+    yellow:  '0x999900'
+    blue:    '0x0000b2'
+    magenta: '0xb200b2'
+    cyan:    '0x00a6b2'
+    white:   '0xbfbfbf'
+
+  # Bright colors
   bright:
-    black: '#6272a4'
-    red: '#ff6e6e'
-    green: '#69ff94'
-    yellow: '#ffffa5'
-    blue: '#d6acff'
-    magenta: '#ff92df'
-    cyan: '#a4ffff'
-    white: '#ffffff'
+    black:   '0x666666'
+    red:     '0xe50000'
+    green:   '0x00d900'
+    yellow:  '0xe5e500'
+    blue:    '0x0000ff'
+    magenta: '0xe500e5'
+    cyan:    '0x00e5e5'
+    white:   '0xe5e5e5'
+
+# Colors (Hyper)
+#colors:
+#  # Default colors
+#  primary:
+#    background: '0x000000'
+#    foreground: '0xffffff'
+#  cursor:
+#    text: '0xF81CE5'
+#    cursor: '0xffffff'
+#
+#  # Normal colors
+#  normal:
+#    black:   '0x000000'
+#    red:     '0xfe0100'
+#    green:   '0x33ff00'
+#    yellow:  '0xfeff00'
+#    blue:    '0x0066ff'
+#    magenta: '0xcc00ff'
+#    cyan:    '0x00ffff'
+#    white:   '0xd0d0d0'
+#
+#  # Bright colors
+#  bright:
+#    black:   '0x808080'
+#    red:     '0xfe0100'
+#    green:   '0x33ff00'
+#    yellow:  '0xfeff00'
+#    blue:    '0x0066ff'
+#    magenta: '0xcc00ff'
+#    cyan:    '0x00ffff'
+#    white:   '0xFFFFFF'

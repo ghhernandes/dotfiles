@@ -191,9 +191,9 @@
 # Colors (Tomorrow Night)
 colors:
   # Default colors
-  primary:
-    background: '#111111'
-    foreground: '#c5c8c6'
+   primary:
+     background: '#111111'
+     foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #

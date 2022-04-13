@@ -18,8 +18,6 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
-    --use 'w0rp/ale'
-
     use 'tpope/vim-fugitive'
 
     use {
@@ -32,9 +30,14 @@ return require('packer').startup(function(use)
         requires = {{'nvim-lua/plenary.nvim'}}
     }
 
-    use "morhetz/gruvbox"
-    use "Mofiqul/dracula.nvim"
-    use "projekt0n/github-nvim-theme"
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = {
+          --'kyazdani42/nvim-web-devicons', -- optional, for file icon
+        },
+        config = function() require'nvim-tree'.setup {} end
+    }
 
+    use "ellisonleao/gruvbox.nvim"
 end)
 

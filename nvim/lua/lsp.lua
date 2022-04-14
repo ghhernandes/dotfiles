@@ -2,7 +2,6 @@
 -- # Treesitter settings
 local configs = require("nvim-treesitter.configs")
 configs.setup {
-    ensure_installed = "maintained", -- Only use parses that are maintained
     highlight = {
         enable = true,
     },
@@ -15,10 +14,10 @@ configs.setup {
 --vim.opt.foldmethod = "expr"
 --vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-local cmp_nvim_lsp_config = require("cmp_nvim_lsp")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local cmp_nvim_lsp_config = require("cmp_nvim_lsp")
 capabilities = cmp_nvim_lsp_config.update_capabilities(capabilities)
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

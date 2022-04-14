@@ -9,6 +9,8 @@ return require('packer').startup(function(use)
     use "nvim-lua/plenary.nvim"
     use "nvim-lua/popup.nvim"
 
+    --use "ambv/black"
+
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -23,6 +25,11 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
+    }
+
+    use {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install"
     }
 
     use {

@@ -1,10 +1,8 @@
-require('plugins')
-require("lsp")
-require("completer")
-require("themes")
-require("tree")
-
-vim.cmd([[
+lua require('plugins')
+lua require("lsp")
+lua require("completer")
+lua require("themes")
+lua require("tree")
 
 set termguicolors
 
@@ -38,6 +36,10 @@ set noswapfile
 set wildignore+=*.pyc
 set wildignore+=**/.git/*
 
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+
 " move line or visually selected block - alt+j/k
 tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
@@ -68,4 +70,4 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-]])
+"nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>

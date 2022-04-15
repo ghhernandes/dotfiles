@@ -1,8 +1,5 @@
 lua require('plugins')
-lua require("lsp")
-lua require("completer")
-lua require("themes")
-lua require("tree")
+lua require("ghhernandes")
 
 set termguicolors
 

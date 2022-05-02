@@ -1,25 +1,37 @@
 lua require('plugins')
 lua require("ghhernandes")
 
+let g:gruvbox_underline=1
+let g:gruvbox_bold=1
+let g:gruvbox_italic=1
+let g:gruvbox_transparent_bg=1
+
 set termguicolors
+set mouse=a
+
+highlight Normal ctermbg=NONE guibg=NONE
+
+set encoding=utf-8
 
 set showmatch
 set ignorecase
 set hlsearch
 set incsearch
 
-set encoding=utf-8
-
-set smarttab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set cc=80
 
-set expandtab
+set smarttab
+"set smartindent
+set autoindent " copy indent from current line when starting a new line
+
+set showcmd
+
+set expandtab " enter spaces when tab is pressed
 set splitbelow
 set splitright
-set autoindent
-set cc=80
 
 set clipboard=unnamedplus
 

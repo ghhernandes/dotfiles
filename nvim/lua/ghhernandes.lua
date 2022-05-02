@@ -1,5 +1,5 @@
 -- # Themes
-vim.opt.termguicolors = true
+--vim.opt.termguicolors = true
 vim.o.background = "dark"
 vim.g.gruvbox_contrast_dark = "hard"
 vim.cmd([[colorscheme gruvbox]])
@@ -20,8 +20,8 @@ configs.setup {
 }
 
 -- Fold expressions. command: zo, zc
---vim.opt.foldmethod = "expr"
---vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -95,15 +95,15 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
+--    ['<Tab>'] = function(fallback)
+--      if cmp.visible() then
+--        cmp.select_next_item()
+--      elseif luasnip.expand_or_jumpable() then
+--        luasnip.expand_or_jump()
+--      else
+--        fallback()
+--      end
+--    end,
     ['<S-Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()

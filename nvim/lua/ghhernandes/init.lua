@@ -1,2 +1,2 @@
-require('ghhernandes.packer')
-require('ghhernandes.set')
+require("ghhernandes.set")
+require("ghhernandes.remap")

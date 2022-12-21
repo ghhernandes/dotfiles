@@ -1,51 +1,66 @@
-local Remap = require("ghhernandes.keymap")
-local nnoremap = Remap.nnoremap
+local lsp = require("lsp-zero")
 
--- Mappings 
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-nnoremap('<space>e', function() vim.diagnostic.open_float() end)
-nnoremap('[d', function() vim.diagnostic.goto_prev() end)
-nnoremap(']d', function() vim.diagnostic.goto_next() end)
-nnoremap('<space>q', function() vim.diagnostic.setloclist() end)
+lsp.preset("recommended")
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+lsp.ensure_installed({
+    'eslint',
+    'sumneko_lua',
+    'rust_analyzer',
+    "pyright",
+    "gopls",
+})
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  nnoremap('gD', function() vim.lsp.buf.declaration() end)
-  nnoremap('gd', function() vim.lsp.buf.definition() end)
-  nnoremap('K', function() vim.lsp.buf.hover() end)
-  nnoremap('gi', function() vim.lsp.buf.implementation() end)
-  nnoremap('<C-k>', function() vim.lsp.buf.signature_help() end)
-  nnoremap('<space>wa', function() vim.lsp.buf.add_workspace_folder() end)
-  nnoremap('<space>wr', function() vim.lsp.buf.remove_workspace_folder() end)
-  nnoremap('<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end)
-  nnoremap('<space>D', function() vim.lsp.buf.type_definition() end)
-  nnoremap('<space>rn', function() vim.lsp.buf.rename() end)
-  nnoremap('<space>ca', function() vim.lsp.buf.code_action() end)
-  nnoremap('gr', function() vim.lsp.buf.references() end)
-  nnoremap('<space>f', function() vim.lsp.buf.formatting() end)
-end
+-- Fix Undefined global 'vim'
+lsp.configure('sumneko_lua', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local cmp_mappings = lsp.defaults.cmp_mappings({
+    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ["<C-Space>"] = cmp.mapping.complete(),
+})
 
-lspconfig = require("lspconfig")
+lsp.setup_nvim_cmp({
+    mapping = cmp_mappings
+})
 
-lspconfig['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
+lsp.set_preferences({
+    suggest_lsp_servers = false,
+    sign_icons = {
+        error = 'E',
+        warn = 'W',
+        hint = 'H',
+        info = 'I'
+    }
+})
 
-lspconfig['gopls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
+lsp.on_attach(function(client, bufnr)
+    local opts = { buffer = bufnr, remap = false }
+
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+end)
+
+lsp.setup()
+
+vim.diagnostic.config({
+    virtual_text = true,
+})

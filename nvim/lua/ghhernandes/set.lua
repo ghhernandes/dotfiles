@@ -10,6 +10,9 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -26,6 +29,20 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
+vim.o.updatetime = 250
+vim.o.timeout = true
+vim.o.timeoutlen = 300
 
 vim.opt.colorcolumn = "80"
+
+-- Sync clipboard between OS and Neovim.
+-- See `:help 'clipboard'`
+vim.o.clipboard = 'unnamedplus'
+
+-- better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+vim.cmd('let g:loaded_python3_provider = 0')
+vim.cmd('let g:loaded_ruby_provider = 0')
+vim.cmd('let g:loaded_node_provider = 0')
+vim.cmd('let g:loaded_perl_provider = 0')

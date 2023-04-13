@@ -1,6 +1,15 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "gopls", "pyright" },
+    ensure_installed = {
+        "rust_analyzer",
+        "gopls",
+        "pyright",
+        "tsserver",
+        "terraformls",
+        "bashls",
+        "dockerls",
+        "vimls",
+    },
 }
 
 require("mason-lspconfig").setup_handlers {

@@ -21,6 +21,8 @@ return require('packer').startup(function(use)
         use 'tpope/vim-fugitive'
         use 'mbbill/undotree'
 
+        use 'folke/trouble.nvim'
+
         use 'ellisonleao/gruvbox.nvim'
         use 'folke/tokyonight.nvim'
     end)

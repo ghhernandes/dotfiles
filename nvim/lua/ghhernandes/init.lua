@@ -5,4 +5,4 @@ require("ghhernandes.set")
 require("ghhernandes.remap")
 require("ghhernandes.filetype")
 require("ghhernandes.trouble")
-
+require("ghhernandes.telescope")

@@ -42,6 +42,8 @@ vim.o.clipboard = 'unnamedplus'
 -- better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+vim.cmd('language en_US.UTF-8')
+
 vim.cmd('let g:loaded_python3_provider = 0')
 vim.cmd('let g:loaded_ruby_provider = 0')
 vim.cmd('let g:loaded_node_provider = 0')

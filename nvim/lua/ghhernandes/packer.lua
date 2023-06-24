@@ -9,6 +9,10 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip'         -- Snippets plugin
 
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use 'leoluz/nvim-dap-go'
+
     use {
         'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
@@ -24,7 +28,9 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
 
     use 'folke/trouble.nvim'
+    use 'folke/flash.nvim'
 
     use 'ellisonleao/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
+    use 'rose-pine/neovim'
 end)

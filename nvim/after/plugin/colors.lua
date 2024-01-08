@@ -1,7 +1,7 @@
 require("gruvbox").setup({
     undercurl = true,
     underline = true,
-    bold = true,
+    bold = false,
     italic = {
         strings = true,
         operators = true,
@@ -13,7 +13,7 @@ require("gruvbox").setup({
     invert_tabline = false,
     invert_intend_guides = false,
     inverse = true, -- invert background for search, diffs, statuslines and errors
-    contrast = "",  -- can be "hard", "soft" or empty string
+    contrast = "hard",  -- can be "hard", "soft" or empty string
     palette_overrides = {},
     overrides = {},
     dim_inactive = false,
@@ -21,13 +21,14 @@ require("gruvbox").setup({
 })
 
 require("rose-pine").setup({
-    disable_background = true,
-    disable_float_background = true,
-    disable_italics = true,
+    styles = {
+        italic = false,
+        transparency = true,
+    },
 })
 
 function MyColors(color)
-    color = color or "rose-pine"
+    color = color or "gruvbox"
     vim.cmd.colorscheme(color)
 end
 

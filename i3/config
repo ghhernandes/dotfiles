@@ -15,9 +15,9 @@ set $mod Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 9
 
-default_border pixel 2
+default_border pixel 1
 default_floating_border pixel 2
 
 # Start XDG autostart .desktop files using dex. See also
@@ -60,17 +60,14 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop 
-#bindsym $mod+d exec "rofi -modi drun,run -show drun"
+
 # A more modern dmenu replacement is rofi:
-#bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+bindsym mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -154,8 +151,6 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-workspace 9 output HDMI-0
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -189,18 +184,32 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-# Suspend
-bindsym $mod+Shift+period exec systemctl suspend
+
+mode "system" {
+    bindsym l exec loginctl lock-session, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
+    bindsym e exec i3-msg exit, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym Control+Shift+s mode "system"
+
 # Screen config
 exec picom
 
 # Wallpapers
 exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/ --randomize 
-# Authentication manager
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id lxpolkit
+
+exec --no-startup-id xfce-polkit
+
+# set color temperature of display (daylight default: 6500K)
+#exec_always --no-startup-id redshift -P -O 5000
 
 bar {
-	output primary
+    position top
+    output primary
     status_command i3status
 }

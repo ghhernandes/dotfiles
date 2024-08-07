@@ -15,7 +15,7 @@ set $mod Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 9
+font pango:DejaVu Sans Mono 8
 
 default_border pixel 1
 default_floating_border pixel 2
@@ -210,6 +210,5 @@ exec --no-startup-id xfce-polkit
 
 bar {
     position top
-    output primary
     status_command i3status
 }

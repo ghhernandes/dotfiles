@@ -20,5 +20,8 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-alias '?'="mods -f"
+alias tf="terraform"
+alias k="kubectl"
+
+alias "?"="mods -m gpt-4o"
 alias '??'="mods -C"

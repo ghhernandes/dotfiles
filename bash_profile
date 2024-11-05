@@ -10,5 +10,10 @@ if [[ -z "${OPENAPI_API_KEY}" && -e "$HOME/.config/gpt/token" ]]; then
 fi
 
 # User specific environment and startup programs
+#
+export EDITOR=nvim
+export LANG=en_US.UTF-8
+
+
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin

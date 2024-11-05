@@ -5,7 +5,6 @@ require("mason-lspconfig").setup {
         "rust_analyzer",
         "gopls",
         "pyright",
-        "tsserver",
         "terraformls",
         "bashls",
         "dockerls",

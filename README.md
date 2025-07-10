@@ -8,11 +8,16 @@ dnf update -y
 
 # i3 desktop dependencies
 
-dnf install i3 vim tmux kitty picom feh
+dnf install i3 vim tmux kitty picom feh rofi redshift
 
 # common dependencies
 
-dnf install vim tmux fzf htop btop pavucontrol
+dnf install fzf htop btop pavucontrol
+
+# install & configure zsh/oh-my-zsh
+
+dnf install zsh
+chsh -s $(which zsh)
 
 # RPM fusion nonfree and free setup
 

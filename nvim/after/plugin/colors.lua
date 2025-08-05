@@ -20,13 +20,6 @@ require("gruvbox").setup({
     transparent_mode = true,
 })
 
-require("rose-pine").setup({
-    styles = {
-        italic = false,
-        transparency = true,
-    },
-})
-
 function MyColors(color)
     color = color or "gruvbox"
     vim.cmd.colorscheme(color)

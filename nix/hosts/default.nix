@@ -18,7 +18,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        home-manager.users.gh = import ../home-manager/gh.nix;
+        home-manager.users.gh = import ./ghstation/home.nix;
       }
     ];
   };

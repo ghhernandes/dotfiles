@@ -2,26 +2,12 @@
 
 {
   imports = [
-    ./modules/clojure.nix
-    ./modules/tmux.nix
-    ./modules/ai.nix
-  ];
-  home.stateVersion = "25.11"; 
+    ./common.nix
+   ];
 
   home.username = "gh";
   home.homeDirectory = "/home/gh";
 
-  home.packages = with pkgs; [
-    neovim
-
-    vesktop
-    spotify
-    slack
-  ];
-
-  programs.vscode.enable = true;
-
-  programs.firefox.enable = true;
   programs.git = {
     enable = true;
     settings = {
@@ -37,8 +23,6 @@
       enable = true;
       plugins = [ "git" "fzf"];
       theme = "simple";
-    }; 
+    };
   };
-
-  programs.home-manager.enable = true;
 }

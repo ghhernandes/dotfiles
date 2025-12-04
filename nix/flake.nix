@@ -21,8 +21,8 @@
 
     homeConfigurations."gh" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      
-      modules = [ ./home-manager/gh.nix ]; 
+
+      modules = [ ./home-manager/home.nix ];
     };
   };
 }

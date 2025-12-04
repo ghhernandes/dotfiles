@@ -5,6 +5,7 @@
     ../modules/clojure.nix
     ../modules/git.nix
     ../modules/tmux.nix
+    ../modules/ai.nix
   ];
   home.stateVersion = "25.11"; 
 
@@ -18,6 +19,8 @@
     spotify
     slack
   ];
+
+  programs.vscode.enable = true;
 
   programs.firefox.enable = true;
   programs.git = {

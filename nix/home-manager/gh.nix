@@ -2,10 +2,9 @@
 
 {
   imports = [
-    ../modules/clojure.nix
-    ../modules/git.nix
-    ../modules/tmux.nix
-    ../modules/ai.nix
+    ./modules/clojure.nix
+    ./modules/tmux.nix
+    ./modules/ai.nix
   ];
   home.stateVersion = "25.11"; 
 

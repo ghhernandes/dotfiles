@@ -1,11 +1,21 @@
 # dotfiles
 
-Rebuild system:
+Build NixOS system:
 ```bash
-nixos-rebuild switch --flake .#ghstation
+cd nix
+sudo nixos-rebuild switch --flake .#<host>
+# Example: sudo nixos-rebuild switch --flake .#ghstation
 ```
 
-Rebuild home-manager (standalone):
+Build home-manager:
 ```bash
-home-manager switch --flake .#gh
+cd nix
+home-manager switch --flake .#<user>
+# Example: home-manager switch --flake .#gh
+```
+
+Update flake:
+```bash
+cd nix
+nix flake update
 ```

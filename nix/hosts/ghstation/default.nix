@@ -24,6 +24,7 @@
   services.xserver.enable = true;
 
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
 
   services.xserver.xkb = {
@@ -51,7 +52,20 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
+  programs.gamemode.enable = true;
+
+  programs.appimage.enable = true;
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    lutris
+
+    heroic
+    gogdl
+  ];
 }
 

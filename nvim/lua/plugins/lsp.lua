@@ -1,15 +1,29 @@
-local lspconfig = require('lspconfig')
+-- Using new vim.lsp.config API (Neovim 0.11+)
+-- See :help lspconfig-nvim-0.11
 
-lspconfig.gopls.setup({
-    settings = {
-        gopls = {
-            analyses = {
-                unusedparams = true,
-            },
-            staticcheck = true,
-        },
+-- Go LSP
+vim.lsp.config.gopls = {
+  cmd = { 'gopls' },
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_markers = { 'go.work', 'go.mod', '.git' },
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
     },
-})
+  },
+}
+vim.lsp.enable('gopls')
+
+-- Clojure LSP
+vim.lsp.config.clojure_lsp = {
+  cmd = { 'clojure-lsp' },
+  filetypes = { 'clojure', 'edn' },
+  root_markers = { 'project.clj', 'deps.edn', 'build.boot', 'shadow-cljs.edn', '.git' },
+}
+vim.lsp.enable('clojure_lsp')
 
 -- Diagnostic settings
 -- Disable inline diagnostics

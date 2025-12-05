@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, ... }:
+{ nixpkgs, home-manager, inputs, ... }:
 
 let
   system = "x86_64-linux";
@@ -19,6 +19,7 @@ in
         home-manager.useUserPackages = true;
 
         home-manager.users.gh = import ./ghstation/home.nix;
+        home-manager.extraSpecialArgs = { inherit inputs system; };
       }
     ];
   };

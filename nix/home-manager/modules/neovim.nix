@@ -3,6 +3,52 @@
 {
   programs.neovim = {
     enable = true;
+    viAlias = true;
+    vimAlias = true;
+
+    # LSP servers and tools managed by Nix
+    extraPackages = with pkgs; [
+      gopls
+      clojure-lsp
+
+      # lua-language-server
+      # rust-analyzer
+      # typescript-language-server
+    ];
+
+    plugins = with pkgs.vimPlugins; [
+      plenary-nvim
+
+      nvim-lspconfig
+
+      # Completion
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp_luasnip
+      luasnip
+
+      # Navigation
+      harpoon2
+      telescope-nvim
+      telescope-fzf-native-nvim
+      nvim-spectre
+
+      # Treesitter
+      nvim-treesitter.withAllGrammars
+      nvim-treesitter-refactor
+
+      # Git
+      vim-fugitive
+      undotree
+
+      # Clojure
+      conjure               # REPL integration (vim-iced not available in nixpkgs)
+      vim-sexp              # Structural editing for Lisp
+      vim-sexp-mappings-for-regular-people
+
+      # Colorscheme
+      gruvbox-nvim
+    ];
   };
 
   xdg.configFile."nvim" = {

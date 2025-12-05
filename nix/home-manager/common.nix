@@ -5,7 +5,6 @@
     ./modules/clojure.nix
     ./modules/tmux.nix
     ./modules/neovim.nix
-    ./modules/ai.nix
   ];
 
   # User settings
@@ -33,6 +32,10 @@
     };
   };
 
+  programs.claude-code = {
+    enable = true;
+  };
+
   programs.home-manager.enable = true;
 
   # CLI tools
@@ -40,5 +43,6 @@
     btop
     fzf
     tree
+    github-cli
   ];
 }

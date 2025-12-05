@@ -43,8 +43,8 @@
 
       # Clojure
       conjure               # REPL integration (vim-iced not available in nixpkgs)
-      vim-sexp              # Structural editing for Lisp
-      vim-sexp-mappings-for-regular-people
+      { plugin = vim-sexp; optional = true; }  # Lazy-loaded for Clojure
+      { plugin = vim-sexp-mappings-for-regular-people; optional = true; }
 
       # Colorscheme
       gruvbox-nvim

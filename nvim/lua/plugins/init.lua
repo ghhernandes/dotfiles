@@ -10,6 +10,7 @@ require("plugins.cmp")
 require("plugins.telescope")
 require("plugins.treesitter")
 require("plugins.harpoon")
+require("plugins.vim-sexp")
 
 -- Plugins not currently installed (configs kept for reference)
 -- To enable: add plugin to nix/home-manager/modules/neovim.nix

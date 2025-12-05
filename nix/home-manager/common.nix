@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -7,16 +7,36 @@
     ./modules/neovim.nix
     ./modules/ai.nix
   ];
-  programs.vscode.enable = true;
-  programs.firefox.enable = true;
-  programs.home-manager.enable = true;
 
+  # User settings
+  home.username = lib.mkDefault "gh";
+  home.homeDirectory = lib.mkDefault "/home/gh";
   home.stateVersion = "25.11";
 
+  # Git configuration
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "Gabriel Hernandes";
+      user.email = "ghh.hernandes@gmail.com";
+    };
+  };
+
+  # Zsh configuration
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "fzf"];
+      theme = "simple";
+    };
+  };
+
+  programs.home-manager.enable = true;
+
+  # CLI tools
   home.packages = with pkgs; [
-    vesktop
-    spotify
-    slack
     btop
     fzf
     tree

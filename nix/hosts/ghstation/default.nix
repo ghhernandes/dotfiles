@@ -44,9 +44,6 @@
 
   programs.zsh.enable = true;
 
-  programs._1password.enable = true;
-  programs._1password-gui.enable = true;
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -54,11 +51,7 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    zsh
-    btop
-    fzf
-    tree
-  ];
+  programs._1password.enable = true;
+  programs._1password-gui.enable = true;
 }
 

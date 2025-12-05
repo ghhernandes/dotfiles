@@ -10,6 +10,7 @@
     extraPackages = with pkgs; [
       gopls
       clojure-lsp
+      nixd
 
       # lua-language-server
       # rust-analyzer
@@ -42,12 +43,10 @@
       undotree
 
       # Clojure
-      conjure               # REPL integration (vim-iced not available in nixpkgs)
+      conjure
       { plugin = vim-sexp; optional = true; }  # Lazy-loaded for Clojure
       { plugin = vim-sexp-mappings-for-regular-people; optional = true; }
 
-      # Colorscheme
-      gruvbox-nvim
     ];
   };
 

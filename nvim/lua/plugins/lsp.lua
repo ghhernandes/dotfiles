@@ -25,6 +25,14 @@ vim.lsp.config.clojure_lsp = {
 }
 vim.lsp.enable('clojure_lsp')
 
+-- Nix LSP
+vim.lsp.config.nixd = {
+  cmd = { 'nixd' },
+  filetypes = { 'nix' },
+  root_markers = { 'flake.nix', 'flake.lock', '.git' },
+}
+vim.lsp.enable('nixd')
+
 -- Diagnostic settings
 -- Disable inline diagnostics
 vim.diagnostic.config {

@@ -1,9 +1,7 @@
-{ config, pkgs, inputs, system, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports = [ ../../home-manager/home.nix ];
-
-  home.packages = with pkgs; [
-    inputs.claude-desktop.packages.${system}.claude-desktop
+  imports = [
+    ../../home-manager/profiles/personal.nix
   ];
 }

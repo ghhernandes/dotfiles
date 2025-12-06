@@ -13,5 +13,7 @@
     vesktop
     spotify
     slack
+
+    devenv
   ];
 }

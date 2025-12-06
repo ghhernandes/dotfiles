@@ -21,6 +21,7 @@
   };
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.trusted-users = [ "root" "gh" ];
 
   system.stateVersion = "25.11"; 
 }

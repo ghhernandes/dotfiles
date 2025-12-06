@@ -11,7 +11,7 @@
   users.users.gh = {
     isNormalUser = true;
     description = "Gabriel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "gamemode" ];
     shell = pkgs.zsh;
   };
 

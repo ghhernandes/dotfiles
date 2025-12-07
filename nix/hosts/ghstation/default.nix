@@ -2,8 +2,9 @@
 
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
+      ./poweroff-corsair-leds.nix
     ];
 
   nixpkgs.config.allowUnfree = true;

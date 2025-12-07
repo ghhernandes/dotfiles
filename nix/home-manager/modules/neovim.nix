@@ -12,6 +12,10 @@
       clojure-lsp
       nixd
 
+      # Runtime dependencies for eca-nvim
+      curl
+      unzip
+
       # lua-language-server
       # rust-analyzer
       # typescript-language-server
@@ -19,6 +23,7 @@
 
     plugins = with pkgs.vimPlugins; [
       plenary-nvim
+      nui-nvim
 
       nvim-lspconfig
 
@@ -47,6 +52,8 @@
       { plugin = vim-sexp; optional = true; }  # Lazy-loaded for Clojure
       { plugin = vim-sexp-mappings-for-regular-people; optional = true; }
 
+      # AI Assistant
+      eca-nvim
     ];
   };
 

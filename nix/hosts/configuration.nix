@@ -1,5 +1,8 @@
 { config, nixpkgs, ... }:
 {
+  # Apply custom overlays
+  nixpkgs.overlays = import ../overlays;
+
   nixpkgs.config.allowUnfree = true;
 
   system.autoUpgrade.enable = true;

@@ -12,10 +12,16 @@
 
   outputs = { self, nixpkgs, home-manager, ...}@inputs:
   let
+    # Import custom overlays
+    overlays = import ./overlays;
+
     # Helper function to create home-manager configuration
     mkHome = { system, profile }:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = overlays;
+        };
         modules = [ profile ];
       };
   in

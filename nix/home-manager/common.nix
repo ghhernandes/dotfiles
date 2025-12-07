@@ -1,10 +1,16 @@
+# common.nix file is to define the baseline environment 
+# that must exists on every single machine
+
+# use profiles/ to create group of different modules.
+# Eg: server, homelab, etc.
+
 { config, pkgs, lib, ... }:
 
 {
   imports = [
-    ./modules/clojure.nix
     ./modules/tmux.nix
     ./modules/neovim.nix
+    ./modules/zsh.nix
   ];
 
   # User settings
@@ -21,17 +27,6 @@
     };
   };
 
-  # Zsh configuration
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "fzf"];
-      theme = "simple";
-    };
-  };
-
   programs.claude-code = {
     enable = true;
   };
@@ -43,6 +38,6 @@
     btop
     fzf
     tree
-    github-cli
+    ripgrep
   ];
 }

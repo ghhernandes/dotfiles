@@ -3,17 +3,15 @@
 {
   imports = [
     ../common.nix
+    ../modules/clojure.nix
+    ../modules/cli.nix
   ];
 
-  # GUI Applications for personal machine
-  programs.firefox.enable = true;
-  programs.vscode.enable = true;
-
   home.packages = with pkgs; [
+    firefox
+    vscode
     vesktop
     spotify
     slack
-
-    devenv
   ];
 }

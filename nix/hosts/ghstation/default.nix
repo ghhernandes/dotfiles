@@ -28,6 +28,11 @@
   services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
 
+  # Disable auto-suspend system-wide
+  services.logind.extraConfig = ''
+    IdleAction=ignore
+  '';
+
   services.xserver.xkb = {
     layout = "us";
     variant = "";

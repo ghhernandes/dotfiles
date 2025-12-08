@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ./poweroff-corsair-leds.nix
+      ./node-exporter.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -16,14 +17,15 @@
     shell = pkgs.zsh;
   };
 
-  zramSwap.enable = true;
-
   networking.hostName = "ghstation"; 
-
   networking.networkmanager.enable = true;
 
-  services.xserver.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
+  zramSwap.enable = true;
+
+  services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;

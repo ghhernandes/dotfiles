@@ -18,9 +18,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
--- Trouble
-vim.keymap.set("n", "<leader>t", vim.cmd.TroubleToggle)
-
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
 
@@ -37,20 +34,3 @@ end)
 
 -- Fugitive
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
--- Spectre
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre"
-})
-
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
-})
-
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = "Search current word"
-})
-
-vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file"
-})

@@ -55,18 +55,18 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  programs.gamemode.enable = true;
-
   programs.appimage.enable = true;
   services.flatpak.enable = true;
   xdg.portal.enable = true;
 
-  programs._1password.enable = true;
-  programs._1password-gui.enable = true;
-
   environment.systemPackages = with pkgs; [
-    lutris
+    _1password-cli
+    _1password-gui
 
+    gamemode
+    mangohud
+
+    lutris
     heroic
     gogdl
   ];

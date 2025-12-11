@@ -25,4 +25,4 @@ function MyColors(color)
     vim.cmd.colorscheme(color)
 end
 
-MyColors("retrobox")
+--MyColors("retrobox")

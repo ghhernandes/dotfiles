@@ -9,9 +9,12 @@
 
   home.packages = with pkgs; [
     firefox
+    gimp
     vscode
     vesktop
     spotify
     slack
+    yubikey-manager
+    yubioath-flutter
   ];
 }

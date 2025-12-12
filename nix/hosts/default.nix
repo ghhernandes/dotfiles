@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, inputs, system, ... }:
+{ nixpkgs, home-manager, lanzaboote, inputs, system, ... }:
 
 let
   lib = nixpkgs.lib;
@@ -10,6 +10,8 @@ in
     modules = [
       ./configuration.nix
       ./ghstation
+
+      lanzaboote.nixosModules.lanzaboote
 
       home-manager.nixosModules.home-manager
 

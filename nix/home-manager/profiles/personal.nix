@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     firefox
+    google-chrome
     gimp
     vscode
     vesktop

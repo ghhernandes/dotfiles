@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, system, ... }:
+{ inputs, config, pkgs, lanzaboote, system, ... }:
 
 {
   imports =
@@ -69,6 +69,8 @@
     lutris
     heroic
     gogdl
+
+    sbctl
   ];
 }
 

@@ -28,11 +28,17 @@
       cmp_luasnip
       luasnip
 
+      dracula-nvim
+      tokyonight-nvim
+      lualine-nvim
+
       # Navigation
+      flash-nvim
       harpoon2
       telescope-nvim
       telescope-fzf-native-nvim
       nvim-spectre
+      trouble-nvim
 
       # Treesitter
       nvim-treesitter.withAllGrammars
@@ -40,13 +46,12 @@
 
       # Git
       vim-fugitive
-      undotree
+      diffview-nvim
 
       # Clojure
       conjure
-      { plugin = vim-sexp; optional = true; }  # Lazy-loaded for Clojure
-      { plugin = vim-sexp-mappings-for-regular-people; optional = true; }
-
+      vim-sexp
+      vim-sexp-mappings-for-regular-people
     ];
   };
 

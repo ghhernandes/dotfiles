@@ -1,8 +1,11 @@
 -- Using new vim.lsp.config API (Neovim 0.11+)
 -- See :help lspconfig-nvim-0.11
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 -- Go LSP
 vim.lsp.config.gopls = {
+  capabilities = capabilities,
   cmd = { 'gopls' },
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
   root_markers = { 'go.work', 'go.mod', '.git' },
@@ -19,6 +22,7 @@ vim.lsp.enable('gopls')
 
 -- Clojure LSP
 vim.lsp.config.clojure_lsp = {
+  capabilities = capabilities,
   cmd = { 'clojure-lsp' },
   filetypes = { 'clojure', 'edn' },
   root_markers = { 'project.clj', 'deps.edn', 'build.boot', 'shadow-cljs.edn', '.git' },
@@ -27,6 +31,7 @@ vim.lsp.enable('clojure_lsp')
 
 -- Nix LSP
 vim.lsp.config.nixd = {
+  capabilities = capabilities,
   cmd = { 'nixd' },
   filetypes = { 'nix' },
   root_markers = { 'flake.nix', 'flake.lock', '.git' },

@@ -6,6 +6,7 @@
     gemini-cli
     claude-code
 
+    lazygit
     glow  # Markdown viewer
     mods  # AI LLM on the CLI
   ];

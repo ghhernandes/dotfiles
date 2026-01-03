@@ -13,7 +13,6 @@
     ./modules/zsh.nix
   ];
 
-  # Allow unfree packages (required for claude-code, etc)
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;

@@ -1,10 +1,30 @@
 { config, pkgs, ... }:
-
 {
+  services.prometheus.exporters.node = {
+    enable = true;
+    port = 9000;
+  };
+
   # OpenRGB for controlling Corsair RAM LEDs
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
+  };
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 47984 47989 47990 48010 ];
+    allowedUDPPortRanges = [
+      { from = 47998; to = 48000; }
+      { from = 8000; to = 8010; }
+    ];
   };
 
   # Systemd service to disable Corsair RAM LEDs at boot
@@ -22,4 +42,5 @@
   environment.systemPackages = with pkgs; [
     openrgb
   ];
+
 }

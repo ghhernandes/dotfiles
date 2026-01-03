@@ -4,9 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./poweroff-corsair-leds.nix
-      ./node-exporter.nix
-      ./sunshine.nix
+      ./services.nix
     ];
 
   users.users.gh = {

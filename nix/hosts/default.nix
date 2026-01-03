@@ -2,16 +2,20 @@
 
 let
   lib = nixpkgs.lib;
-in
-{
-  ghstation = lib.nixosSystem {
+
+  hostDirs = builtins.readDir ./.;
+  isDirectory = name: type: type == "directory";
+  hosts = lib.filterAttrs isDirectory hostDirs;
+
+  mkHost = name: _: lib.nixosSystem {
     inherit system;
 
     modules = [
       ./configuration.nix
-      ./ghstation
+      ./${name}
 
       lanzaboote.nixosModules.lanzaboote
     ];
   };
-}
+in
+  lib.mapAttrs mkHost hosts

@@ -38,12 +38,12 @@
       # Essential keybindings
       bind = [
         # Applications
-        "$mod, Q, exec, $terminal"
-        "$mod, C, killactive"
+        "$mod, Return, exec, $terminal"
+        "$mod, Q, killactive"
         "$mod, M, exit"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
-        "$mod, R, exec, $menu"
+        "$mod, D, exec, $menu"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
 

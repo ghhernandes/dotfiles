@@ -22,6 +22,9 @@
     systemd.enable = false;  # Disable to avoid conflicts with UWSM
 
     settings = {
+      # Monitor configuration
+      monitor = "DP-1,2560x1440@165,auto,1";
+
       # Set modifier key (Super/Windows key)
       "$mod" = "SUPER";
 
@@ -41,13 +44,14 @@
         # Applications
         "$mod, Return, exec, $terminal"
         "$mod, Q, killactive"
-        "$mod, M, exit"
+        "$mod, M, exec, $HOME/.local/bin/rofi-power"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
         "$mod, D, exec, $menu"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
         "$mod, L, exec, hyprlock"
+        "$mod, B, exec, $HOME/.local/bin/rofi-bluetooth"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
@@ -163,7 +167,7 @@
         height = 30;
         modules-left = [ "hyprland/workspaces" "hyprland/window" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" "tray" ];
+        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -533,4 +537,11 @@
       valign = center
     }
   '';
+
+  # Symlink rofi scripts to ~/.local/bin
+  home.file.".local/bin/rofi-bluetooth".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts/rofi-bluetooth";
+
+  home.file.".local/bin/rofi-power".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts/rofi-power";
 }

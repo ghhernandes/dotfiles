@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# Rofi Power Menu
+# Simple script to manage system power via Rofi
+
+# Power off
+power_off() {
+    systemctl poweroff
+}
+
+# Restart
+restart() {
+    systemctl reboot
+}
+
+# Suspend
+suspend() {
+    systemctl suspend
+}
+
+# Logout from user session
+logout() {
+    loginctl terminate-user $USER
+}
+
+# Main menu
+main() {
+    local options="Power Off\nRestart\nSuspend\nLogout"
+
+    # Show Rofi menu
+    local chosen=$(echo -e "$options" | rofi -dmenu -p "Power" -theme custom)
+
+    # Handle selection
+    case "$chosen" in
+        "Power Off")
+            power_off
+            ;;
+        "Restart")
+            restart
+            ;;
+        "Suspend")
+            suspend
+            ;;
+        "Logout")
+            logout
+            ;;
+    esac
+}
+
+main

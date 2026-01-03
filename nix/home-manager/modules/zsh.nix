@@ -9,6 +9,10 @@
       plugins = [ "git" "fzf"];
       theme = "simple";
     };
+    initContent = ''
+      # Add ~/.local/bin to PATH
+      export PATH="$HOME/.local/bin:$PATH"
+    '';
   };
 }
 

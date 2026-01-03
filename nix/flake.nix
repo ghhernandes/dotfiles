@@ -16,13 +16,6 @@
   };
 
   outputs = { self, nixpkgs, home-manager, lanzaboote, ...}@inputs:
-  let
-    mkHome = { system, profile }:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ profile ];
-      };
-  in
   {
     nixosConfigurations = (
       import ./hosts {
@@ -31,11 +24,11 @@
       }
     );
 
-    homeConfigurations = {
-      "gh" = mkHome {
+    homeConfigurations = (
+      import ./home/profiles {
+        inherit nixpkgs home-manager;
         system = "x86_64-linux";
-        profile = ./home/profiles/personal.nix;
-      };
-    };
+      }
+    );
   };
 }

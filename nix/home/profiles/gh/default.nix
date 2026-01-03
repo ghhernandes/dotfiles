@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ../common.nix
-    ../modules/clojure.nix
-    ../modules/cli.nix
-    ../modules/hyprland.nix
+    ../../common.nix
+    ../../modules/clojure.nix
+    ../../modules/cli.nix
+    ../../modules/hyprland.nix
   ];
 
   home.packages = with pkgs; [

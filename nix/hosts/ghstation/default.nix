@@ -6,9 +6,8 @@
       ./hardware-configuration.nix
       ./poweroff-corsair-leds.nix
       ./node-exporter.nix
+      ./sunshine.nix
     ];
-
-  nixpkgs.config.allowUnfree = true;
 
   users.users.gh = {
     isNormalUser = true;
@@ -55,9 +54,26 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
+  # Enable the gnome-keyring secrets vault. 
+  # Will be exposed through DBus to programs willing to store secrets.
+  services.gnome.gnome-keyring.enable = true;
+
+  # enable Hyprland window manager
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;  # recommended for NixOS 24.11+
+    xwayland.enable = true;
+  };
+
+  # Enable Wayland support for Electron apps
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs.appimage.enable = true;
   services.flatpak.enable = true;
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  };
 
   environment.systemPackages = with pkgs; [
     _1password-cli
@@ -70,7 +86,11 @@
     heroic
     gogdl
 
-    sbctl
+    sunshine
+
+    grim # screenshot functionality
+    slurp # screenshot functionality
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
   ];
 }
 

@@ -24,15 +24,13 @@
 
   zramSwap.enable = true;
 
-  services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.autoSuspend = false;
-  services.desktopManager.gnome.enable = true;
+  # X11 is not needed - Hyprland handles XWayland through programs.hyprland.xwayland
+  # Keyboard layout is configured in Hyprland's input section
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

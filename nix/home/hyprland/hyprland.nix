@@ -42,11 +42,14 @@
         "workspace 2, class:^(Google-chrome)$"
         "workspace 2, class:^(google-chrome)$"
 
-        # Workspace 3: Emacs
+        # Workspace 3: Editors
         "workspace 3, class:^(Emacs)$"
         "workspace 3, class:^(emacs)$"
 
-        # Workspace 6: Spotify
+        # Workspace 4: File managers
+        "workspace 4, class:^(org.gnome.Nautilus)$"
+
+        # Workspace 6: Spotify, Music
         "workspace 6, class:^(Spotify)$"
         "workspace 6, class:^(spotify)$"
 
@@ -54,13 +57,15 @@
         "workspace 7, class:^(obsidian)$"
         "workspace 7, class:^(Obsidian)$"
 
-        # Workspace 9: Vesktop, Discord, Slack
+        # Workspace 9: Messaging
         "workspace 9, class:^(vesktop)$"
         "workspace 9, class:^(Vesktop)$"
         "workspace 9, class:^(discord)$"
         "workspace 9, class:^(Discord)$"
         "workspace 9, class:^(Slack)$"
         "workspace 9, class:^(slack)$"
+        "workspace 9, class:^(signal)$"
+        "workspace 9, class:^(Signal)$"
 
         # 1Password: Floating and centered
         "float, class:^(1password)$"
@@ -91,6 +96,7 @@
         "$mod SHIFT, E, exec, emacs"
         "$mod SHIFT, O, exec, obsidian"
         "$mod SHIFT, M, exec, spotify"
+        "$mod SHIFT, G, exec, signal"
         "$mod SHIFT, slash, exec, 1password"
 
         "$mod, L, exec, hyprlock"

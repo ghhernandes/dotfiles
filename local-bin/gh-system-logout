@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Logout from current user session
+
+loginctl terminate-user $USER

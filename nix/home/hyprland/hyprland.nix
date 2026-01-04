@@ -83,7 +83,7 @@
         # Applications
         "$mod, Return, exec, $terminal"
         "$mod, Q, killactive"
-        "$mod, M, exec, $HOME/.local/bin/gh-system-power"
+        "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"

@@ -2,30 +2,11 @@
 
 # Rofi Power Menu
 # Simple script to manage system power via Rofi
-
-# Power off
-power_off() {
-    systemctl poweroff
-}
-
-# Restart
-restart() {
-    systemctl reboot
-}
-
-# Suspend
-suspend() {
-    systemctl suspend
-}
-
-# Logout from user session
-logout() {
-    loginctl terminate-user $USER
-}
+# Uses composable system power scripts
 
 # Main menu
 main() {
-    local options="Power Off\nRestart\nSuspend\nLogout"
+    local options="Power Off\nReboot\nSuspend\nLogout"
 
     # Show Rofi menu
     local chosen=$(echo -e "$options" | rofi -dmenu -p "Power" -theme custom)
@@ -33,16 +14,16 @@ main() {
     # Handle selection
     case "$chosen" in
         "Power Off")
-            power_off
+            gh-system-poweroff
             ;;
-        "Restart")
-            restart
+        "Reboot")
+            gh-system-reboot
             ;;
         "Suspend")
-            suspend
+            gh-system-suspend
             ;;
         "Logout")
-            logout
+            gh-system-logout
             ;;
     esac
 }

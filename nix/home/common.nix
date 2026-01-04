@@ -1,4 +1,4 @@
-# common.nix file is to define the baseline environment 
+# common.nix file is to define the baseline environment
 # that must exists on every single machine
 
 # use profiles/ to create group of different modules.
@@ -17,11 +17,4 @@
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
-
-  home.packages = [
-    pkgs.btop
-    pkgs.fzf
-    pkgs.tree
-    pkgs.ripgrep
-  ];
 }

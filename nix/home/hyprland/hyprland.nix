@@ -87,7 +87,7 @@
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
-        "$mod, D, exec, $menu"
+        "$mod, SPC, exec, $menu"
         "$mod, L, exec, hyprlock"
         "$mod, B, exec, $HOME/.local/bin/gh-rofi-bluetooth"
 

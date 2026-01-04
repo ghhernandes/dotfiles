@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-# Suspend the system
+# Lock screen and suspend the system
 
+hyprlock &
+sleep 0.5
 systemctl suspend

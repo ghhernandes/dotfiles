@@ -19,19 +19,10 @@
   {
     homeModules = {
       common = ./home/common.nix;
-      cli = ./home/cli.nix;
-      tmux = ./home/tmux.nix;
-      git = ./home/git.nix;
-      neovim = ./home/neovim.nix;
-      shell = ./home/shell.nix;
+      cli = ./home/cli;
+      gui = ./home/gui.nix;
       emacs = ./home/emacs.nix;
       kitty = ./home/kitty.nix;
-      editors = ./home/editors.nix;
-      browsers = ./home/browsers.nix;
-      media = ./home/media.nix;
-      messaging = ./home/messaging.nix;
-      passwordManager = ./home/password-manager.nix;
-      claudeCode = ./home/claude-code.nix;
       localBin = ./home/local-bin.nix;
       dev = ./home/dev;
       hyprland = ./home/hyprland;

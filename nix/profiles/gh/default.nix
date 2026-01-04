@@ -4,18 +4,9 @@
   imports = with self.homeModules; [
     common
     cli
-    tmux
-    git
-    neovim
-    shell
+    gui
     emacs
     kitty
-    editors
-    browsers
-    media
-    messaging
-    passwordManager
-    claudeCode
     localBin
     dev
     hyprland

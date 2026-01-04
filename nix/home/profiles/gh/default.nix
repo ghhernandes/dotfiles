@@ -5,7 +5,9 @@
     ../../common.nix
     ../../modules/clojure.nix
     ../../modules/cli.nix
-    ../../modules/hyprland.nix
+    ../../modules/hyprland
+    ../../modules/kitty.nix
+    ../../modules/rofi
   ];
 
   home.packages = with pkgs; [

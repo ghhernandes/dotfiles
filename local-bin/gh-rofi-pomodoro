@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Rofi Pomodoro Manager
+# Simple script to manage Pomodoro timers via Rofi
+# Uses composable pomodoro scripts
+
+# Main menu
+main() {
+    local status=$(gh-pomodoro-status)
+
+    # Build menu options based on current status
+    local options=""
+    if [ -n "$status" ]; then
+        options="Stop Timer [$status]\nRefresh"
+    else
+        options="Start 25 min\nStart 15 min\nStart 5 min\nRefresh"
+    fi
+
+    # Show Rofi menu
+    local chosen=$(echo -e "$options" | rofi -dmenu -p "Pomodoro" -theme custom)
+
+    # Handle selection
+    case "$chosen" in
+        "Start 25 min")
+            gh-pomodoro-start 25
+            ;;
+        "Start 15 min")
+            gh-pomodoro-start 15
+            ;;
+        "Start 5 min")
+            gh-pomodoro-start 5
+            ;;
+        "Stop Timer"*)
+            gh-pomodoro-stop
+            ;;
+        "Refresh")
+            main
+            ;;
+    esac
+}
+
+main

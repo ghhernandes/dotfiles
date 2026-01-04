@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Scan for Bluetooth devices (async)
+# Starts scanning in the background and auto-stops after 5 seconds
+
+(
+    # Start scanning
+    bluetoothctl scan on > /dev/null 2>&1 &
+    scan_pid=$!
+
+    # Wait for devices to be discovered
+    sleep 5
+
+    # Stop scanning
+    bluetoothctl scan off > /dev/null 2>&1
+    kill $scan_pid 2>/dev/null
+
+    notify-send "Bluetooth" "Scan completed"
+) &

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Rofi Bluetooth Manager
+# Simple script to manage Bluetooth via Rofi
+# Uses composable bluetooth scripts
+
+# Main menu
+main() {
+    local status=$(gh-bluetooth-status)
+
+    # Build menu options based on current status
+    local options=""
+    if [ "$status" = "on" ]; then
+        options="Scan\nConnect\nPower OFF\nRefresh"
+    else
+        options="Power ON\nRefresh"
+    fi
+
+    # Show Rofi menu
+    local chosen=$(echo -e "$options" | rofi -dmenu -p "Bluetooth [$status]" -theme custom)
+
+    # Handle selection
+    case "$chosen" in
+        "Power ON")
+            gh-bluetooth-power-on
+            ;;
+        "Power OFF")
+            gh-bluetooth-power-off
+            ;;
+        "Scan")
+            gh-bluetooth-scan
+            ;;
+        "Connect")
+            gh-bluetooth-connect
+            ;;
+        "Refresh")
+            main
+            ;;
+    esac
+}
+
+main

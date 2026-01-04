@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Pomodoro daemon - monitors timer and sends notification when complete
+
+set -euo pipefail
+
+# Configuration
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gh-pomodoro-$USER"
+STATE_FILE="$STATE_DIR/state"
+PID_FILE="$STATE_DIR/daemon.pid"
+
+# Write PID
+echo $$ > "$PID_FILE"
+
+# Monitor loop
+while [[ -f "$STATE_FILE" ]]; do
+    state=$(cat "$STATE_FILE" 2>/dev/null || echo "")
+
+    if [[ -z "$state" ]]; then
+        break
+    fi
+
+    IFS='|' read -r start_time duration <<< "$state"
+
+    current_time=$(date +%s)
+    elapsed=$((current_time - start_time))
+    remaining=$((duration - elapsed))
+
+    if [[ $remaining -le 0 ]]; then
+        # Timer finished
+        if command -v notify-send &> /dev/null; then
+            notify-send -u critical "pomodoro" "Timer complete!"
+        fi
+
+        # Clean up
+        rm -f "$STATE_FILE" "$PID_FILE"
+        break
+    fi
+
+    sleep 1
+done
+
+rm -f "$PID_FILE"

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+CONFIG_FILE="$HOME/.config/gh-system/hostname"
+FLAKE_DIR="$HOME/.dotfiles/nix"
+
+# Create config directory if it doesn't exist
+mkdir -p "$(dirname "$CONFIG_FILE")"
+
+# If hostname is provided as argument, use and save it
+if [ -n "$1" ]; then
+    host="$1"
+    echo "$host" > "$CONFIG_FILE"
+# Otherwise, try to read from saved config
+elif [ -f "$CONFIG_FILE" ]; then
+    host=$(cat "$CONFIG_FILE")
+    if [ -z "$host" ]; then
+        echo "Error: No hostname found in config file"
+        echo "Usage: gh-system-rebuild [hostname]"
+        exit 1
+    fi
+    echo "Using saved hostname: $host"
+else
+    echo "Error: No hostname provided and no saved hostname found"
+    echo "Usage: gh-system-rebuild [hostname]"
+    exit 1
+fi
+
+# Run nixos-rebuild
+sudo nixos-rebuild switch --flake "$FLAKE_DIR#$host"

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Get current pomodoro timer status
+# Outputs: MM:SS or empty string if no timer running
+
+set -euo pipefail
+
+# Configuration
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gh-pomodoro-$USER"
+STATE_FILE="$STATE_DIR/state"
+
+# Check if state file exists
+if [[ ! -f "$STATE_FILE" ]]; then
+    echo ""
+    exit 0
+fi
+
+# Read state
+state=$(cat "$STATE_FILE" 2>/dev/null || echo "")
+
+if [[ -z "$state" ]]; then
+    echo ""
+    exit 0
+fi
+
+# Parse state
+IFS='|' read -r start_time duration <<< "$state"
+
+# Calculate remaining time
+current_time=$(date +%s)
+elapsed=$((current_time - start_time))
+remaining=$((duration - elapsed))
+
+# If time is up, output empty
+if [[ $remaining -lt 0 ]]; then
+    echo ""
+    exit 0
+fi
+
+# Format time as MM:SS
+if [[ $remaining -lt 0 ]]; then
+    remaining=0
+fi
+printf "%02d:%02d" $((remaining / 60)) $((remaining % 60))

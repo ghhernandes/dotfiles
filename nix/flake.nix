@@ -32,6 +32,7 @@
       messaging = ./home/messaging.nix;
       passwordManager = ./home/password-manager.nix;
       claudeCode = ./home/claude-code.nix;
+      localBin = ./home/local-bin.nix;
       dev = ./home/dev;
       hyprland = ./home/hyprland;
       rofi = ./home/rofi;

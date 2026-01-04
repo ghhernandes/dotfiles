@@ -16,6 +16,7 @@
     messaging
     passwordManager
     claudeCode
+    localBin
     dev
     hyprland
     rofi

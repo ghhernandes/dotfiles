@@ -69,10 +69,10 @@
         };
 
         "custom/gh-pomodoro" = {
-          exec = "gh-pomodoro status";
+          exec = "gh-pomodoro-status";
           interval = 1;
           format = "{}";
-          on-click = "gh-pomodoro stop";
+          on-click = "gh-pomodoro-stop";
         };
       };
     };

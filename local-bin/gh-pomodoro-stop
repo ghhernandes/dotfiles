@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Stop the pomodoro timer
+
+set -euo pipefail
+
+# Configuration
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gh-pomodoro-$USER"
+STATE_FILE="$STATE_DIR/state"
+PID_FILE="$STATE_DIR/daemon.pid"
+
+# Helper function to stop daemon
+stop_daemon() {
+    if [[ -f "$PID_FILE" ]]; then
+        local pid
+        pid=$(cat "$PID_FILE")
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+            sleep 0.2
+        fi
+        rm -f "$PID_FILE"
+    fi
+}
+
+# Stop daemon and clean up state
+stop_daemon
+rm -f "$STATE_FILE"
+
+echo "Timer stopped"

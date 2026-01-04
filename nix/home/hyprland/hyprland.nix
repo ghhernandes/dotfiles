@@ -89,7 +89,7 @@
         "$mod, F, fullscreen"
         "$mod, D, exec, $menu"
         "$mod, L, exec, hyprlock"
-        "$mod, B, exec, $HOME/.local/bin/gh-system-bluetooth"
+        "$mod, B, exec, $HOME/.local/bin/gh-rofi-bluetooth"
 
         # Screenshots
         ", Print, exec, $HOME/.local/bin/gh-screenshot full"

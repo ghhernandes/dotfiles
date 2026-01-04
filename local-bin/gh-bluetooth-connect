@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Connect to a Bluetooth device
+# Usage: gh-bluetooth-connect [MAC_ADDRESS]
+# If no MAC address provided, shows rofi menu to select device
+
+if [ -n "$1" ]; then
+    # MAC address provided as argument
+    mac="$1"
+
+    if bluetoothctl connect "$mac" 2>&1 | grep -q "successful"; then
+        notify-send "Bluetooth" "Connected to device"
+        exit 0
+    else
+        notify-send "Bluetooth" "Failed to connect to device"
+        exit 1
+    fi
+else
+    # No MAC provided, show rofi menu
+    devices=$(gh-bluetooth-list-devices)
+
+    if [ -z "$devices" ]; then
+        notify-send "Bluetooth" "No devices found"
+        exit 1
+    fi
+
+    # Show devices in Rofi
+    chosen=$(echo "$devices" | rofi -dmenu -p "Select device to connect" -theme custom)
+
+    if [ -n "$chosen" ]; then
+        # Extract MAC address (first word)
+        mac=$(echo "$chosen" | awk '{print $1}')
+        name=$(echo "$chosen" | cut -d' ' -f2-)
+
+        # Connect to device
+        if bluetoothctl connect "$mac" 2>&1 | grep -q "successful"; then
+            notify-send "Bluetooth" "Connected to $name"
+        else
+            notify-send "Bluetooth" "Failed to connect to $name"
+        fi
+    fi
+fi

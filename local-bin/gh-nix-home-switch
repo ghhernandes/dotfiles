@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+CONFIG_FILE="$HOME/.config/gh-system/profile"
+FLAKE_DIR="$HOME/.dotfiles/nix"
+
+# Create config directory if it doesn't exist
+mkdir -p "$(dirname "$CONFIG_FILE")"
+
+# If profile is provided as argument, use and save it
+if [ -n "$1" ]; then
+    profile="$1"
+    echo "$profile" > "$CONFIG_FILE"
+# Otherwise, try to read from saved config
+elif [ -f "$CONFIG_FILE" ]; then
+    profile=$(cat "$CONFIG_FILE")
+    if [ -z "$profile" ]; then
+        echo "Error: No profile found in config file"
+        echo "Usage: gh-home-manager [profile]"
+        exit 1
+    fi
+    echo "Using saved profile: $profile"
+else
+    echo "Error: No profile provided and no saved profile found"
+    echo "Usage: gh-home-manager [profile]"
+    exit 1
+fi
+
+# Run home-manager
+home-manager switch --flake "$FLAKE_DIR#$profile"

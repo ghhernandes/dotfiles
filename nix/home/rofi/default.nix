@@ -4,6 +4,5 @@
   imports = [
     ./rofi.nix
     ./theme.nix
-    ./scripts.nix
   ];
 }

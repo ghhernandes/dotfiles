@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Start a pomodoro timer
+# Usage: gh-pomodoro-start <minutes>
+
+set -euo pipefail
+
+# Configuration
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gh-pomodoro-$USER"
+STATE_FILE="$STATE_DIR/state"
+PID_FILE="$STATE_DIR/daemon.pid"
+
+# Ensure state directory exists
+mkdir -p "$STATE_DIR"
+
+# Validate input
+if [[ -z "${1:-}" ]]; then
+    echo "Usage: gh-pomodoro-start <minutes>"
+    exit 1
+fi
+
+minutes="$1"
+duration=$((minutes * 60))
+
+# Helper function to stop daemon
+stop_daemon() {
+    if [[ -f "$PID_FILE" ]]; then
+        local pid
+        pid=$(cat "$PID_FILE")
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+            sleep 0.2
+        fi
+        rm -f "$PID_FILE"
+    fi
+}
+
+# Format time as MM:SS
+format_time() {
+    local seconds="$1"
+    if [[ $seconds -lt 0 ]]; then
+        seconds=0
+    fi
+    printf "%02d:%02d" $((seconds / 60)) $((seconds % 60))
+}
+
+# Stop any existing timer
+stop_daemon
+rm -f "$STATE_FILE"
+
+# Create state file
+# Format: START_TIME|DURATION
+start_time=$(date +%s)
+echo "${start_time}|${duration}" > "$STATE_FILE"
+
+# Start daemon
+gh-pomodoro-daemon &
+disown
+
+echo "Timer started: $(format_time "$duration")"

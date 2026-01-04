@@ -3,11 +3,11 @@
 {
   imports = [
     ../../common.nix
-    ../../modules/clojure.nix
-    ../../modules/cli.nix
-    ../../modules/hyprland
-    ../../modules/kitty.nix
-    ../../modules/rofi
+    ../../clojure.nix
+    ../../cli.nix
+    ../../hyprland
+    ../../kitty.nix
+    ../../rofi
   ];
 
   home.packages = with pkgs; [

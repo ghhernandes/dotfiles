@@ -8,9 +8,9 @@
 
 {
   imports = [
-    ./modules/tmux.nix
-    ./modules/neovim.nix
-    ./modules/zsh.nix
+    ./tmux.nix
+    ./neovim.nix
+    ./zsh.nix
   ];
 
   nixpkgs.config = {

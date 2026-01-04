@@ -8,7 +8,7 @@
   ];
 
   xdg.configFile."doom" = {
-    source = ../../../doom;
+    source = ../../doom;
     recursive = true;
   };
 

@@ -32,6 +32,53 @@
         "dunst"
       ];
 
+      # Window rules for fixed workspaces
+      windowrulev2 = [
+        # Workspace 1: kitty
+        "workspace 1, class:^(kitty)$"
+
+        # Workspace 2: Firefox and Chrome
+        "workspace 2, class:^(firefox)$"
+        "workspace 2, class:^(Google-chrome)$"
+        "workspace 2, class:^(google-chrome)$"
+
+        # Workspace 3: Emacs
+        "workspace 3, class:^(Emacs)$"
+        "workspace 3, class:^(emacs)$"
+
+        # Workspace 6: Spotify
+        "workspace 6, class:^(Spotify)$"
+        "workspace 6, class:^(spotify)$"
+
+        # Workspace 7: Obsidian
+        "workspace 7, class:^(obsidian)$"
+        "workspace 7, class:^(Obsidian)$"
+
+        # Workspace 9: Vesktop, Discord, Slack
+        "workspace 9, class:^(vesktop)$"
+        "workspace 9, class:^(Vesktop)$"
+        "workspace 9, class:^(discord)$"
+        "workspace 9, class:^(Discord)$"
+        "workspace 9, class:^(Slack)$"
+        "workspace 9, class:^(slack)$"
+
+        # 1Password: Floating and centered
+        "float, class:^(1password)$"
+        "center, class:^(1password)$"
+        "size 800 600, class:^(1password)$"
+
+        # Volume control: Floating and centered
+        "float, class:^(org.pulseaudio.pavucontrol)$"
+        "center, class:^(org.pulseaudio.pavucontrol)$"
+        "size 800 600, class:^(org.pulseaudio.pavucontrol)$"
+
+        # Gaming: Auto fullscreen
+        "fullscreen, class:^(steam_app_).*"
+        "fullscreen, class:^(Wine)$"
+        "fullscreen, class:^(steam_proton)$"
+        "fullscreen, title:^(.* - Wine desktop)$"
+      ];
+
       bind = [
         # Applications
         "$mod, Return, exec, $terminal"

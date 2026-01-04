@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, dotfilesPath, ... }:
 
 {
   programs.neovim = {
@@ -56,7 +56,7 @@
   };
 
   xdg.configFile."nvim" = {
-    source = ../../nvim;
+    source = "${dotfilesPath}/nvim";
     recursive = true;
   };
 }

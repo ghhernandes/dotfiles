@@ -13,7 +13,10 @@ let
   mkProfile = username: _:
     home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = { inherit self; };
+      extraSpecialArgs = {
+        inherit self;
+        dotfilesPath = self + "/..";
+      };
       modules = [
         ./${username}
         {

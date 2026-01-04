@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, dotfilesPath, ... }:
 {
   home.packages = with pkgs; [
     emacs
@@ -8,7 +8,7 @@
   ];
 
   xdg.configFile."doom" = {
-    source = ../../doom;
+    source = "${dotfilesPath}/doom";
     recursive = true;
   };
 

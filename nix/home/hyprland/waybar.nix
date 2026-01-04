@@ -78,8 +78,9 @@
     };
     style = ''
       * {
-        font-family: monospace;
+        font-family: "DejaVu Sans", sans-serif;
         font-size: 13px;
+        font-weight: 500;
         border: none;
         border-radius: 0;
       }

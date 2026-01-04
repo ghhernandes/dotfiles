@@ -91,6 +91,12 @@
         "$mod, L, exec, hyprlock"
         "$mod, B, exec, $HOME/.local/bin/rofi-bluetooth"
 
+        # Screenshots
+        ", Print, exec, $HOME/.local/bin/hypr-screenshot full"
+        "SHIFT, Print, exec, $HOME/.local/bin/hypr-screenshot region"
+        "CTRL, Print, exec, $HOME/.local/bin/hypr-screenshot clipboard"
+        "$mod, Print, exec, $HOME/.local/bin/hypr-screenshot window"
+
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

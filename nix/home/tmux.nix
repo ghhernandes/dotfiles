@@ -8,7 +8,7 @@
   };
 
   home.file.".local/bin/tmux-session" = {
-    source = "${dotfilesPath}/scripts/tmux-session";
+    source = "${dotfilesPath}/local-bin/tmux-session";
     executable = true;
   };
 }

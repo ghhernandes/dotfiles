@@ -96,7 +96,8 @@
         "$mod SHIFT, E, exec, emacs"
         "$mod SHIFT, O, exec, obsidian"
         "$mod SHIFT, M, exec, spotify"
-        "$mod SHIFT, G, exec, signal"
+        "$mod SHIFT, D, exec, vesktop"
+        "$mod SHIFT, G, exec, signal-desktop"
         "$mod SHIFT, slash, exec, 1password"
 
         "$mod, L, exec, hyprlock"

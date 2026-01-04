@@ -83,12 +83,18 @@
         # Applications
         "$mod, Return, exec, $terminal"
         "$mod, Q, killactive"
-        "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
-        "$mod, SPC, exec, $menu"
+
+        "$mod, SPACE, exec, $menu"
+        "$mod SHIFT, E, exec, emacs"
+        "$mod SHIFT, O, exec, obsidian"
+        "$mod SHIFT, M, exec, spotify"
+        "$mod SHIFT, slash, exec, 1password"
+
         "$mod, L, exec, hyprlock"
+        "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
         "$mod, B, exec, $HOME/.local/bin/gh-rofi-bluetooth"
 
         # Screenshots

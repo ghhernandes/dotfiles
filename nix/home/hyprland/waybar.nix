@@ -9,7 +9,7 @@
         position = "top";
         height = 30;
         modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "clock" ];
+        modules-center = [ "custom/gh-pomodoro" "clock" ];
         modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" "clock#date" ];
 
         "hyprland/workspaces" = {
@@ -67,6 +67,13 @@
           format-connected = "BT {num_connections}";
           on-click = "blueman-manager";
         };
+
+        "custom/gh-pomodoro" = {
+          exec = "gh-pomodoro status";
+          interval = 1;
+          format = "{}";
+          on-click = "gh-pomodoro stop";
+        };
       };
     };
     style = ''
@@ -105,7 +112,8 @@
       #network,
       #pulseaudio,
       #bluetooth,
-      #tray {
+      #tray,
+      #custom-gh-pomodoro {
         padding: 0 10px;
       }
     '';

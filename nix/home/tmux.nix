@@ -7,8 +7,8 @@
     extraConfig = builtins.readFile "${dotfilesPath}/tmux/tmux.conf";
   };
 
-  home.file.".local/bin/tmux-session" = {
-    source = "${dotfilesPath}/local-bin/tmux-session";
+  home.file.".local/bin/gh-tmux-session" = {
+    source = "${dotfilesPath}/local-bin/gh-tmux-session";
     executable = true;
   };
 }

@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Configuration
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gh-pomodoro-$USER"
+STATE_FILE="$STATE_DIR/state"
+PID_FILE="$STATE_DIR/daemon.pid"
+
+# Ensure state directory exists
+mkdir -p "$STATE_DIR"
+
+# Helper function to stop daemon
+stop_daemon() {
+    if [[ -f "$PID_FILE" ]]; then
+        local pid
+        pid=$(cat "$PID_FILE")
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+            sleep 0.2
+        fi
+        rm -f "$PID_FILE"
+    fi
+}
+
+# Create state file
+# Format: START_TIME|DURATION
+create_state() {
+    local duration="$1"
+    local start_time
+    start_time=$(date +%s)
+
+    echo "${start_time}|${duration}" > "$STATE_FILE"
+}
+
+# Daemon function
+run_daemon() {
+    echo $$ > "$PID_FILE"
+
+    while [[ -f "$STATE_FILE" ]]; do
+        local state
+        state=$(cat "$STATE_FILE" 2>/dev/null || echo "")
+
+        if [[ -z "$state" ]]; then
+            break
+        fi
+
+        IFS='|' read -r start_time duration <<< "$state"
+
+        local current_time elapsed remaining
+        current_time=$(date +%s)
+        elapsed=$((current_time - start_time))
+        remaining=$((duration - elapsed))
+
+        if [[ $remaining -le 0 ]]; then
+            # Timer finished
+            if command -v notify-send &> /dev/null; then
+                notify-send -u critical "Timer Complete!" "Time's up!"
+            fi
+
+            # Clean up
+            rm -f "$STATE_FILE" "$PID_FILE"
+            break
+        fi
+
+        sleep 1
+    done
+
+    rm -f "$PID_FILE"
+}
+
+# Format time as MM:SS
+format_time() {
+    local seconds="$1"
+    if [[ $seconds -lt 0 ]]; then
+        seconds=0
+    fi
+    printf "%02d:%02d" $((seconds / 60)) $((seconds % 60))
+}
+
+# Command: start
+cmd_start() {
+    local minutes="${1:-25}"
+    local duration=$((minutes * 60))
+
+    stop_daemon
+    rm -f "$STATE_FILE"
+
+    create_state "$duration"
+
+    run_daemon &
+    disown
+
+    echo "Timer started: $(format_time "$duration")"
+}
+
+# Command: stop
+cmd_stop() {
+    stop_daemon
+    rm -f "$STATE_FILE"
+    echo "Timer stopped"
+}
+
+# Command: status
+cmd_status() {
+    if [[ ! -f "$STATE_FILE" ]]; then
+        echo ""
+        exit 0
+    fi
+
+    local state
+    state=$(cat "$STATE_FILE" 2>/dev/null || echo "")
+
+    if [[ -z "$state" ]]; then
+        echo ""
+        exit 0
+    fi
+
+    IFS='|' read -r start_time duration <<< "$state"
+
+    local current_time elapsed remaining
+    current_time=$(date +%s)
+    elapsed=$((current_time - start_time))
+    remaining=$((duration - elapsed))
+
+    if [[ $remaining -lt 0 ]]; then
+        echo ""
+        exit 0
+    fi
+
+    echo "$(format_time "$remaining")"
+}
+
+# Main command dispatcher
+main() {
+    local cmd="${1:-}"
+
+    case "$cmd" in
+        start)
+            if [[ -z "${2:-}" ]]; then
+                echo "Usage: gh-pomodoro start <minutes>"
+                exit 1
+            fi
+            cmd_start "$2"
+            ;;
+        stop)
+            cmd_stop
+            ;;
+        status)
+            cmd_status
+            ;;
+        daemon)
+            run_daemon
+            ;;
+        *)
+            cat <<EOF
+Usage: gh-pomodoro <command> [options]
+
+Commands:
+  start <minutes>  Start a timer with specified minutes
+  stop             Stop the current timer
+  status           Get current timer status (for Waybar)
+
+Examples:
+  gh-pomodoro start 25    # Start 25 minute timer
+  gh-pomodoro start 5     # Start 5 minute timer
+  gh-pomodoro stop        # Stop timer
+EOF
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

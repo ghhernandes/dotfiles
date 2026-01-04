@@ -83,19 +83,19 @@
         # Applications
         "$mod, Return, exec, $terminal"
         "$mod, Q, killactive"
-        "$mod, M, exec, $HOME/.local/bin/rofi-power"
+        "$mod, M, exec, $HOME/.local/bin/gh-system-power"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
         "$mod, D, exec, $menu"
         "$mod, L, exec, hyprlock"
-        "$mod, B, exec, $HOME/.local/bin/rofi-bluetooth"
+        "$mod, B, exec, $HOME/.local/bin/gh-system-bluetooth"
 
         # Screenshots
-        ", Print, exec, $HOME/.local/bin/hypr-screenshot full"
-        "SHIFT, Print, exec, $HOME/.local/bin/hypr-screenshot region"
-        "CTRL, Print, exec, $HOME/.local/bin/hypr-screenshot clipboard"
-        "$mod, Print, exec, $HOME/.local/bin/hypr-screenshot window"
+        ", Print, exec, $HOME/.local/bin/gh-screenshot full"
+        "SHIFT, Print, exec, $HOME/.local/bin/gh-screenshot region"
+        "CTRL, Print, exec, $HOME/.local/bin/gh-screenshot clipboard"
+        "$mod, Print, exec, $HOME/.local/bin/gh-screenshot window"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"

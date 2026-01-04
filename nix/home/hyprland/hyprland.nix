@@ -1,18 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    kitty          # Terminal emulator
-    rofi           # Application launcher
-    waybar         # Status bar
-    dunst          # Notification daemon
-    libnotify      # Notification utilities (notify-send)
-    swww           # Wallpaper daemon
-    pamixer        # Audio control
-    playerctl      # Media player control
-    pavucontrol    # GUI audio control
-    blueman        # Bluetooth manager GUI
-    hyprlock       # Screen locker
+  home.packages = [
+    pkgs.kitty          # Terminal emulator
+    pkgs.rofi           # Application launcher
+    pkgs.waybar         # Status bar
+    pkgs.dunst          # Notification daemon
+    pkgs.libnotify      # Notification utilities (notify-send)
+    pkgs.swww           # Wallpaper daemon
+    pkgs.pamixer        # Audio control
+    pkgs.playerctl      # Media player control
+    pkgs.pavucontrol    # GUI audio control
+    pkgs.blueman        # Bluetooth manager GUI
+    pkgs.hyprlock       # Screen locker
   ];
 
   wayland.windowManager.hyprland = {

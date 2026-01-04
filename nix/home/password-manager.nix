@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    yubikey-manager
-    yubioath-flutter
+  home.packages = [
+    pkgs.yubikey-manager
+    pkgs.yubioath-flutter
   ];
 }

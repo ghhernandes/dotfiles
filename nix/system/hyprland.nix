@@ -14,13 +14,13 @@
   # XDG Portal for Hyprland
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   # System packages for Hyprland functionality
-  environment.systemPackages = with pkgs; [
-    grim           # screenshot functionality
-    slurp          # screenshot functionality
-    wl-clipboard   # wl-copy and wl-paste for copy/paste from stdin/stdout
+  environment.systemPackages = [
+    pkgs.grim           # screenshot functionality
+    pkgs.slurp          # screenshot functionality
+    pkgs.wl-clipboard   # wl-copy and wl-paste for copy/paste from stdin/stdout
   ];
 }

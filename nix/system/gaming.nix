@@ -10,12 +10,12 @@
 
   programs.gamemode.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    gamemode
-    gamescope
-    mangohud
-    lutris
-    heroic
-    gogdl
+  environment.systemPackages = [
+    pkgs.gamemode
+    pkgs.gamescope
+    pkgs.mangohud
+    pkgs.lutris
+    pkgs.heroic
+    pkgs.gogdl
   ];
 }

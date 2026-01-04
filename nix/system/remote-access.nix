@@ -18,8 +18,4 @@
       { from = 8000; to = 8010; }
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    sunshine
-  ];
 }

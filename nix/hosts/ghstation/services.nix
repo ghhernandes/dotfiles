@@ -17,10 +17,5 @@
       RemainAfterExit = true;
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    openrgb
-  ];
-
 }
 

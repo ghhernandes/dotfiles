@@ -18,10 +18,10 @@
 
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-    btop
-    fzf
-    tree
-    ripgrep
+  home.packages = [
+    pkgs.btop
+    pkgs.fzf
+    pkgs.tree
+    pkgs.ripgrep
   ];
 }

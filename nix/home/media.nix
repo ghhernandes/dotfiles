@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    spotify
-    gimp
+  home.packages = [
+    pkgs.spotify
+    pkgs.gimp
   ];
 }

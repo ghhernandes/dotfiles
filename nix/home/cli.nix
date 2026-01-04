@@ -1,13 +1,13 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    github-cli
-    gemini-cli
-    claude-code
+  home.packages = [
+    pkgs.github-cli
+    pkgs.gemini-cli
+    pkgs.claude-code
 
-    lazygit
-    glow  # Markdown viewer
-    mods  # AI LLM on the CLI
+    pkgs.lazygit
+    pkgs.glow  # Markdown viewer
+    pkgs.mods  # AI LLM on the CLI
   ];
 }

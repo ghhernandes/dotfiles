@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    vesktop
-    slack
+  home.packages = [
+    pkgs.vesktop
+    pkgs.slack
   ];
 }

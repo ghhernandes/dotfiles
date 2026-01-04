@@ -7,51 +7,51 @@
     vimAlias = true;
 
     # LSP servers and tools managed by Nix
-    extraPackages = with pkgs; [
-      gopls
-      clojure-lsp
-      nixd
+    extraPackages = [
+      pkgs.gopls
+      pkgs.clojure-lsp
+      pkgs.nixd
 
-      # lua-language-server
-      # rust-analyzer
-      # typescript-language-server
+      # pkgs.lua-language-server
+      # pkgs.rust-analyzer
+      # pkgs.typescript-language-server
     ];
 
-    plugins = with pkgs.vimPlugins; [
-      plenary-nvim
+    plugins = let p = pkgs.vimPlugins; in [
+      p.plenary-nvim
 
-      nvim-lspconfig
+      p.nvim-lspconfig
 
       # Completion
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp_luasnip
-      luasnip
+      p.nvim-cmp
+      p.cmp-nvim-lsp
+      p.cmp_luasnip
+      p.luasnip
 
-      dracula-nvim
-      tokyonight-nvim
-      lualine-nvim
+      p.dracula-nvim
+      p.tokyonight-nvim
+      p.lualine-nvim
 
       # Navigation
-      flash-nvim
-      harpoon2
-      telescope-nvim
-      telescope-fzf-native-nvim
-      nvim-spectre
-      trouble-nvim
+      p.flash-nvim
+      p.harpoon2
+      p.telescope-nvim
+      p.telescope-fzf-native-nvim
+      p.nvim-spectre
+      p.trouble-nvim
 
       # Treesitter
-      nvim-treesitter.withAllGrammars
-      nvim-treesitter-refactor
+      p.nvim-treesitter.withAllGrammars
+      p.nvim-treesitter-refactor
 
       # Git
-      vim-fugitive
-      diffview-nvim
+      p.vim-fugitive
+      p.diffview-nvim
 
       # Clojure
-      conjure
-      vim-sexp
-      vim-sexp-mappings-for-regular-people
+      p.conjure
+      p.vim-sexp
+      p.vim-sexp-mappings-for-regular-people
     ];
   };
 

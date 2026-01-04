@@ -5,8 +5,8 @@
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    _1password-cli
-    _1password-gui
+  environment.systemPackages = [
+    pkgs._1password-cli
+    pkgs._1password-gui
   ];
 }

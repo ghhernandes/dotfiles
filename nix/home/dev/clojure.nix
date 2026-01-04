@@ -6,11 +6,11 @@
     package = pkgs.jdk21;
   };
 
-  home.packages = with pkgs; [
-    clojure
-    clojure-lsp
-    babashka
-    clj-kondo
-    leiningen
+  home.packages = [
+    pkgs.clojure
+    pkgs.clojure-lsp
+    pkgs.babashka
+    pkgs.clj-kondo
+    pkgs.leiningen
   ];
 }

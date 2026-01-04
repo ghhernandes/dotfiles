@@ -115,12 +115,16 @@
           enabled = false;  # No blur
         };
         shadow = {
-          enabled = true;  # No shadows
+          enabled = false;  # No shadows
         };
       };
 
       animations = {
         enabled = false;  # Disable animations for snappy feel
+      };
+
+      misc = {
+        vfr = true;  # Variable frame rate to save battery
       };
     };
   };

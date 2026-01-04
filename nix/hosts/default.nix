@@ -9,6 +9,7 @@ let
 
   mkHost = name: _: lib.nixosSystem {
     inherit system;
+    specialArgs = { inherit (inputs) self; };
 
     modules = [
       ./configuration.nix

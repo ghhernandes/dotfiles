@@ -1,11 +1,19 @@
-{ inputs, config, pkgs, lanzaboote, system, ... }:
+{ self, config, pkgs, lanzaboote, system, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./services.nix
-    ];
+  imports = with self.systemModules; [
+    ./hardware-configuration.nix
+    ./services.nix
+    audio
+    bluetooth
+    gaming
+    virtualization
+    hyprland
+    remoteAccess
+    monitoring
+    security
+    packageManagers
+  ];
 
   users.users.gh = {
     isNormalUser = true;
@@ -14,79 +22,9 @@
     shell = pkgs.zsh;
   };
 
-  networking.hostName = "ghstation"; 
+  networking.hostName = "ghstation";
   networking.networkmanager.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
-  zramSwap.enable = true;
-
-  # X11 is not needed - Hyprland handles XWayland through programs.hyprland.xwayland
-  # Keyboard layout is configured in Hyprland's input section
-
-  # Enable Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  services.tailscale.enable = true;
-
   programs.zsh.enable = true;
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
-  # Enable the gnome-keyring secrets vault. 
-  # Will be exposed through DBus to programs willing to store secrets.
-  services.gnome.gnome-keyring.enable = true;
-
-  # enable Hyprland window manager
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;  # recommended for NixOS 24.11+
-    xwayland.enable = true;
-  };
-
-  # Enable Wayland support for Electron apps
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  programs.appimage.enable = true;
-  services.flatpak.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    _1password-cli
-    _1password-gui
-
-    gamemode
-    mangohud
-
-    lutris
-    heroic
-    gogdl
-
-    sunshine
-
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-  ];
 }
 

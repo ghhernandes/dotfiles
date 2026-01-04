@@ -44,6 +44,9 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  # Enable zram swap
+  zramSwap.enable = true;
+
   # Enable I2C for RGB control (Corsair RAM)
   hardware.i2c.enable = true;
 

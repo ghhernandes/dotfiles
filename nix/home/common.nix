@@ -7,38 +7,17 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./tmux.nix
-    ./neovim.nix
-    ./zsh.nix
-  ];
-
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
   };
 
-  # User settings
   home.username = lib.mkDefault "gh";
   home.homeDirectory = lib.mkDefault "/home/gh";
   home.stateVersion = "25.11";
 
-  # Git configuration
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "Gabriel Hernandes";
-      user.email = "ghh.hernandes@gmail.com";
-    };
-  };
-
-  programs.claude-code = {
-    enable = true;
-  };
-
   programs.home-manager.enable = true;
 
-  # CLI tools
   home.packages = with pkgs; [
     btop
     fzf

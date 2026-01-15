@@ -2,7 +2,7 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
 
   time.timeZone = "America/Sao_Paulo";
 

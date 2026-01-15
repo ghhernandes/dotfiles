@@ -169,28 +169,28 @@
       general = {
         gaps_in = 2;
         gaps_out = 5;
-        border_size = 1;
+        border_size = 2;
         "col.active_border" = "rgba(458588ff)";  # Simple blue
         "col.inactive_border" = "rgba(282828aa)";
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 0;  # No rounded corners
+        rounding = 10;
         blur = {
-          enabled = false;  # No blur
+          enabled = true;
         };
         shadow = {
-          enabled = false;  # No shadows
+          enabled = false;
         };
       };
 
       animations = {
-        enabled = false;  # Disable animations for snappy feel
+        enabled = false;
       };
 
       misc = {
-        vfr = true;  # Variable frame rate to save battery
+        vfr = false;
       };
     };
   };

@@ -1,10 +1,12 @@
-{ config, lib, modulesPath, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 
 {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
@@ -39,9 +41,6 @@
 
   # Enable zram swap
   zramSwap.enable = true;
-
-  # Enable I2C for RGB control (Corsair RAM)
-  hardware.i2c.enable = true;
 
   # Enable OpenGL
   hardware.graphics = {

@@ -23,6 +23,7 @@
       gui = ./home/gui.nix;
       emacs = ./home/emacs.nix;
       kitty = ./home/kitty.nix;
+      fonts = ./home/fonts.nix;
       localBin = ./home/local-bin.nix;
       dev = ./home/dev;
       hyprland = ./home/hyprland;

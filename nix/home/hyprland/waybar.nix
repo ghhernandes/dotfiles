@@ -10,7 +10,7 @@
         height = 30;
         modules-left = [ "hyprland/workspaces" "hyprland/window" ];
         modules-center = [ "custom/gh-pomodoro" "clock" ];
-        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" "clock#date" ];
+        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -21,51 +21,52 @@
           max-length = 50;
         };
 
-        "clock#date" = {
-          format = "{:%b %d}";
-        };
-
         clock = {
-          format = "{:%I:%M %p}";
+          format = "{:%b %d %I:%M %p}";
         };
 
         cpu = {
-          format = "CPU {usage}%";
+          format = "󰻠 {usage}%";
         };
 
         temperature = {
-          format = "TEMP {temperatureC}°C";
+          format = "󰔏 {temperatureC}°C";
           critical-threshold = 80;
-          format-critical = "TEMP {temperatureC}°C";
+          format-critical = "󰸁 {temperatureC}°C";
         };
 
         memory = {
-          format = "MEM {}%";
+          format = "󰍛 {}%";
         };
 
         battery = {
-          format = "BAT {capacity}%";
-          format-charging = "CHG {capacity}%";
-          format-plugged = "PLUG {capacity}%";
+          format = "{icon} {capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰚥 {capacity}%";
+          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
 
         network = {
-          format-wifi = "WIFI {signalStrength}%";
-          format-ethernet = "ETH";
-          format-disconnected = "NO NET";
+          format-wifi = "󰖩 {signalStrength}%";
+          format-ethernet = "󰈀 ETH";
+          format-disconnected = "󰖪 NO NET";
+          on-click = "kitty --class impala-float impala";
         };
 
         pulseaudio = {
-          format = "VOL {volume}%";
-          format-muted = "MUTE";
+          format = "{icon} {volume}%";
+          format-muted = "󰖁 MUTE";
+          format-icons = {
+            default = ["󰕿" "󰖀" "󰕾"];
+          };
           on-click = "pavucontrol";
         };
 
         bluetooth = {
-          format = "BT {status}";
-          format-disabled = "BT OFF";
-          format-connected = "BT {num_connections}";
-          on-click = "blueman-manager";
+          format = "󰂯 {status}";
+          format-disabled = "󰂲 OFF";
+          format-connected = "󰂱 {num_connections}";
+          on-click = "kitty --class bluetui-float bluetui";
         };
 
         "custom/gh-pomodoro" = {
@@ -78,8 +79,8 @@
     };
     style = ''
       * {
-        font-family: "DejaVu Sans", sans-serif;
-        font-size: 13px;
+        font-family: "JetBrainsMono Nerd Font", "DejaVu Sans", sans-serif;
+        font-size: 14px;
         font-weight: 500;
         border: none;
         border-radius: 0;

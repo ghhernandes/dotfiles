@@ -7,6 +7,7 @@
     gui
     emacs
     kitty
+    fonts
     localBin
     dev
     hyprland

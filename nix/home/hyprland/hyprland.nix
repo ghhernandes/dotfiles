@@ -13,6 +13,8 @@
     pkgs.pavucontrol    # GUI audio control
     pkgs.blueman        # Bluetooth manager GUI
     pkgs.hyprlock       # Screen locker
+    pkgs.impala
+    pkgs.bluetui
   ];
 
   wayland.windowManager.hyprland = {
@@ -76,6 +78,16 @@
         "float, class:^(org.pulseaudio.pavucontrol)$"
         "center, class:^(org.pulseaudio.pavucontrol)$"
         "size 800 600, class:^(org.pulseaudio.pavucontrol)$"
+
+        # Bluetui: Floating and centered
+        "float, class:^(bluetui-float)$"
+        "center, class:^(bluetui-float)$"
+        "size 800 600, class:^(bluetui-float)$"
+
+        # Impala: Floating and centered
+        "float, class:^(impala-float)$"
+        "center, class:^(impala-float)$"
+        "size 800 600, class:^(impala-float)$"
 
         # Gaming: Auto fullscreen
         "fullscreen, class:^(steam_app_).*"
@@ -181,7 +193,7 @@
           enabled = true;
         };
         shadow = {
-          enabled = false;
+          enabled = true;
         };
       };
 

@@ -17,6 +17,21 @@
     pkgs.bluetui
   ];
 
+  services.hyprpaper = {
+  enable = true;
+  settings = {
+    preload = [
+      "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+    ];
+    wallpaper = [
+      # By display
+      #"DP-2,~/wallpapers/wallpaper2.jpg"
+      # By default/fallback
+      ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+    ];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = false;  # Disable to avoid conflicts with UWSM
@@ -32,6 +47,7 @@
       exec-once = [
         "waybar"
         "dunst"
+        "systemctl --user start hyprpaper"
       ];
 
       # Window rules for fixed workspaces
@@ -182,7 +198,7 @@
         gaps_in = 2;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(458588ff)";  # Simple blue
+        "col.active_border" = "rgba(ffffffff)";  # Simple blue
         "col.inactive_border" = "rgba(282828aa)";
         layout = "dwindle";
       };

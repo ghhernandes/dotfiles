@@ -38,6 +38,22 @@ vim.lsp.config.nixd = {
 }
 vim.lsp.enable('nixd')
 
+-- Dart/Flutter LSP
+vim.lsp.config.dartls = {
+  capabilities = capabilities,
+  cmd = { 'dart', 'language-server', '--protocol=lsp' },
+  filetypes = { 'dart' },
+  root_markers = { 'pubspec.yaml', '.git' },
+  init_options = {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true,
+  },
+}
+vim.lsp.enable('dartls')
+
 -- Diagnostic settings
 -- Disable inline diagnostics
 vim.diagnostic.config {

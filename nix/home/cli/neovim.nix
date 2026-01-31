@@ -11,6 +11,7 @@
       pkgs.gopls
       pkgs.clojure-lsp
       pkgs.nixd
+      pkgs.dart
 
       # pkgs.lua-language-server
       # pkgs.rust-analyzer

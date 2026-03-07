@@ -16,7 +16,6 @@
     pkgs.lazygit
 
     # AI/LLM tools
-    pkgs.gemini-cli
     pkgs.claude-code
     pkgs.mods
 

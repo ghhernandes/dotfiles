@@ -53,37 +53,37 @@
       # Window rules for fixed workspaces
       windowrulev2 = [
         # Workspace 1: kitty
-        "workspace 1, class:^(kitty)$"
+       # "workspace 1, class:^(kitty)$"
 
-        # Workspace 2: Firefox and Chrome
-        "workspace 2, class:^(firefox)$"
-        "workspace 2, class:^(Google-chrome)$"
-        "workspace 2, class:^(google-chrome)$"
+       # # Workspace 2: Firefox and Chrome
+       # "workspace 2, class:^(firefox)$"
+       # "workspace 2, class:^(Google-chrome)$"
+       # "workspace 2, class:^(google-chrome)$"
 
-        # Workspace 3: Editors
-        "workspace 3, class:^(Emacs)$"
-        "workspace 3, class:^(emacs)$"
+       # # Workspace 3: Editors
+       # "workspace 3, class:^(Emacs)$"
+       # "workspace 3, class:^(emacs)$"
 
-        # Workspace 4: File managers
-        "workspace 4, class:^(org.gnome.Nautilus)$"
+       # # Workspace 4: File managers
+       # "workspace 4, class:^(org.gnome.Nautilus)$"
 
-        # Workspace 6: Spotify, Music
-        "workspace 6, class:^(Spotify)$"
-        "workspace 6, class:^(spotify)$"
+       # # Workspace 6: Spotify, Music
+       # "workspace 6, class:^(Spotify)$"
+       # "workspace 6, class:^(spotify)$"
 
-        # Workspace 7: Obsidian
-        "workspace 7, class:^(obsidian)$"
-        "workspace 7, class:^(Obsidian)$"
+       # # Workspace 7: Obsidian
+       # "workspace 7, class:^(obsidian)$"
+       # "workspace 7, class:^(Obsidian)$"
 
-        # Workspace 9: Messaging
-        "workspace 9, class:^(vesktop)$"
-        "workspace 9, class:^(Vesktop)$"
-        "workspace 9, class:^(discord)$"
-        "workspace 9, class:^(Discord)$"
-        "workspace 9, class:^(Slack)$"
-        "workspace 9, class:^(slack)$"
-        "workspace 9, class:^(signal)$"
-        "workspace 9, class:^(Signal)$"
+       # # Workspace 9: Messaging
+       # "workspace 9, class:^(vesktop)$"
+       # "workspace 9, class:^(Vesktop)$"
+       # "workspace 9, class:^(discord)$"
+       # "workspace 9, class:^(Discord)$"
+       # "workspace 9, class:^(Slack)$"
+       # "workspace 9, class:^(slack)$"
+       # "workspace 9, class:^(signal)$"
+       # "workspace 9, class:^(Signal)$"
 
         # 1Password: Floating and centered
         "float, class:^(1password)$"

@@ -1,4 +1,4 @@
-{ self, nixpkgs, home-manager, system, ... }:
+{ self, nixpkgs, home-manager, system, claude-code, ... }:
 
 let
   lib = nixpkgs.lib;
@@ -20,6 +20,8 @@ let
       modules = [
         ./${username}
         {
+          nixpkgs.overlays = [ claude-code.overlays.default ];
+
           home.username = lib.mkForce username;
           home.homeDirectory = lib.mkForce "${homePrefix}/${username}";
         }

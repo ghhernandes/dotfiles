@@ -5,7 +5,7 @@
     common
     cli
     gui
-    emacs
+    #emacs
     kitty
     fonts
     localBin

@@ -12,10 +12,12 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    claude-code.url = "github:sadjow/claude-code-nix";
+
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, ...}@inputs:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, claude-code, ...}@inputs:
   {
     homeModules = {
       common = ./home/common.nix;
@@ -51,7 +53,7 @@
 
     homeConfigurations = (
       import ./profiles {
-        inherit self nixpkgs home-manager;
+        inherit self nixpkgs home-manager claude-code;
         system = "x86_64-linux";
       }
     );

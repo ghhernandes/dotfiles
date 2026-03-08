@@ -54,6 +54,34 @@ vim.lsp.config.dartls = {
 }
 vim.lsp.enable('dartls')
 
+-- Python LSP (pyright + ruff)
+vim.lsp.config.pyright = {
+  capabilities = capabilities,
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt' },
+  workspace_required = true,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'workspace',
+      },
+    },
+  },
+}
+vim.lsp.enable('pyright')
+
+vim.lsp.config.ruff = {
+  capabilities = capabilities,
+  cmd = { 'ruff', 'server' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml' },
+  workspace_required = true,
+}
+vim.lsp.enable('ruff')
+
 -- Diagnostic settings
 -- Disable inline diagnostics
 vim.diagnostic.config {

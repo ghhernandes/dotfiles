@@ -12,6 +12,8 @@
       pkgs.clojure-lsp
       pkgs.nixd
       pkgs.dart
+      pkgs.pyright
+      pkgs.ruff
 
       # pkgs.lua-language-server
       # pkgs.rust-analyzer

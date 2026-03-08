@@ -128,7 +128,9 @@
         "$mod SHIFT, G, exec, signal-desktop"
         "$mod SHIFT, slash, exec, 1password"
 
-        "$mod, L, exec, hyprlock"
+
+
+        "$mod, backslash, exec, hyprlock"
         "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
         "$mod, B, exec, $HOME/.local/bin/gh-rofi-bluetooth"
 
@@ -138,11 +140,21 @@
         "CTRL, Print, exec, $HOME/.local/bin/gh-screenshot clipboard"
         "$mod, Print, exec, $HOME/.local/bin/gh-screenshot window"
 
-        # Move focus with mod + arrow keys
+        # Move focus with mod + hjkl or arrow keys
+        "$mod, H, movefocus, l"
+        "$mod, L, movefocus, r"
+        "$mod, K, movefocus, u"
+        "$mod, J, movefocus, d"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
+
+        # Swap windows with mod + shift + hjkl
+        "$mod SHIFT, H, swapwindow, l"
+        "$mod SHIFT, L, swapwindow, r"
+        "$mod SHIFT, K, swapwindow, u"
+        "$mod SHIFT, J, swapwindow, d"
 
         # Switch workspaces with mod + [0-9]
         "$mod, 1, workspace, 1"
@@ -167,6 +179,14 @@
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
+      ];
+
+      # Resize windows with mod + CTRL + hjkl
+      binde = [
+        "$mod CTRL, H, resizeactive, -50 0"
+        "$mod CTRL, L, resizeactive, 50 0"
+        "$mod CTRL, K, resizeactive, 0 -50"
+        "$mod CTRL, J, resizeactive, 0 50"
       ];
 
       # Media and audio control keybindings

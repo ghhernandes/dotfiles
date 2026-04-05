@@ -1,7 +1,7 @@
-{ self, config, pkgs, lanzaboote, system, ... }:
+{ self, config, pkgs, lanzaboote, ... }:
 
 {
-  imports = with self.systemModules; [
+  imports = (with self.systemModules; [
     ./hardware-configuration.nix
     ./services.nix
     audio
@@ -13,6 +13,8 @@
     monitoring
     security
     packageManagers
+  ]) ++ [
+    lanzaboote.nixosModules.lanzaboote
   ];
 
   users.users.gh = {

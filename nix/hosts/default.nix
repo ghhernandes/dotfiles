@@ -9,13 +9,11 @@ let
 
   mkHost = name: _: lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit (inputs) self; };
+    specialArgs = { inherit (inputs) self; inherit lanzaboote; };
 
     modules = [
       ./configuration.nix
       ./${name}
-
-      lanzaboote.nixosModules.lanzaboote
     ];
   };
 in

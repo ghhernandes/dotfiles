@@ -22,8 +22,8 @@ let
         {
           nixpkgs.overlays = [ claude-code.overlays.default ];
 
-          home.username = lib.mkForce username;
-          home.homeDirectory = lib.mkForce "${homePrefix}/${username}";
+          home.username = lib.mkDefault username;
+          home.homeDirectory = lib.mkDefault "${homePrefix}/${username}";
         }
       ];
     };

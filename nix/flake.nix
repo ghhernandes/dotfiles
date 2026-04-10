@@ -42,6 +42,7 @@
       dev = ./home/dev;
       hyprland = ./home/hyprland;
       rofi = ./home/rofi;
+      reverseEngineering = ./home/reverse-engineering.nix;
     };
 
     systemModules = {

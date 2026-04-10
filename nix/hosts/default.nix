@@ -25,6 +25,7 @@ let
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
         inherit self;
+        hostName = name;
         dotfilesPath = self + "/..";
       };
       modules = [

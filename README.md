@@ -1,40 +1,51 @@
 # dotfiles
 
-NixOS and home-manager configurations using flakes.
+NixOS + home-manager flake-based configurations for multiple hosts.
 
 ## Structure
 
 ```
+ai/            # AI tool configs (Claude Code, future siblings), see ai/README.md
 nix/
-├── flake.nix           # Main entry point, exports modules
-├── system/             # System-level modules (audio, bluetooth, gaming, etc.)
-├── home/               # Home-manager modules (browsers, editors, shell, etc.)
-├── hosts/              # Host configurations (per-machine settings)
-└── profiles/           # User profiles (imports home modules)
+├── flake.nix     # Inputs, exports homeModules/systemModules, wires hosts
+├── system/       # NixOS system modules (audio, docker, hyprland, ...)
+├── home/         # home-manager modules (cli, gui, dev, ai, hyprland, ...)
+└── hosts/        # Per-host configs; each subdir auto-discovered
+    ├── configuration.nix   # Shared base system config
+    ├── callisto/           # WSL dev environment
+    ├── ghstation/          # Hyprland desktop / gaming workstation
+    └── devbox/             # Minimal GNOME dev box
 ```
 
-## System Modules
+## Hosts
 
-System modules configure NixOS system-level features like hardware, services, and system-wide settings. Located in `nix/system/`.
+- **callisto** — NixOS-WSL, CLI + dev + reverse-engineering
+- **ghstation** — Full Hyprland desktop, gaming, virtualization, secure boot
+- **devbox** — Minimal GNOME dev box
 
-Each host imports only the system modules it needs, making configurations modular and reusable across machines.
+## Modules
 
-## Home Modules
+`flake.nix` exports two attribute sets — `systemModules` and `homeModules` —
+that hosts pick from. Each host's `default.nix` imports the system modules it
+needs, and (if present) its `home.nix` imports the home modules it needs.
 
-Home modules configure user environment and applications that don't require root privileges. Located in `nix/home/`.
-
-Each profile imports only the home modules it needs, allowing different users or setups to share common configurations while customizing their environment.
+New hosts are picked up automatically by `hosts/default.nix`: any subdirectory
+becomes a `nixosConfiguration`, and if it also contains a `home.nix` it
+becomes a `homeConfiguration` keyed by the host name (default user `gh`).
 
 ## Usage
 
-Build NixOS system:
 ```bash
 cd nix
-sudo nixos-rebuild switch --flake .#ghstation
-```
 
-Build home-manager:
-```bash
-cd nix
-home-manager switch --flake .#gh
+# System rebuild (pick the active host)
+sudo nixos-rebuild switch --flake .#callisto
+sudo nixos-rebuild switch --flake .#ghstation
+sudo nixos-rebuild switch --flake .#devbox
+
+# Home-manager (keyed by host, not user)
+home-manager switch --flake .#callisto
+
+# Update flake inputs
+nix flake update
 ```

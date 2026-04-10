@@ -6,5 +6,6 @@
     cli
     localBin
     dev
+    ai
   ];
 }

@@ -13,5 +13,6 @@
     dev
     hyprland
     rofi
+    ai
   ];
 }

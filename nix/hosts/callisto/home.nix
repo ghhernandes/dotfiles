@@ -6,5 +6,6 @@
     cli
     dev
     reverseEngineering
+    ai
   ];
 }

@@ -16,13 +16,13 @@ elif [ -f "$CONFIG_FILE" ]; then
     profile=$(cat "$CONFIG_FILE")
     if [ -z "$profile" ]; then
         echo "Error: No profile found in config file"
-        echo "Usage: gh-home-manager [profile]"
+        echo "Usage: gh-nix-home-switch [profile]"
         exit 1
     fi
     echo "Using saved profile: $profile"
 else
     echo "Error: No profile provided and no saved profile found"
-    echo "Usage: gh-home-manager [profile]"
+    echo "Usage: gh-nix-home-switch [profile]"
     exit 1
 fi
 

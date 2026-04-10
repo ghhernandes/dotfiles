@@ -20,12 +20,7 @@
     pkgs.mods
 
     # TUI applications
-    pkgs.impala
-    pkgs.bluetui
     pkgs.glow  # Markdown viewer
-
-    # Security/Yubikey CLI
-    pkgs.yubikey-manager
   ];
 
   # Git configuration
@@ -40,5 +35,11 @@
   # Claude Code
   programs.claude-code = {
     enable = true;
+  };
+
+  # Direnv with nix-direnv for per-project dev shells
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 }

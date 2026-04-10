@@ -14,14 +14,26 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, claude-code, ...}@inputs:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, claude-code, nixos-wsl, ...}@inputs:
+  let
+    hostOutputs = import ./hosts {
+      inherit self nixpkgs home-manager lanzaboote claude-code inputs;
+      system = "x86_64-linux";
+    };
+  in
   {
     homeModules = {
       common = ./home/common.nix;
       cli = ./home/cli;
+      cliHardware = ./home/cli/hardware.nix;
       gui = ./home/gui.nix;
       emacs = ./home/emacs.nix;
       kitty = ./home/kitty.nix;
@@ -42,20 +54,9 @@
       monitoring = ./system/monitoring.nix;
       security = ./system/security.nix;
       packageManagers = ./system/package-managers.nix;
+      docker = ./system/docker.nix;
     };
 
-    nixosConfigurations = (
-      import ./hosts {
-        inherit nixpkgs home-manager lanzaboote inputs;
-        system = "x86_64-linux";
-      }
-    );
-
-    homeConfigurations = (
-      import ./profiles {
-        inherit self nixpkgs home-manager claude-code;
-        system = "x86_64-linux";
-      }
-    );
+    inherit (hostOutputs) nixosConfigurations homeConfigurations;
   };
 }

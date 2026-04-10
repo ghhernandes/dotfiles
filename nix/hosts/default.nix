@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, lanzaboote, inputs, system, ... }:
+{ self, nixpkgs, home-manager, lanzaboote, claude-code, inputs, system, ... }:
 
 let
   lib = nixpkgs.lib;
@@ -7,14 +7,39 @@ let
   isDirectory = name: type: type == "directory";
   hosts = lib.filterAttrs isDirectory hostDirs;
 
-  mkHost = name: _: lib.nixosSystem {
-    inherit system;
-    specialArgs = { inherit (inputs) self; inherit lanzaboote; };
+  homePrefix = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
 
+  mkSystem = name: _: lib.nixosSystem {
+    inherit system;
+    specialArgs = { inherit self lanzaboote inputs; };
     modules = [
       ./configuration.nix
       ./${name}
     ];
   };
+
+  hasHome = name: builtins.pathExists (./. + "/${name}/home.nix");
+
+  mkHome = name: _:
+    home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {
+        inherit self;
+        dotfilesPath = self + "/..";
+      };
+      modules = [
+        (./. + "/${name}/home.nix")
+        {
+          nixpkgs.overlays = [ claude-code.overlays.default ];
+          home.username = lib.mkDefault "gh";
+          home.homeDirectory = lib.mkDefault "${homePrefix}/gh";
+        }
+      ];
+    };
+
+  hostsWithHome = lib.filterAttrs (name: _: hasHome name) hosts;
 in
-  lib.mapAttrs mkHost hosts
+{
+  nixosConfigurations = lib.mapAttrs mkSystem hosts;
+  homeConfigurations  = lib.mapAttrs mkHome hostsWithHome;
+}

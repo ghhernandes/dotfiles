@@ -1,9 +1,10 @@
-{ self, config, pkgs, ... }:
+{ self, ... }:
 
 {
   imports = with self.homeModules; [
     common
     cli
+    cliHardware
     gui
     #emacs
     kitty

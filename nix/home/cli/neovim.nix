@@ -51,6 +51,9 @@
       p.vim-fugitive
       p.diffview-nvim
 
+      # Claude Code
+      p.claudecode-nvim
+
       # Clojure
       p.conjure
       p.vim-sexp

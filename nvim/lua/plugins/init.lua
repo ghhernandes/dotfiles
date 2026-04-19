@@ -13,4 +13,5 @@ require("plugins.treesitter")
 require("plugins.harpoon")
 require("plugins.vim-sexp")
 require("plugins.trouble")
+require("plugins.claudecode")
 

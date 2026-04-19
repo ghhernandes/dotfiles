@@ -79,7 +79,7 @@
     };
     style = ''
       * {
-        font-family: "JetBrainsMono Nerd Font", "DejaVu Sans", sans-serif;
+        font-family: "JetBrainsMono Nerd Font Propo", "DejaVu Sans", sans-serif;
         font-size: 14px;
         font-weight: 500;
         border: none;

@@ -35,23 +35,13 @@
     "PreToolUse": [
       {
         "matcher": "Read|Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/protect-secrets.sh"
-          }
-        ]
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/protect-secrets.sh" }]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/nixfmt-on-write.sh"
-          }
-        ]
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/nixfmt-on-write.sh" }]
       }
     ]
   }

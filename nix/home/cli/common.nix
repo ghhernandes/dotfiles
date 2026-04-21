@@ -1,44 +1,15 @@
 { pkgs, ... }:
 
 {
-  # CLI Applications and Tools
   home.packages = [
-    # System monitoring
-    pkgs.btop
-
-    # Core CLI tools
     pkgs.fzf
     pkgs.tree
     pkgs.ripgrep
-
-    # Git and version control
-    pkgs.github-cli
-    pkgs.lazygit
-
-    # AI/LLM tools
-    pkgs.mods
-
-    # Tmux orchestration
-    pkgs.tony
-
-    # TUI applications
-    pkgs.glow # Markdown viewer
+    pkgs.glow
   ];
 
-  programs = {
-    # Git configuration
-    git = {
-      enable = true;
-      settings = {
-        user.name = "Gabriel Hernandes";
-        user.email = "ghh.hernandes@gmail.com";
-      };
-    };
-
-    # Direnv with nix-direnv for per-project dev shells
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 }

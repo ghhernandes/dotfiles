@@ -18,7 +18,9 @@ let
   };
 in
 {
-  home.packages = [ tmux-session-manager ];
+  home.packages = [
+    tmux-session-manager
+  ];
 
   programs.tmux = {
     enable = true;

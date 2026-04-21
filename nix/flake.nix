@@ -19,8 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    tony.url = "github:ghhernandes/tony";
-
     systems.url = "github:nix-systems/default";
   };
 
@@ -31,7 +29,6 @@
       home-manager,
       lanzaboote,
       claude-code,
-      tony,
       ...
     }@inputs:
     let
@@ -42,7 +39,6 @@
           home-manager
           lanzaboote
           claude-code
-          tony
           inputs
           ;
       };
@@ -51,6 +47,7 @@
       homeModules = {
         common = ./home/common.nix;
         cli = ./home/cli;
+        git = ./home/cli/git.nix;
         zsh = ./home/cli/zsh.nix;
         cliHardware = ./home/cli/hardware.nix;
         gui = ./home/gui.nix;

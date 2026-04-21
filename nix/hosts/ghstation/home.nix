@@ -4,6 +4,7 @@
   imports = with self.homeModules; [
     common
     cli
+    git
     zsh
     cliHardware
     gui

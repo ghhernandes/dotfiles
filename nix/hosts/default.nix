@@ -4,7 +4,6 @@
   home-manager,
   lanzaboote,
   claude-code,
-  tony,
   inputs,
   ...
 }:
@@ -66,7 +65,6 @@ let
         {
           nixpkgs.overlays = [
             claude-code.overlays.default
-            tony.overlays.default
           ];
           home.username = lib.mkDefault meta.username;
           home.homeDirectory = lib.mkDefault "${homePrefix meta.system}/${meta.username}";

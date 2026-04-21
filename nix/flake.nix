@@ -62,7 +62,9 @@
         hyprland = ./home/hyprland;
         rofi = ./home/rofi;
         reverseEngineering = ./home/reverse-engineering.nix;
-        ai = ./home/ai;
+        claude = ./home/ai/claude.nix;
+        opencode = ./home/ai/opencode.nix;
+        gemini = ./home/ai/gemini.nix;
       };
 
       systemModules = {

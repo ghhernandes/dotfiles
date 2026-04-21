@@ -13,6 +13,8 @@
     dev
     hyprland
     rofi
-    ai
+    claude
+    opencode
+    gemini
   ];
 }

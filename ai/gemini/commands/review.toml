@@ -1,0 +1,2 @@
+description = "Review code for quality, security, and correctness"
+prompt = "Review the following code for quality, security vulnerabilities, and correctness. Do not make changes, only analyze and report findings. {{args}}"

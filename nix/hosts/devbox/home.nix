@@ -6,6 +6,10 @@
     cli
     localBin
     dev
-    ai
+    claude
+    opencode
+    gemini
   ];
+
+  programs.firefox.enable = true;
 }

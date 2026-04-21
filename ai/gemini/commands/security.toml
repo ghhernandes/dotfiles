@@ -1,0 +1,2 @@
+description = "Audit code for vulnerabilities and secret exposure"
+prompt = "Audit this code for security vulnerabilities, secret exposure, and OWASP top 10 issues. Report findings without making changes. {{args}}"

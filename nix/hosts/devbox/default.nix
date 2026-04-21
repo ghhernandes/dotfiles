@@ -19,6 +19,7 @@
       "wheel"
     ];
     shell = pkgs.zsh;
+    linger = true;
   };
 
   networking = {
@@ -29,20 +30,16 @@
   programs.zsh.enable = true;
 
   services = {
-    # GNOME Desktop
-    xserver = {
+    printing.enable = true;
+
+    tailscale.enable = true;
+
+    openssh = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-      videoDrivers = [
-        "modesetting"
-        "fbdev"
-      ];
-      xkb = {
-        layout = "us";
-        variant = "";
+      settings = {
+        PasswordAuthentication = true; # TODO: disable after ssh-copy-id
+        PermitRootLogin = "no";
       };
     };
-    printing.enable = true;
   };
 }

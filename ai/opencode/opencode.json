@@ -1,0 +1,58 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-gemini-auth@latest"
+  ],
+  "instructions": [
+    "CLAUDE.md",
+    "AGENTS.md",
+    "CONTRIBUTING.md"
+  ],
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "git status *": "allow",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "git branch *": "allow",
+      "git show *": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "rg *": "allow"
+    }
+  },
+  "agent": {
+    "reviewer": {
+      "description": "Reviews code for quality, security, and correctness without making changes",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git *": "allow",
+          "rg *": "allow",
+          "ls *": "allow"
+        }
+      }
+    },
+    "security": {
+      "description": "Audits code for vulnerabilities and secret exposure",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git *": "allow",
+          "rg *": "allow"
+        }
+      }
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true
+  }
+}

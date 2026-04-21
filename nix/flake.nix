@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -11,8 +12,6 @@
 
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    claude-code.url = "github:sadjow/claude-code-nix";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -33,7 +32,6 @@
       nixpkgs,
       home-manager,
       lanzaboote,
-      claude-code,
       ...
     }@inputs:
     let
@@ -43,7 +41,6 @@
           nixpkgs
           home-manager
           lanzaboote
-          claude-code
           inputs
           ;
       };

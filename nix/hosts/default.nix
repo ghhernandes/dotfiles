@@ -3,7 +3,6 @@
   nixpkgs,
   home-manager,
   lanzaboote,
-  claude-code,
   inputs,
   ...
 }:
@@ -59,13 +58,11 @@ let
         inherit self inputs;
         hostName = name;
         dotfilesPath = self + "/..";
+        pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${meta.system};
       };
       modules = [
         (./. + "/${name}/home.nix")
         {
-          nixpkgs.overlays = [
-            claude-code.overlays.default
-          ];
           home.username = lib.mkDefault meta.username;
           home.homeDirectory = lib.mkDefault "${homePrefix meta.system}/${meta.username}";
         }

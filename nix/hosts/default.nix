@@ -56,7 +56,7 @@ let
     home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${meta.system};
       extraSpecialArgs = {
-        inherit self;
+        inherit self inputs;
         hostName = name;
         dotfilesPath = self + "/..";
       };

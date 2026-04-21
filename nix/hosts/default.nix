@@ -4,6 +4,7 @@
   home-manager,
   lanzaboote,
   claude-code,
+  tony,
   inputs,
   system,
   ...
@@ -43,7 +44,10 @@ let
       modules = [
         (./. + "/${name}/home.nix")
         {
-          nixpkgs.overlays = [ claude-code.overlays.default ];
+          nixpkgs.overlays = [
+            claude-code.overlays.default
+            tony.overlays.default
+          ];
           home.username = lib.mkDefault "gh";
           home.homeDirectory = lib.mkDefault "${homePrefix}/gh";
         }

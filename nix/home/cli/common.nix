@@ -19,6 +19,9 @@
     pkgs.claude-code
     pkgs.mods
 
+    # Tmux orchestration
+    pkgs.tony
+
     # TUI applications
     pkgs.glow # Markdown viewer
   ];

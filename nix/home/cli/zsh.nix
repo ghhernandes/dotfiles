@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+_:
 
 {
   programs.zsh = {
@@ -6,7 +6,10 @@
     autosuggestion.enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "fzf"];
+      plugins = [
+        "git"
+        "fzf"
+      ];
       theme = "simple";
     };
     initContent = ''
@@ -15,5 +18,3 @@
     '';
   };
 }
-
-

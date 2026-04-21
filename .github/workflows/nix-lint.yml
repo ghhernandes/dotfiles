@@ -24,7 +24,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
 
       - name: Check formatting
-        run: nix run nixpkgs#nixfmt -- --check nix/
+        run: find nix/ -name '*.nix' | xargs nix run nixpkgs#nixfmt -- --check
 
   deadnix:
     runs-on: ubuntu-latest

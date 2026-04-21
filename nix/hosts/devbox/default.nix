@@ -1,4 +1,8 @@
-{ self, config, pkgs, ... }:
+{
+  self,
+  pkgs,
+  ...
+}:
 
 {
   imports = with self.systemModules; [
@@ -10,25 +14,35 @@
   users.users.gh = {
     isNormalUser = true;
     description = "Gabriel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh;
   };
 
-  networking.hostName = "devbox";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "devbox";
+    networkmanager.enable = true;
+  };
 
   programs.zsh.enable = true;
 
-  # GNOME Desktop
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" "fbdev" ];
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services = {
+    # GNOME Desktop
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      videoDrivers = [
+        "modesetting"
+        "fbdev"
+      ];
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+    printing.enable = true;
   };
-
-  services.printing.enable = true;
 }

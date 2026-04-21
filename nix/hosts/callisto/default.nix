@@ -1,12 +1,19 @@
-{ self, config, pkgs, lib, inputs, ... }:
+{
+  self,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports = (with self.systemModules; [
-    security
-    docker
-  ]) ++ [
-    inputs.nixos-wsl.nixosModules.default
-  ];
+  imports =
+    (with self.systemModules; [
+      security
+      docker
+    ])
+    ++ [
+      inputs.nixos-wsl.nixosModules.default
+    ];
 
   # --- NixOS-WSL configuration ---
   wsl = {

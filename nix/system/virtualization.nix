@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+_:
 
 {
   virtualisation.libvirtd.enable = true;

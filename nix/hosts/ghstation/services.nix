@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # Enable I2C for RGB control (Corsair RAM)
   hardware.i2c.enable = true;
@@ -22,4 +22,3 @@
     };
   };
 }
-

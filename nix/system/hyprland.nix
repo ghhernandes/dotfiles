@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Enable Hyprland window manager
   programs.hyprland = {
     enable = true;
-    withUWSM = true;  # recommended for NixOS 24.11+
+    withUWSM = true; # recommended for NixOS 24.11+
     xwayland.enable = true;
   };
 
@@ -19,8 +19,8 @@
 
   # System packages for Hyprland functionality
   environment.systemPackages = [
-    pkgs.grim           # screenshot functionality
-    pkgs.slurp          # screenshot functionality
-    pkgs.wl-clipboard   # wl-copy and wl-paste for copy/paste from stdin/stdout
+    pkgs.grim # screenshot functionality
+    pkgs.slurp # screenshot functionality
+    pkgs.wl-clipboard # wl-copy and wl-paste for copy/paste from stdin/stdout
   ];
 }

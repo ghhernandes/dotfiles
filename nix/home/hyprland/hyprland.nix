@@ -2,39 +2,39 @@
 
 {
   home.packages = [
-    pkgs.kitty          # Terminal emulator
-    pkgs.rofi           # Application launcher
-    pkgs.waybar         # Status bar
-    pkgs.dunst          # Notification daemon
-    pkgs.libnotify      # Notification utilities (notify-send)
-    pkgs.swww           # Wallpaper daemon
-    pkgs.pamixer        # Audio control
-    pkgs.playerctl      # Media player control
-    pkgs.pavucontrol    # GUI audio control
-    pkgs.blueman        # Bluetooth manager GUI
-    pkgs.hyprlock       # Screen locker
+    pkgs.kitty # Terminal emulator
+    pkgs.rofi # Application launcher
+    pkgs.waybar # Status bar
+    pkgs.dunst # Notification daemon
+    pkgs.libnotify # Notification utilities (notify-send)
+    pkgs.swww # Wallpaper daemon
+    pkgs.pamixer # Audio control
+    pkgs.playerctl # Media player control
+    pkgs.pavucontrol # GUI audio control
+    pkgs.blueman # Bluetooth manager GUI
+    pkgs.hyprlock # Screen locker
     pkgs.impala
     pkgs.bluetui
   ];
 
   services.hyprpaper = {
-  enable = true;
-  settings = {
-    preload = [
-      "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
-    ];
-    wallpaper = [
-      # By display
-      #"DP-2,~/wallpapers/wallpaper2.jpg"
-      # By default/fallback
-      ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
-    ];
+    enable = true;
+    settings = {
+      preload = [
+        "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+      ];
+      wallpaper = [
+        # By display
+        #"DP-2,~/wallpapers/wallpaper2.jpg"
+        # By default/fallback
+        ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+      ];
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = false;  # Disable to avoid conflicts with UWSM
+    systemd.enable = false; # Disable to avoid conflicts with UWSM
 
     settings = {
       monitor = "DP-1,2560x1440@165,auto,1";
@@ -53,37 +53,37 @@
       # Window rules for fixed workspaces
       windowrulev2 = [
         # Workspace 1: kitty
-       # "workspace 1, class:^(kitty)$"
+        # "workspace 1, class:^(kitty)$"
 
-       # # Workspace 2: Firefox and Chrome
-       # "workspace 2, class:^(firefox)$"
-       # "workspace 2, class:^(Google-chrome)$"
-       # "workspace 2, class:^(google-chrome)$"
+        # # Workspace 2: Firefox and Chrome
+        # "workspace 2, class:^(firefox)$"
+        # "workspace 2, class:^(Google-chrome)$"
+        # "workspace 2, class:^(google-chrome)$"
 
-       # # Workspace 3: Editors
-       # "workspace 3, class:^(Emacs)$"
-       # "workspace 3, class:^(emacs)$"
+        # # Workspace 3: Editors
+        # "workspace 3, class:^(Emacs)$"
+        # "workspace 3, class:^(emacs)$"
 
-       # # Workspace 4: File managers
-       # "workspace 4, class:^(org.gnome.Nautilus)$"
+        # # Workspace 4: File managers
+        # "workspace 4, class:^(org.gnome.Nautilus)$"
 
-       # # Workspace 6: Spotify, Music
-       # "workspace 6, class:^(Spotify)$"
-       # "workspace 6, class:^(spotify)$"
+        # # Workspace 6: Spotify, Music
+        # "workspace 6, class:^(Spotify)$"
+        # "workspace 6, class:^(spotify)$"
 
-       # # Workspace 7: Obsidian
-       # "workspace 7, class:^(obsidian)$"
-       # "workspace 7, class:^(Obsidian)$"
+        # # Workspace 7: Obsidian
+        # "workspace 7, class:^(obsidian)$"
+        # "workspace 7, class:^(Obsidian)$"
 
-       # # Workspace 9: Messaging
-       # "workspace 9, class:^(vesktop)$"
-       # "workspace 9, class:^(Vesktop)$"
-       # "workspace 9, class:^(discord)$"
-       # "workspace 9, class:^(Discord)$"
-       # "workspace 9, class:^(Slack)$"
-       # "workspace 9, class:^(slack)$"
-       # "workspace 9, class:^(signal)$"
-       # "workspace 9, class:^(Signal)$"
+        # # Workspace 9: Messaging
+        # "workspace 9, class:^(vesktop)$"
+        # "workspace 9, class:^(Vesktop)$"
+        # "workspace 9, class:^(discord)$"
+        # "workspace 9, class:^(Discord)$"
+        # "workspace 9, class:^(Slack)$"
+        # "workspace 9, class:^(slack)$"
+        # "workspace 9, class:^(signal)$"
+        # "workspace 9, class:^(Signal)$"
 
         # 1Password: Floating and centered
         "float, class:^(1password)$"
@@ -127,8 +127,6 @@
         "$mod SHIFT, D, exec, vesktop"
         "$mod SHIFT, G, exec, signal-desktop"
         "$mod SHIFT, slash, exec, 1password"
-
-
 
         "$mod, backslash, exec, hyprlock"
         "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
@@ -218,7 +216,7 @@
         gaps_in = 2;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(ffffffff)";  # Simple blue
+        "col.active_border" = "rgba(ffffffff)"; # Simple blue
         "col.inactive_border" = "rgba(282828aa)";
         layout = "dwindle";
       };

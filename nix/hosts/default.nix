@@ -1,26 +1,38 @@
-{ self, nixpkgs, home-manager, lanzaboote, claude-code, inputs, system, ... }:
+{
+  self,
+  nixpkgs,
+  home-manager,
+  lanzaboote,
+  claude-code,
+  inputs,
+  system,
+  ...
+}:
 
 let
-  lib = nixpkgs.lib;
+  inherit (nixpkgs) lib;
 
   hostDirs = builtins.readDir ./.;
-  isDirectory = name: type: type == "directory";
+  isDirectory = _name: type: type == "directory";
   hosts = lib.filterAttrs isDirectory hostDirs;
 
   homePrefix = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
 
-  mkSystem = name: _: lib.nixosSystem {
-    inherit system;
-    specialArgs = { inherit self lanzaboote inputs; };
-    modules = [
-      ./configuration.nix
-      ./${name}
-    ];
-  };
+  mkSystem =
+    name: _:
+    lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit self lanzaboote inputs; };
+      modules = [
+        ./configuration.nix
+        ./${name}
+      ];
+    };
 
   hasHome = name: builtins.pathExists (./. + "/${name}/home.nix");
 
-  mkHome = name: _:
+  mkHome =
+    name: _:
     home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
@@ -42,5 +54,5 @@ let
 in
 {
   nixosConfigurations = lib.mapAttrs mkSystem hosts;
-  homeConfigurations  = lib.mapAttrs mkHome hostsWithHome;
+  homeConfigurations = lib.mapAttrs mkHome hostsWithHome;
 }

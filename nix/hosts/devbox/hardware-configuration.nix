@@ -1,17 +1,33 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
+    };
+    initrd = {
+      availableKernelModules = [
+        "ata_piix"
+        "uhci_hcd"
+        "virtio_pci"
+        "virtio_scsi"
+        "sd_mod"
+        "sr_mod"
+      ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c3acc464-15b2-4394-8465-cdc00cfa07fb";

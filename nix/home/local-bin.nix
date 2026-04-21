@@ -1,4 +1,9 @@
-{ config, pkgs, lib, dotfilesPath, ... }:
+{
+  config,
+  lib,
+  dotfilesPath,
+  ...
+}:
 
 let
   # Use the dotfilesPath passed from flake.nix
@@ -8,7 +13,7 @@ let
   localBinFiles = builtins.readDir (dotfilesPath + "/local-bin");
 
   # Filter to only include regular files (not directories)
-  scriptFiles = lib.filterAttrs (name: type: type == "regular") localBinFiles;
+  scriptFiles = lib.filterAttrs (_name: type: type == "regular") localBinFiles;
 
   # Create a symlink entry for each script
   mkScriptLink = name: _: {

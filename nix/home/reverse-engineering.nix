@@ -9,10 +9,12 @@
     pkgs.maven
 
     # Python env for ghidra-mcp's MCP bridge (bridge_mcp_ghidra.py).
-    (pkgs.python3.withPackages (ps: with ps; [
-      mcp
-      requests
-    ]))
+    (pkgs.python3.withPackages (
+      ps: with ps; [
+        mcp
+        requests
+      ]
+    ))
   ];
 
   # ghidra-mcp (https://github.com/bethington/ghidra-mcp) is not in nixpkgs.

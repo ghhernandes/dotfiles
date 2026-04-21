@@ -1,4 +1,8 @@
-{ config, pkgs, dotfilesPath, ... }:
+{
+  pkgs,
+  dotfilesPath,
+  ...
+}:
 
 let
   tmux-session-manager = pkgs.writeShellApplication {

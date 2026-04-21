@@ -1,4 +1,11 @@
-{ config, pkgs, lib, dotfilesPath, hostName, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  dotfilesPath,
+  hostName,
+  ...
+}:
 
 let
   # Build-time reads (CLAUDE.md, settings.json merge) use the Nix path
@@ -19,34 +26,29 @@ let
   baseClaudeMd = builtins.readFile (claudeRepo + "/CLAUDE.md");
   hostClaudeMdPath = hostRepo + "/CLAUDE.md";
   hostClaudeMd =
-    if builtins.pathExists hostClaudeMdPath
-    then builtins.readFile hostClaudeMdPath
-    else "";
-  mergedClaudeMd =
-    if hostClaudeMd == ""
-    then baseClaudeMd
-    else baseClaudeMd + "\n" + hostClaudeMd;
+    if builtins.pathExists hostClaudeMdPath then builtins.readFile hostClaudeMdPath else "";
+  mergedClaudeMd = if hostClaudeMd == "" then baseClaudeMd else baseClaudeMd + "\n" + hostClaudeMd;
 
   # ---- settings.json: shared base recursiveUpdate-merged with host override ----
   baseSettings = builtins.fromJSON (builtins.readFile (claudeRepo + "/settings.json"));
   hostSettingsPath = hostRepo + "/settings.json";
   hostSettings =
-    if builtins.pathExists hostSettingsPath
-    then builtins.fromJSON (builtins.readFile hostSettingsPath)
-    else { };
+    if builtins.pathExists hostSettingsPath then
+      builtins.fromJSON (builtins.readFile hostSettingsPath)
+    else
+      { };
   mergedSettings = lib.recursiveUpdate baseSettings hostSettings;
 
-  settingsFile =
-    (pkgs.formats.json { }).generate "claude-settings.json" mergedSettings;
+  settingsFile = (pkgs.formats.json { }).generate "claude-settings.json" mergedSettings;
 
   # ---- Live-edit out-of-store symlinks ----
   # Existence is checked via the build-time Nix path (so we don't symlink
   # to a directory that doesn't exist yet), but the symlink target uses the
   # on-disk string path so edits round-trip without a rebuild.
-  maybeSymlink = relPath: target:
+  maybeSymlink =
+    relPath: target:
     lib.optionalAttrs (builtins.pathExists (claudeRepo + "/${relPath}")) {
-      "${target}".source =
-        config.lib.file.mkOutOfStoreSymlink "${liveClaudeRepo}/${relPath}";
+      "${target}".source = config.lib.file.mkOutOfStoreSymlink "${liveClaudeRepo}/${relPath}";
     };
 
   liveFiles =

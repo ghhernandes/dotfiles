@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+_:
 
 {
   programs.waybar = {
@@ -8,9 +8,22 @@
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "custom/gh-pomodoro" "clock" ];
-        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
+        modules-center = [
+          "custom/gh-pomodoro"
+          "clock"
+        ];
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "bluetooth"
+          "cpu"
+          "memory"
+          "battery"
+        ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -43,7 +56,19 @@
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󰚥 {capacity}%";
-          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          format-icons = [
+            "󰂎"
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
         };
 
         network = {
@@ -57,7 +82,11 @@
           format = "{icon} {volume}%";
           format-muted = "󰖁 MUTE";
           format-icons = {
-            default = ["󰕿" "󰖀" "󰕾"];
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
           };
           on-click = "pavucontrol";
         };

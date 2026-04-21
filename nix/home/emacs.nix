@@ -1,9 +1,13 @@
-{ config, pkgs, dotfilesPath, ... }:
+{
+  pkgs,
+  dotfilesPath,
+  ...
+}:
 {
   home.packages = [
     pkgs.emacs
     pkgs.git
-    (pkgs.ripgrep.override {withPCRE2 = true;})
+    (pkgs.ripgrep.override { withPCRE2 = true; })
     pkgs.fd
   ];
 

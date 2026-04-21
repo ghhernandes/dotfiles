@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+_:
 
 {
   home.file.".config/rofi/custom.rasi".text = ''

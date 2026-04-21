@@ -20,26 +20,28 @@
     pkgs.mods
 
     # TUI applications
-    pkgs.glow  # Markdown viewer
+    pkgs.glow # Markdown viewer
   ];
 
-  # Git configuration
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "Gabriel Hernandes";
-      user.email = "ghh.hernandes@gmail.com";
+  programs = {
+    # Git configuration
+    git = {
+      enable = true;
+      settings = {
+        user.name = "Gabriel Hernandes";
+        user.email = "ghh.hernandes@gmail.com";
+      };
     };
-  };
 
-  # Claude Code
-  programs.claude-code = {
-    enable = true;
-  };
+    # Claude Code
+    claude-code = {
+      enable = true;
+    };
 
-  # Direnv with nix-direnv for per-project dev shells
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+    # Direnv with nix-direnv for per-project dev shells
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }

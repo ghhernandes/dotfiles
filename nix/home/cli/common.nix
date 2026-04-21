@@ -16,7 +16,6 @@
     pkgs.lazygit
 
     # AI/LLM tools
-    pkgs.claude-code
     pkgs.mods
 
     # Tmux orchestration
@@ -34,11 +33,6 @@
         user.name = "Gabriel Hernandes";
         user.email = "ghh.hernandes@gmail.com";
       };
-    };
-
-    # Claude Code
-    claude-code = {
-      enable = true;
     };
 
     # Direnv with nix-direnv for per-project dev shells

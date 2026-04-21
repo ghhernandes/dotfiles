@@ -16,8 +16,7 @@
   };
 
   home = {
-    username = lib.mkDefault "gh";
-    homeDirectory = lib.mkDefault "/home/gh";
+    # username and homeDirectory are set per-host in hosts/default.nix
     stateVersion = "25.11";
   };
 

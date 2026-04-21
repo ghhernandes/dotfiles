@@ -45,13 +45,13 @@
           tony
           inputs
           ;
-        system = "x86_64-linux";
       };
     in
     {
       homeModules = {
         common = ./home/common.nix;
         cli = ./home/cli;
+        zsh = ./home/cli/zsh.nix;
         cliHardware = ./home/cli/hardware.nix;
         gui = ./home/gui.nix;
         emacs = ./home/emacs.nix;

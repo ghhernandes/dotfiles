@@ -12,6 +12,7 @@
 
 {
   home.packages = [ pkgs.nodejs ];
+
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;

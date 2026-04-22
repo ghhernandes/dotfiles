@@ -31,6 +31,7 @@ let
   liveFiles = maybeSymlink "commands" ".gemini/commands";
 in
 {
+  home.packages = [ pkgs.gemini-cli ];
 
   home.file = liveFiles // {
     ".gemini/GEMINI.md".text = mergedGeminiMd;

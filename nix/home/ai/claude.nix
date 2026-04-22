@@ -64,6 +64,7 @@ in
   # but listed explicitly so hooks work on a fresh host before the shell
   # profile populates PATH.
   home.packages = [
+    pkgs.claude-code
     pkgs.jq
     pkgs.nixfmt
     pkgs.coreutils

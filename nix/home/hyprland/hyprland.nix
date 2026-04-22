@@ -7,7 +7,6 @@
     pkgs.waybar # Status bar
     pkgs.dunst # Notification daemon
     pkgs.libnotify # Notification utilities (notify-send)
-    pkgs.swww # Wallpaper daemon
     pkgs.pamixer # Audio control
     pkgs.playerctl # Media player control
     pkgs.pavucontrol # GUI audio control
@@ -24,9 +23,6 @@
         "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
       ];
       wallpaper = [
-        # By display
-        #"DP-2,~/wallpapers/wallpaper2.jpg"
-        # By default/fallback
         ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
       ];
     };
@@ -51,65 +47,32 @@
       ];
 
       # Window rules for fixed workspaces
-      windowrulev2 = [
-        # Workspace 1: kitty
-        # "workspace 1, class:^(kitty)$"
-
-        # # Workspace 2: Firefox and Chrome
-        # "workspace 2, class:^(firefox)$"
-        # "workspace 2, class:^(Google-chrome)$"
-        # "workspace 2, class:^(google-chrome)$"
-
-        # # Workspace 3: Editors
-        # "workspace 3, class:^(Emacs)$"
-        # "workspace 3, class:^(emacs)$"
-
-        # # Workspace 4: File managers
-        # "workspace 4, class:^(org.gnome.Nautilus)$"
-
-        # # Workspace 6: Spotify, Music
-        # "workspace 6, class:^(Spotify)$"
-        # "workspace 6, class:^(spotify)$"
-
-        # # Workspace 7: Obsidian
-        # "workspace 7, class:^(obsidian)$"
-        # "workspace 7, class:^(Obsidian)$"
-
-        # # Workspace 9: Messaging
-        # "workspace 9, class:^(vesktop)$"
-        # "workspace 9, class:^(Vesktop)$"
-        # "workspace 9, class:^(discord)$"
-        # "workspace 9, class:^(Discord)$"
-        # "workspace 9, class:^(Slack)$"
-        # "workspace 9, class:^(slack)$"
-        # "workspace 9, class:^(signal)$"
-        # "workspace 9, class:^(Signal)$"
-
+      windowrule = [
         # 1Password: Floating and centered
-        "float, class:^(1password)$"
-        "center, class:^(1password)$"
-        "size 800 600, class:^(1password)$"
+        "float on, match:class ^(1password)$"
+        "center on, match:class ^(1password)$"
+        "size 800 600, match:class ^(1password)$"
 
         # Volume control: Floating and centered
-        "float, class:^(org.pulseaudio.pavucontrol)$"
-        "center, class:^(org.pulseaudio.pavucontrol)$"
-        "size 800 600, class:^(org.pulseaudio.pavucontrol)$"
+        "float on, match:class ^(org.pulseaudio.pavucontrol)$"
+        "center on, match:class ^(org.pulseaudio.pavucontrol)$"
+        "size 800 600, match:class ^(org.pulseaudio.pavucontrol)$"
 
         # Bluetui: Floating and centered
-        "float, class:^(bluetui-float)$"
-        "center, class:^(bluetui-float)$"
-        "size 800 600, class:^(bluetui-float)$"
+        "float on, match:class ^(bluetui-float)$"
+        "center on, match:class ^(bluetui-float)$"
+        "size 800 600, match:class ^(bluetui-float)$"
 
         # Impala: Floating and centered
-        "float, class:^(impala-float)$"
-        "center, class:^(impala-float)$"
-        "size 800 600, class:^(impala-float)$"
+        "float on, match:class ^(impala-float)$"
+        "center on, match:class ^(impala-float)$"
+        "size 800 600, match:class ^(impala-float)$"
 
         # Gaming: Auto fullscreen
-        "fullscreen, class:^(steam_app_).*"
-        "fullscreen, class:^(Wine)$"
-        "fullscreen, class:^(steam_proton)$"
-        "fullscreen, title:^(.* - Wine desktop)$"
+        "fullscreen on, match:class ^(steam_app_).*"
+        "fullscreen on, match:class ^(Wine)$"
+        "fullscreen on, match:class ^(steam_proton)$"
+        "fullscreen on, match:title ^(.* - Wine desktop)$"
       ];
 
       bind = [

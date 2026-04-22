@@ -1,5 +1,6 @@
 {
   "includeCoAuthoredBy": false,
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -21,27 +22,152 @@
       "Read(**)",
       "Glob(**)",
       "Grep(**)",
+      "Edit",
+      "MultiEdit",
+      "WebSearch",
+      "WebFetch",
+      "Agent",
       "Bash(ls *)",
       "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(find *)",
+      "Bash(grep *)",
       "Bash(rg *)",
+      "Bash(wc *)",
+      "Bash(tree *)",
+      "Bash(echo *)",
+      "Bash(pwd)",
+      "Bash(which *)",
+      "Bash(env)",
+      "Bash(unzip *)",
+      "Bash(jar *)",
+      "Bash(python3 *)",
+      "Bash(sleep *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(sed *)",
+      "Bash(awk *)",
+      "Bash(cut *)",
+      "Bash(tr *)",
+      "Bash(diff *)",
+      "Bash(file *)",
+      "Bash(stat *)",
+      "Bash(basename *)",
+      "Bash(dirname *)",
+      "Bash(realpath *)",
+      "Bash(base64 *)",
+      "Bash(cd *)",
       "Bash(git status *)",
-      "Bash(git diff *)",
       "Bash(git log *)",
+      "Bash(git diff *)",
       "Bash(git branch *)",
-      "Bash(git show *)"
-    ]
+      "Bash(git show *)",
+      "Bash(git rev-parse *)",
+      "Bash(git remote *)",
+      "Bash(git stash list)",
+      "Bash(git blame *)",
+      "Bash(git config *)",
+      "Bash(gh api *)",
+      "Bash(gh api:*)",
+      "Bash(gh pr *)",
+      "Bash(gh pr list:*)",
+      "Bash(gh search *)",
+      "Bash(gh issue *)",
+      "Bash(jq *)",
+      "Bash(jq:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(sudo *)",
+      "Bash(su *)",
+      "Bash(chmod 777 *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push origin main *)",
+      "Bash(git push origin master *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -fd *)",
+      "Bash(git clean -f *)",
+      "Bash(git checkout -- *)",
+      "Bash(truncate *)",
+      "Bash(dd *)",
+      "Bash(mkfs *)",
+      "Bash(kill -9 *)",
+      "Bash(killall *)",
+      "Bash(pkill *)",
+      "Bash(shutdown *)",
+      "Bash(reboot *)",
+      "Read(**/.env)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Read(**/*secret*)"
+    ],
+    "ask": [
+      "Read(**/*credentials*)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git stash drop *)",
+      "Bash(git branch -D *)",
+      "Bash(git branch -d *)",
+      "Bash(rm *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(pip install *)",
+      "Bash(npm install *)",
+      "Bash(npm run test *)",
+      "Bash(npm run lint *)"
+    ],
+    "defaultMode": "default"
   },
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Read|Edit|Write|MultiEdit",
         "hooks": [{ "type": "command", "command": "~/.claude/hooks/protect-secrets.sh" }]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // empty'); branch=$(git branch --show-current 2>/dev/null); echo \"$cmd\" | grep -qE '^git (push|commit)' && [ \"$branch\" = \"main\" ] && echo '{\"continue\":false,\"stopReason\":\"You are on main branch. Create a feature branch first.\"}' || true",
+            "timeout": 5,
+            "statusMessage": "Checking branch safety..."
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
         "hooks": [{ "type": "command", "command": "~/.claude/hooks/nixfmt-on-write.sh" }]
+      },
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh" }]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh 🔔" }]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh 💤" }]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh" }]
       }
     ]
   }

@@ -6,7 +6,10 @@
 
 {
   programs.neovim = {
+    package = pkgs.neovim-unwrapped;
     enable = true;
+    withRuby = false;
+    withPython3 = false;
     viAlias = true;
     vimAlias = true;
 
@@ -53,7 +56,6 @@
 
         # Treesitter
         p.nvim-treesitter.withAllGrammars
-        p.nvim-treesitter-refactor
 
         # Git
         p.vim-fugitive

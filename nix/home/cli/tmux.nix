@@ -23,6 +23,7 @@ in
   ];
 
   programs.tmux = {
+    package = pkgs.tmux;
     enable = true;
     clock24 = true;
     extraConfig = builtins.readFile "${dotfilesPath}/tmux/tmux.conf";

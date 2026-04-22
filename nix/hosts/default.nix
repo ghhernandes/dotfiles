@@ -53,12 +53,11 @@ let
       meta = getHostMeta name;
     in
     home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${meta.system};
+      pkgs = inputs.nixpkgs-unstable.legacyPackages.${meta.system};
       extraSpecialArgs = {
         inherit self inputs;
         hostName = name;
         dotfilesPath = self + "/..";
-        pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${meta.system};
       };
       modules = [
         (./. + "/${name}/home.nix")

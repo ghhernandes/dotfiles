@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-unstable,
   lib,
   dotfilesPath,
   hostName,
@@ -65,13 +64,10 @@ in
   # but listed explicitly so hooks work on a fresh host before the shell
   # profile populates PATH.
   home.packages = [
-    pkgs-unstable.claude-code
     pkgs.jq
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.coreutils
   ];
-
-  programs.claude-code.enable = true;
 
   home.file = liveFiles // {
     ".claude/CLAUDE.md".text = mergedClaudeMd;

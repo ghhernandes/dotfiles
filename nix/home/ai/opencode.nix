@@ -41,7 +41,6 @@ let
   tuiFile = jsonFormat.generate "tui.json" mergedTui;
 in
 {
-  home.packages = [ pkgs.opencode ];
 
   xdg.configFile = {
     "opencode/opencode.json".source = configFile;

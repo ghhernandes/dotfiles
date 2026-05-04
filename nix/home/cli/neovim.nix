@@ -55,7 +55,16 @@
         p.trouble-nvim
 
         # Treesitter
-        p.nvim-treesitter.withAllGrammars
+        (p.nvim-treesitter.withPlugins (g: [
+          g.go g.gomod g.gowork g.gosum
+          g.clojure
+          g.nix
+          g.dart
+          g.python
+          g.typescript g.javascript g.tsx g.jsdoc
+          g.lua g.vim g.vimdoc g.query
+          g.bash g.json g.yaml g.toml g.markdown g.markdown_inline g.regex g.diff g.gitcommit
+        ]))
 
         # Git
         p.vim-fugitive

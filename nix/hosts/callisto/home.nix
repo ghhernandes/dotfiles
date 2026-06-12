@@ -21,11 +21,11 @@
   # Other hosts use a different agent and configure it in their own home.nix.
   programs.ssh = {
     enable = true;
-    # home-manager 25.11 is deprecating the implicit "Host *" defaults it
-    # writes into ssh_config. Every one of those defaults already matches
-    # OpenSSH's own defaults, so opting out here silences the deprecation
-    # warning and loses nothing at runtime.
+    # home-manager deprecates the implicit "Host *" defaults it writes into
+    # ssh_config. Every one of those defaults already matches OpenSSH's own
+    # defaults, so opting out here silences the deprecation warning and loses
+    # nothing at runtime.
     enableDefaultConfig = false;
-    matchBlocks."*".identityAgent = "/run/user/1000/gcr/ssh";
+    settings."*".IdentityAgent = "/run/user/1000/gcr/ssh";
   };
 }

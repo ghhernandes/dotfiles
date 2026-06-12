@@ -1,1 +1,5 @@
 result
+
+# clojure-lsp / clj-kondo caches
+.clj-kondo/
+.lsp/

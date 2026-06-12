@@ -1,21 +1,12 @@
 {
   "includeCoAuthoredBy": false,
+  "defaultEffortLevel": "high",
   "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
-  "extraKnownMarketplaces": {
-    "ghhernandes": {
-      "source": {
-        "source": "github",
-        "repo": "ghhernandes/ai-plugins"
-      }
-    }
-  },
   "enabledPlugins": {
-    "forge@ghhernandes": true,
-    "config-doctor@ghhernandes": true
   },
   "permissions": {
     "allow": [

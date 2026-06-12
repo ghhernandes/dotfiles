@@ -146,28 +146,6 @@
       {
         "matcher": "Edit|Write|MultiEdit",
         "hooks": [{ "type": "command", "command": "~/.claude/hooks/nixfmt-on-write.sh" }]
-      },
-      {
-        "matcher": "",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh" }]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh 🔔" }]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh 💤" }]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-tag.sh" }]
       }
     ]
   }

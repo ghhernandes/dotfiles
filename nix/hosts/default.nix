@@ -37,7 +37,7 @@ let
       meta = getHostMeta name;
     in
     lib.nixosSystem {
-      system = meta.system;
+      inherit (meta) system;
       specialArgs = { inherit self lanzaboote inputs; };
       modules = [
         ./configuration.nix

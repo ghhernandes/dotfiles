@@ -5,7 +5,6 @@
 # Eg: server, homelab, etc.
 
 {
-  lib,
   pkgs,
   ...
 }:

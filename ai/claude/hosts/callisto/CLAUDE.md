@@ -1,3 +1,5 @@
+## NixOS
+
 You're running inside WSL NixOS.
 
 Nix configuration files are at ~/.dotfiles/nix.

@@ -197,10 +197,6 @@
       animations = {
         enabled = false;
       };
-
-      misc = {
-        vfr = false;
-      };
     };
   };
 }

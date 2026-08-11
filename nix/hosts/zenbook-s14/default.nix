@@ -34,10 +34,15 @@
   # inside the mapper, not the LUKS partition's.
   boot.resumeDevice = "/dev/disk/by-uuid/6e438b3a-e057-4755-8d0c-a9236ce62932";
 
-  # On battery, a closed lid suspends to RAM and then hibernates after the
-  # delay, so a laptop left in a bag doesn't drain flat. On AC it stays on
-  # plain suspend (the default from system/laptop.nix).
-  services.logind.settings.Login.HandleLidSwitch = lib.mkForce "suspend-then-hibernate";
+  # A closed lid suspends to RAM and then hibernates after the delay, on both
+  # battery and AC. Doing it on AC too closes a gap: plain suspend has no
+  # hibernate timer, so a machine suspended while plugged in and then unplugged
+  # would drain in s2idle with no fallback. suspend-then-hibernate always ends
+  # up safely hibernated regardless of when the charger comes and goes.
+  services.logind.settings.Login = {
+    HandleLidSwitch = lib.mkForce "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = lib.mkForce "suspend-then-hibernate";
+  };
   systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
 
   hardware.cpu.intel.updateMicrocode = true;

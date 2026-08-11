@@ -17,6 +17,10 @@
     pkgs.bluetui
     pkgs.btop # System monitor (waybar cpu/memory click target)
     pkgs.brightnessctl # Backlight control (laptops; no-op without a backlight device)
+    pkgs.hyprpolkitagent # GUI polkit auth prompts (mounting drives, admin actions)
+    pkgs.cliphist # Clipboard history (rofi picker on mod+shift+v)
+    pkgs.udiskie # Auto-mount removable drives
+    pkgs.wlsunset # Night light / blue-light schedule
   ];
 
   # Cursor theme for Wayland/Hyprland (hyprcursor), X11 apps, and GTK.
@@ -47,6 +51,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = false; # Disable to avoid conflicts with UWSM
+    # This module's settings are written in hyprlang. Pin it so bumping
+    # home.stateVersion to 26.05 (which flips the default to lua) can't
+    # silently break the config.
+    configType = "hyprlang";
 
     settings = {
       # Generic catch-all; hosts with specific output requirements (fixed
@@ -70,6 +78,19 @@
         "dunst"
         "swayosd-server"
         "systemctl --user start hyprpaper"
+
+        # Polkit auth agent — GUI password prompts for privileged actions.
+        "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
+
+        # Clipboard history: watch both text and images into cliphist.
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+
+        # Auto-mount removable drives; tray icon appears in waybar when present.
+        "udiskie --smart-tray"
+
+        # Night light for São Paulo (auto sunrise/sunset by lat/long).
+        "wlsunset -l -23.55 -L -46.63"
       ];
 
       # Window rules for fixed workspaces
@@ -127,6 +148,7 @@
         "$mod, B, exec, kitty --class bluetui-float bluetui"
         "$mod, N, exec, focus-mode toggle"
         "$mod, period, exec, rofimoji --selector rofi --action copy"
+        "$mod SHIFT, V, exec, cliphist list | rofi -dmenu -theme custom | cliphist decode | wl-copy"
 
         # Screenshots
         ", Print, exec, screenshot full"

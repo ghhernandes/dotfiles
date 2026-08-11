@@ -56,9 +56,9 @@
         emacs = ./home/emacs.nix;
         kitty = ./home/kitty.nix;
         fonts = ./home/fonts.nix;
-        localBin = ./home/local-bin.nix;
         dev = ./home/dev;
         hyprland = ./home/hyprland;
+        hypridle = ./home/hypridle.nix;
         rofi = ./home/rofi;
         reverseEngineering = ./home/reverse-engineering.nix;
         claude = ./home/ai/claude.nix;
@@ -77,6 +77,7 @@
         security = ./system/security.nix;
         packageManagers = ./system/package-managers.nix;
         docker = ./system/docker.nix;
+        laptop = ./system/laptop.nix;
       };
 
       inherit (hostOutputs) nixosConfigurations homeConfigurations;

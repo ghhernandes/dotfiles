@@ -14,7 +14,8 @@ nix/
     ├── configuration.nix   # Shared base system config
     ├── callisto/           # WSL dev environment
     ├── ghstation/          # Hyprland desktop / gaming workstation
-    └── devbox/             # Minimal GNOME dev box
+    ├── devbox/             # Minimal GNOME dev box
+    └── zenbook-s14/        # Hyprland laptop (ASUS Zenbook S 14, LUKS)
 ```
 
 ## Hosts
@@ -22,6 +23,7 @@ nix/
 - **callisto** — NixOS-WSL, CLI + dev + reverse-engineering
 - **ghstation** — Full Hyprland desktop, gaming, virtualization, secure boot
 - **devbox** — Minimal GNOME dev box
+- **zenbook-s14** — Full Hyprland laptop, LUKS-encrypted, ASUS power tooling
 
 ## Modules
 
@@ -42,6 +44,7 @@ cd nix
 sudo nixos-rebuild switch --flake .#callisto
 sudo nixos-rebuild switch --flake .#ghstation
 sudo nixos-rebuild switch --flake .#devbox
+sudo nixos-rebuild switch --flake .#zenbook-s14
 
 # Home-manager (keyed by host, not user)
 home-manager switch --flake .#callisto

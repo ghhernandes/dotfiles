@@ -4,6 +4,7 @@
   home.packages = [
     pkgs.kitty # Terminal emulator
     pkgs.rofi # Application launcher
+    pkgs.rofimoji # Emoji/symbol picker (Super+.), uses rofi as its selector
     pkgs.waybar # Status bar
     pkgs.dunst # Notification daemon
     pkgs.libnotify # Notification utilities (notify-send)
@@ -14,7 +15,22 @@
     pkgs.hyprlock # Screen locker
     pkgs.impala
     pkgs.bluetui
+    pkgs.btop # System monitor (waybar cpu/memory click target)
+    pkgs.brightnessctl # Backlight control (laptops; no-op without a backlight device)
   ];
+
+  # Cursor theme for Wayland/Hyprland (hyprcursor), X11 apps, and GTK.
+  # Without this, Hyprland falls back to its built-in default cursor.
+  home.pointerCursor = {
+    gtk.enable = true;
+    hyprcursor.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
+
+  # On-screen display for volume/brightness/caps-lock changes.
+  services.swayosd.enable = true;
 
   services.hyprpaper = {
     enable = true;
@@ -33,16 +49,26 @@
     systemd.enable = false; # Disable to avoid conflicts with UWSM
 
     settings = {
-      monitor = "DP-1,2560x1440@165,auto,1";
+      # Generic catch-all; hosts with specific output requirements (fixed
+      # desktop monitor, laptop panel + dock, ...) override this with mkForce.
+      monitor = [ ",preferred,auto,1" ];
 
       "$mod" = "SUPER";
 
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
 
+      # Force Electron/Chromium apps (Chrome, Spotify, VS Code, ...) onto native
+      # Wayland so they render crisply at fractional scale instead of blurry
+      # XWayland. The nixpkgs wrappers add the right flags when this is set.
+      env = [
+        "NIXOS_OZONE_WL,1"
+      ];
+
       exec-once = [
         "waybar"
         "dunst"
+        "swayosd-server"
         "systemctl --user start hyprpaper"
       ];
 
@@ -68,6 +94,11 @@
         "center on, match:class ^(impala-float)$"
         "size 800 600, match:class ^(impala-float)$"
 
+        # btop: Floating and centered
+        "float on, match:class ^(btop-float)$"
+        "center on, match:class ^(btop-float)$"
+        "size 1000 700, match:class ^(btop-float)$"
+
         # Gaming: Auto fullscreen
         "fullscreen on, match:class ^(steam_app_).*"
         "fullscreen on, match:class ^(Wine)$"
@@ -92,14 +123,16 @@
         "$mod SHIFT, slash, exec, 1password"
 
         "$mod, backslash, exec, hyprlock"
-        "$mod, M, exec, $HOME/.local/bin/gh-rofi-power"
-        "$mod, B, exec, $HOME/.local/bin/gh-rofi-bluetooth"
+        "$mod, M, exec, rofi-power"
+        "$mod, B, exec, kitty --class bluetui-float bluetui"
+        "$mod, N, exec, focus-mode toggle"
+        "$mod, period, exec, rofimoji --selector rofi --action copy"
 
         # Screenshots
-        ", Print, exec, $HOME/.local/bin/gh-screenshot full"
-        "SHIFT, Print, exec, $HOME/.local/bin/gh-screenshot region"
-        "CTRL, Print, exec, $HOME/.local/bin/gh-screenshot clipboard"
-        "$mod, Print, exec, $HOME/.local/bin/gh-screenshot window"
+        ", Print, exec, screenshot full"
+        "SHIFT, Print, exec, screenshot region"
+        "CTRL, Print, exec, screenshot clipboard"
+        "$mod, Print, exec, screenshot window"
 
         # Move focus with mod + hjkl or arrow keys
         "$mod, H, movefocus, l"
@@ -152,54 +185,133 @@
 
       # Media and audio control keybindings
       bindl = [
-        # Audio controls
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        # Audio controls (swayosd shows an on-screen indicator)
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
 
         # Media controls
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
+
+        # Screen backlight (laptops; no-op without a backlight device)
+        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise"
+        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower"
+
+        # Keyboard backlight (asus::kbd_backlight, levels 0-3; no-op elsewhere)
+        ", XF86KbdBrightnessUp, exec, brightnessctl -d asus::kbd_backlight set +1"
+        ", XF86KbdBrightnessDown, exec, brightnessctl -d asus::kbd_backlight set 1-"
       ];
 
       input = {
         kb_layout = "us";
         kb_variant = "";
         kb_model = "";
-        kb_options = "";
+        kb_options = "ctrl:nocaps"; # Caps Lock acts as an extra Control key
         kb_rules = "";
 
         follow_mouse = 1;
         sensitivity = 0;
+
+        touchpad = {
+          natural_scroll = true;
+          tap-to-click = true;
+        };
       };
 
+      # 3-finger horizontal touchpad swipe to switch workspaces.
+      # Hyprland 0.49+ replaced the old `gestures { workspace_swipe }` section
+      # with this keyword. No-op on machines without a touchpad.
+      gesture = [
+        "3, horizontal, workspace"
+      ];
+
+      # Look & feel adapted from Omarchy (basecamp/omarchy default/hypr/looknfeel.conf).
       general = {
-        gaps_in = 2;
-        gaps_out = 5;
+        gaps_in = 5;
+        gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(ffffffff)"; # Simple blue
-        "col.inactive_border" = "rgba(282828aa)";
+        # Gradient active border (cyan -> green, 45deg), Hyprland's signature palette.
+        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.inactive_border" = "rgba(595959aa)";
+        resize_on_border = true; # drag window edges to resize (deviates from Omarchy's false)
+        allow_tearing = false;
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 10;
+        rounding = 0;
         blur = {
           enabled = true;
+          size = 2;
+          passes = 2;
+          special = true;
+          brightness = 0.60;
+          contrast = 0.75;
         };
         shadow = {
           enabled = true;
+          range = 2;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
         };
       };
 
       animations = {
-        enabled = false;
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+        animation = [
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeOutQuint"
+          "windows, 1, 3.79, easeOutQuint"
+          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostLinear"
+          "fadeOut, 1, 1.46, almostLinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeOutQuint"
+          "layersIn, 1, 4, easeOutQuint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostLinear"
+          "fadeLayersOut, 1, 1.39, almostLinear"
+          "workspaces, 0, 0, ease"
+          "specialWorkspace, 1, 3, easeOutQuint, slidevert"
+        ];
+      };
+
+      dwindle = {
+        preserve_split = true;
+        force_split = 2;
       };
 
       misc = {
-        vfr = false;
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+        disable_scale_notification = true;
+        focus_on_activate = true;
+        on_focus_under_fullscreen = 1;
+        anr_missed_pings = 3;
+        # Wake the screen on input (moved here from the input section).
+        key_press_enables_dpms = true;
+        mouse_move_enables_dpms = true;
+      };
+
+      cursor = {
+        hide_on_key_press = true;
+        warp_on_change_workspace = 1;
+      };
+
+      binds = {
+        hide_special_on_workspace_change = true;
       };
     };
   };

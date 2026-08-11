@@ -6,7 +6,6 @@
     cli
     git
     zsh
-    localBin
     dev
     claude
     opencode

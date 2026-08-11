@@ -10,21 +10,21 @@ _:
         follow = "mouse";
 
         # Geometry
-        width = "(200, 400)";
-        height = 300;
+        width = "(300, 500)";
+        height = 350;
         origin = "top-center";
-        offset = "0x40";
+        offset = "0x48";
 
         # Layout
-        padding = 12;
-        horizontal_padding = 12;
-        frame_width = 1;
-        gap_size = 4;
+        padding = 14;
+        horizontal_padding = 14;
+        frame_width = 2;
+        gap_size = 6;
         separator_height = 1;
         separator_color = "frame";
 
         # Typography
-        font = "monospace 11";
+        font = "JetBrainsMono Nerd Font 12";
         line_height = 0;
         markup = "full";
         format = "<b>%s</b>\\n%b";
@@ -67,11 +67,11 @@ _:
         timeout = 5;
       };
 
-      # Normal urgency notifications
+      # Normal urgency notifications (cyan accent, matching window borders/waybar)
       urgency_normal = {
         background = "#1e1e1e";
         foreground = "#ffffff";
-        frame_color = "#ffffff";
+        frame_color = "#33ccff";
         timeout = 8;
       };
 
@@ -79,7 +79,7 @@ _:
       urgency_critical = {
         background = "#1e1e1e";
         foreground = "#ffffff";
-        frame_color = "#ff5555";
+        frame_color = "#f38ba8";
         timeout = 0;
       };
     };

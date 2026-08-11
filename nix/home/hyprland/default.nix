@@ -6,5 +6,6 @@
     ./waybar.nix
     ./dunst.nix
     ./hyprlock.nix
+    ./scripts.nix
   ];
 }

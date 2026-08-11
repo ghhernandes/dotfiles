@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, lib, ... }:
 
 {
   imports = with self.homeModules; [
@@ -11,12 +11,15 @@
     #emacs
     kitty
     fonts
-    localBin
     dev
     hyprland
     rofi
     claude
     opencode
     gemini
+  ];
+
+  wayland.windowManager.hyprland.settings.monitor = lib.mkForce [
+    "DP-1,2560x1440@165,auto,1"
   ];
 }

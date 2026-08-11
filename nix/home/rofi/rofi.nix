@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  # Icon theme rofi resolves via `icon-theme` below; without a theme package
+  # on the profile, `show-icons` renders nothing.
+  home.packages = [ pkgs.papirus-icon-theme ];
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
@@ -8,6 +12,8 @@
     extraConfig = {
       modi = "drun,run,window";
       show-icons = true;
+      icon-theme = "Papirus-Dark";
+      matching = "fuzzy";
       terminal = "kitty";
       drun-display-format = "{name}";
       location = 0;

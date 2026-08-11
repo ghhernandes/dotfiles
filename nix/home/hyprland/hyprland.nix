@@ -26,6 +26,7 @@
   # Cursor theme for Wayland/Hyprland (hyprcursor), X11 apps, and GTK.
   # Without this, Hyprland falls back to its built-in default cursor.
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
     hyprcursor.enable = true;
     package = pkgs.bibata-cursors;

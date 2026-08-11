@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# Power off Bluetooth
-
-bluetoothctl power off > /dev/null 2>&1

@@ -6,6 +6,7 @@
 
 {
   pkgs,
+  lib,
   ...
 }:
 
@@ -18,8 +19,10 @@
   };
 
   home = {
-    # username and homeDirectory are set per-host in hosts/default.nix
-    stateVersion = "25.11";
+    # username and homeDirectory are set per-host in hosts/default.nix.
+    # Baseline reflects the older hosts' install; newer hosts override per-host
+    # (a machine's stateVersion should match when it was first set up).
+    stateVersion = lib.mkDefault "25.11";
   };
 
   programs.home-manager.enable = true;

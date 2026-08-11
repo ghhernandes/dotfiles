@@ -19,6 +19,10 @@
     gemini
   ];
 
+  # Fresh install on NixOS 26.05, so adopt the 26.05 home-manager defaults
+  # (the shared common.nix baseline of 25.11 covers the older hosts).
+  home.stateVersion = "26.05";
+
   # Integer scale (1x) keeps XWayland apps (e.g. Spotify) crisp — fractional
   # scales bitmap-upscale X clients and blur them. Tradeoff: 1920x1200 on a
   # 14" panel (~162 DPI) is on the small side.

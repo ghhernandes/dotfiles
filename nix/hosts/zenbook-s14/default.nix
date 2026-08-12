@@ -18,21 +18,23 @@
     laptop
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  # Swap partition's LUKS mapping. Root's mapping already lives in
-  # hardware-configuration.nix (generated); nixos-generate-config doesn't
-  # pick up the swap one, so it's carried over from /etc/nixos/configuration.nix.
-  boot.initrd.luks.devices."luks-ce024c4d-5d6e-4938-b7cc-900053b2d37d".device =
-    "/dev/disk/by-uuid/ce024c4d-5d6e-4938-b7cc-900053b2d37d";
+    # Swap partition's LUKS mapping. Root's mapping already lives in
+    # hardware-configuration.nix (generated); nixos-generate-config doesn't
+    # pick up the swap one, so it's carried over from /etc/nixos/configuration.nix.
+    initrd.luks.devices."luks-ce024c4d-5d6e-4938-b7cc-900053b2d37d".device =
+      "/dev/disk/by-uuid/ce024c4d-5d6e-4938-b7cc-900053b2d37d";
 
-  # Hibernate resume target: the *decrypted* swap device. The initrd unlocks
-  # the LUKS swap (above) before the resume step, so the image — written to
-  # encrypted swap — is read back after unlock. UUID is the swap signature
-  # inside the mapper, not the LUKS partition's.
-  boot.resumeDevice = "/dev/disk/by-uuid/6e438b3a-e057-4755-8d0c-a9236ce62932";
+    # Hibernate resume target: the *decrypted* swap device. The initrd unlocks
+    # the LUKS swap (above) before the resume step, so the image — written to
+    # encrypted swap — is read back after unlock. UUID is the swap signature
+    # inside the mapper, not the LUKS partition's.
+    resumeDevice = "/dev/disk/by-uuid/6e438b3a-e057-4755-8d0c-a9236ce62932";
+  };
 
   # A closed lid suspends to RAM and then hibernates after the delay, on both
   # battery and AC. Doing it on AC too closes a gap: plain suspend has no

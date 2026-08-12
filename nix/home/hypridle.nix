@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 # Idle management: lock, then blank the screen, then suspend. Laptop-scoped
 # (imported per-host) — deliberately not applied to hosts that must stay awake

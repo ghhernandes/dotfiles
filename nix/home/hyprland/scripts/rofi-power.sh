@@ -9,16 +9,13 @@ main() {
     case "$chosen" in
         "Power Off") systemctl poweroff ;;
         "Reboot") systemctl reboot ;;
-        "Suspend")
-            hyprlock &
-            sleep 0.5
-            systemctl suspend
-            ;;
-        "Hibernate")
-            hyprlock &
-            sleep 0.5
-            systemctl hibernate
-            ;;
+        # Locking is left to hypridle, which holds a *delay* inhibitor on sleep
+        # and runs `loginctl lock-session` from it, so the lock is guaranteed to
+        # be up before the machine goes down. -i only disables the *block*
+        # inhibitor check, letting an explicit choice here override caffeine
+        # while the automatic paths (lid, idle) keep respecting it.
+        "Suspend") systemctl suspend -i ;;
+        "Hibernate") systemctl hibernate -i ;;
         "Logout") loginctl terminate-user "$USER" ;;
     esac
 }

@@ -269,7 +269,12 @@
 
       input = {
         kb_layout = "us";
-        kb_variant = "";
+        # macOS's own dead-key scheme, so muscle memory carries between this
+        # machine, the MacBook and the HHKB: right Alt is Option, and the
+        # accents are mnemonic — e acute, n tilde, i circumflex, u diaeresis,
+        # c cedilla. Quotes stay literal at levels 1-2, unlike us(intl), which
+        # matters for code. The variant pulls in level3(ralt_switch) itself.
+        kb_variant = "mac";
         kb_model = "";
         kb_options = "ctrl:nocaps"; # Caps Lock acts as an extra Control key
         kb_rules = "";

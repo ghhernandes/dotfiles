@@ -14,7 +14,6 @@ _:
 
         modules-left = [
           "hyprland/workspaces"
-          "hyprland/window"
         ];
         modules-center = [
           "clock"
@@ -55,10 +54,6 @@ _:
             "4" = [ ];
             "5" = [ ];
           };
-        };
-
-        "hyprland/window" = {
-          max-length = 50;
         };
 
         clock = {
@@ -250,7 +245,6 @@ _:
         color: #ffffff;
       }
 
-      #window,
       #clock,
       #cpu,
       #memory,

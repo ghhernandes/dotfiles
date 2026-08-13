@@ -58,42 +58,44 @@
     fi
   '';
 
-  # On-screen display for volume/brightness/caps-lock changes.
-  services.swayosd.enable = true;
-
   # Session services. These are all bound to graphical-session.target, so
   # systemd starts them with the session, restarts them on failure, and logs
   # them to `journalctl --user -u <name>` — none of which applies to the
   # exec-once entries they replace.
-  services.hyprpolkitagent.enable = true; # GUI polkit auth prompts
+  services = {
+    # On-screen display for volume/brightness/caps-lock changes.
+    swayosd.enable = true;
 
-  services.cliphist = {
-    enable = true;
-    allowImages = true;
-  };
+    hyprpolkitagent.enable = true; # GUI polkit auth prompts
 
-  services.udiskie = {
-    enable = true;
-    automount = true;
-    tray = "auto"; # only show the icon while a removable device is mounted
-  };
+    cliphist = {
+      enable = true;
+      allowImages = true;
+    };
 
-  # Night light, São Paulo (drives sunrise/sunset from lat/long).
-  services.wlsunset = {
-    enable = true;
-    latitude = -23.55;
-    longitude = -46.63;
-  };
+    udiskie = {
+      enable = true;
+      automount = true;
+      tray = "auto"; # only show the icon while a removable device is mounted
+    };
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [
-        "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
-      ];
-      wallpaper = [
-        ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
-      ];
+    # Night light, São Paulo (drives sunrise/sunset from lat/long).
+    wlsunset = {
+      enable = true;
+      latitude = -23.55;
+      longitude = -46.63;
+    };
+
+    hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          "${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+        ];
+        wallpaper = [
+          ",${config.home.homeDirectory}/.dotfiles/nix/home/hyprland/wallpapers/nix.png"
+        ];
+      };
     };
   };
 

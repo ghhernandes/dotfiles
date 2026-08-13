@@ -269,7 +269,12 @@
 
       input = {
         kb_layout = "us";
-        kb_variant = "";
+        # macOS's own dead-key scheme, so muscle memory carries between this
+        # machine, the MacBook and the HHKB: right Alt is Option, and the
+        # accents are mnemonic — e acute, n tilde, i circumflex, u diaeresis,
+        # c cedilla. Quotes stay literal at levels 1-2, unlike us(intl), which
+        # matters for code. The variant pulls in level3(ralt_switch) itself.
+        kb_variant = "mac";
         kb_model = "";
         kb_options = "ctrl:nocaps"; # Caps Lock acts as an extra Control key
         kb_rules = "";
@@ -292,11 +297,11 @@
 
       # Look & feel adapted from Omarchy (basecamp/omarchy default/hypr/looknfeel.conf).
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
+        gaps_in = 2;
+        gaps_out = 4;
         border_size = 2;
-        # Gradient active border (cyan -> green, 45deg), Hyprland's signature palette.
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        # Matches the active-workspace accent in the waybar style.
+        "col.active_border" = "rgba(33ccffee)";
         "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = true; # drag window edges to resize (deviates from Omarchy's false)
         allow_tearing = false;

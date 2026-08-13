@@ -148,6 +148,8 @@
         "$mod, M, exec, rofi-power"
         "$mod, B, exec, kitty --class bluetui-float bluetui"
         "$mod, N, exec, focus-mode toggle"
+        "$mod, C, exec, caffeine toggle"
+        "$mod SHIFT, C, exec, caffeine menu"
         "$mod, period, exec, rofimoji --selector rofi --action copy"
         "$mod SHIFT, V, exec, cliphist list | rofi -dmenu -theme custom | cliphist decode | wl-copy"
 
@@ -208,6 +210,12 @@
 
       # Media and audio control keybindings
       bindl = [
+        # Lock on lid close. logind still decides whether to sleep (and honours
+        # caffeine's inhibitor via LidSwitchIgnoreInhibited=no), but it can only
+        # take one action per lid event, so the lock has to come from here to
+        # also cover the case where sleeping is inhibited.
+        ", switch:on:Lid Switch, exec, pidof hyprlock || hyprlock"
+
         # Audio controls (swayosd shows an on-screen indicator)
         ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
         ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"

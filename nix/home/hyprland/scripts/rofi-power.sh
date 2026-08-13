@@ -9,15 +9,17 @@ main() {
     case "$chosen" in
         "Power Off") systemctl poweroff ;;
         "Reboot") systemctl reboot ;;
+        # -i so an explicit choice from this menu overrides caffeine; only the
+        # automatic paths (lid, idle) are meant to respect the inhibitor.
         "Suspend")
             hyprlock &
             sleep 0.5
-            systemctl suspend
+            systemctl suspend -i
             ;;
         "Hibernate")
             hyprlock &
             sleep 0.5
-            systemctl hibernate
+            systemctl hibernate -i
             ;;
         "Logout") loginctl terminate-user "$USER" ;;
     esac

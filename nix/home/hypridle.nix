@@ -12,6 +12,9 @@ _:
         before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = "hyprctl dispatch dpms on";
       };
+      # Locking and screen-off are unconditional. The sleep step needs no guard
+      # of its own: `systemctl` already refuses a sleep while something holds a
+      # block inhibitor on it, which is exactly how caffeine suppresses this.
       listener = [
         {
           timeout = 300; # 5 min: lock
@@ -23,8 +26,8 @@ _:
           on-resume = "hyprctl dispatch dpms on";
         }
         {
-          timeout = 1800; # 30 min: suspend
-          on-timeout = "systemctl suspend";
+          timeout = 1800; # 30 min: sleep, unless inhibited
+          on-timeout = "systemctl suspend-then-hibernate";
         }
       ];
     };

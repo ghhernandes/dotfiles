@@ -37,5 +37,13 @@ in
       pkgs.libnotify
       pkgs.coreutils
     ])
+    (mkScript "caffeine" [
+      pkgs.systemd
+      pkgs.procps
+      pkgs.libnotify
+      pkgs.coreutils
+      pkgs.gnugrep
+      pkgs.rofi
+    ])
   ];
 }

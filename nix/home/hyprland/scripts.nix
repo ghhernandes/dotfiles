@@ -29,8 +29,6 @@ in
     (mkScript "rofi-power" [
       pkgs.rofi
       pkgs.systemd
-      pkgs.hyprlock
-      pkgs.coreutils
     ])
     (mkScript "focus-mode" [
       pkgs.dunst

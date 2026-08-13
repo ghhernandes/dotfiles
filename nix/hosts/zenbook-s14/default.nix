@@ -1,7 +1,6 @@
 {
   self,
   pkgs,
-  lib,
   ...
 }:
 
@@ -36,25 +35,32 @@
     resumeDevice = "/dev/disk/by-uuid/6e438b3a-e057-4755-8d0c-a9236ce62932";
   };
 
-  # A closed lid suspends and then hibernates after the delay, on battery and on
-  # AC alike: plain suspend has no hibernate timer, so a machine suspended while
-  # plugged in and later unplugged would drain in s2idle with no fallback.
-  #
-  # Docked is set explicitly because it defaults to "ignore" *and* applies
-  # whenever more than one display is connected — leaving it would mean the lid
-  # does nothing while an external monitor is plugged in.
+  # A closed lid always suspends, and hibernates once the delay expires. The
+  # three cases are spelled out because their defaults disagree: Docked is
+  # "ignore" *and* applies whenever more than one display is connected, so
+  # leaving it would mean the lid does nothing with an external monitor
+  # attached. (laptop.nix sets the first two as mkDefault, so plain values win.)
   #
   # LidSwitchIgnoreInhibited defaults to "yes", meaning the lid ignores
   # high-level inhibitors; "no" makes it respect them, which is what lets
   # `caffeine` keep the machine awake through a lid close. Hyprland locks the
   # session separately on lid close, so it still locks when sleep is inhibited.
   services.logind.settings.Login = {
-    HandleLidSwitch = lib.mkForce "suspend-then-hibernate";
-    HandleLidSwitchExternalPower = lib.mkForce "suspend-then-hibernate";
-    HandleLidSwitchDocked = lib.mkForce "suspend-then-hibernate";
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "suspend-then-hibernate";
     LidSwitchIgnoreInhibited = "no";
   };
-  systemd.sleep.settings.Sleep.HibernateDelaySec = "30min";
+
+  # On AC the machine stays in s2idle indefinitely and the countdown starts
+  # only once power is pulled, so being plugged in keeps fast resume without
+  # giving up the hibernate fallback for a laptop that gets unplugged while
+  # asleep. Independently of the timer, the battery's ACPI trip point can
+  # trigger hibernation early if the charge runs low first.
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "30min";
+    HibernateOnACPower = "no";
+  };
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.graphics = {

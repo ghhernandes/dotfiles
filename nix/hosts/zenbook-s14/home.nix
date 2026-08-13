@@ -23,19 +23,22 @@
   # (the shared common.nix baseline of 25.11 covers the older hosts).
   home.stateVersion = "26.05";
 
-  # Integer scale (1x) keeps XWayland apps (e.g. Spotify) crisp — fractional
-  # scales bitmap-upscale X clients and blur them. Tradeoff: 1920x1200 on a
-  # 14" panel (~162 DPI) is on the small side.
+  # The panel is 1920x1200 in 300x190mm (~162 DPI), so scale 1 draws text at
+  # ~60% of the size toolkits assume at 96 DPI. 1.25 divides cleanly (logical
+  # 1536x960, ~130 DPI effective) and still leaves 768px per window in a
+  # side-by-side split. XWayland clients get compositor-upscaled and lose some
+  # sharpness, but NIXOS_OZONE_WL puts Electron and Chrome on native Wayland,
+  # so the X11 holdouts here are occasional apps (GIMP, yubioath-flutter).
   #
   # Externals auto-configure on hotplug and extend *above* the laptop panel
   # (auto-up). Match each by its stable `description:` (from
-  # `hyprctl monitors all`) and use an integer scale so XWayland stays sharp:
+  # `hyprctl monitors all`):
   #   personal 4K  -> scale 2 (logical 1920x1080)
   #   work FHD/2K  -> scale 1
-  # Fill in the two desc rules below once captured; until then the wildcard
-  # lights up any unknown external above the laptop at scale 1.
+  # Fill in the work rule below once captured; until then the wildcard lights
+  # up any unknown external above the laptop at scale 1.
   wayland.windowManager.hyprland.settings.monitor = lib.mkForce [
-    "eDP-1,1920x1200@60,auto,1"
+    "eDP-1,1920x1200@60,auto,1.25"
 
     # Personal 4K (Alienware AW3225QF): above the laptop, scale 2 (sharp).
     "desc:Dell Inc. AW3225QF HDPCYZ3,preferred,auto-up,2"

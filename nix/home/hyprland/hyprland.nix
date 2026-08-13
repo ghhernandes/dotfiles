@@ -34,8 +34,56 @@
     size = 24;
   };
 
+  # Start the session through UWSM, which runs the compositor as a systemd user
+  # unit and so activates graphical-session.target. Launching Hyprland bare
+  # leaves that target inactive, and every user service bound to it (hypridle,
+  # waybar, dunst, ...) silently never starts.
+  #
+  # Restricted to tty1 so the other VTs stay plain shells: if the session fails
+  # to come up, tty2-6 are still a way in. Deliberately not `exec` for the same
+  # reason — a failed start drops back to this shell instead of logging out.
+  #
+  # start-hyprland rather than the Hyprland binary: it is what raises the
+  # compositor's scheduling priority, and Hyprland warns loudly when bypassed.
+  # This mirrors the stock hyprland.desktop, which UWSM is designed to launch.
+  #
+  # Given as an absolute store path because the system tree and this profile
+  # ship different Hyprland versions (system nixpkgs is stable, home-manager
+  # follows unstable), and the config here is written against the profile's.
+  # Note also that hyprland-uwsm.desktop is *itself* `uwsm start ...`, meant
+  # for a display manager — passing it to `uwsm start` would nest UWSM in UWSM.
+  programs.zsh.loginExtra = ''
+    if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+      uwsm start -e -D Hyprland ${config.wayland.windowManager.hyprland.finalPackage}/bin/start-hyprland
+    fi
+  '';
+
   # On-screen display for volume/brightness/caps-lock changes.
   services.swayosd.enable = true;
+
+  # Session services. These are all bound to graphical-session.target, so
+  # systemd starts them with the session, restarts them on failure, and logs
+  # them to `journalctl --user -u <name>` — none of which applies to the
+  # exec-once entries they replace.
+  services.hyprpolkitagent.enable = true; # GUI polkit auth prompts
+
+  services.cliphist = {
+    enable = true;
+    allowImages = true;
+  };
+
+  services.udiskie = {
+    enable = true;
+    automount = true;
+    tray = "auto"; # only show the icon while a removable device is mounted
+  };
+
+  # Night light, São Paulo (drives sunrise/sunset from lat/long).
+  services.wlsunset = {
+    enable = true;
+    latitude = -23.55;
+    longitude = -46.63;
+  };
 
   services.hyprpaper = {
     enable = true;
@@ -72,26 +120,6 @@
       # XWayland. The nixpkgs wrappers add the right flags when this is set.
       env = [
         "NIXOS_OZONE_WL,1"
-      ];
-
-      exec-once = [
-        "waybar"
-        "dunst"
-        "swayosd-server"
-        "systemctl --user start hyprpaper"
-
-        # Polkit auth agent — GUI password prompts for privileged actions.
-        "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
-
-        # Clipboard history: watch both text and images into cliphist.
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
-
-        # Auto-mount removable drives; tray icon appears in waybar when present.
-        "udiskie --smart-tray"
-
-        # Night light for São Paulo (auto sunrise/sunset by lat/long).
-        "wlsunset -l -23.55 -L -46.63"
       ];
 
       # Window rules for fixed workspaces

@@ -3,6 +3,7 @@ _:
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true; # start with graphical-session.target, not exec-once
     settings = {
       mainBar = {
         layer = "top";

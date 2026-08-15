@@ -10,6 +10,7 @@
     (with self.systemModules; [
       security
       docker
+      nixGc
     ])
     ++ [
       inputs.nixos-wsl.nixosModules.default

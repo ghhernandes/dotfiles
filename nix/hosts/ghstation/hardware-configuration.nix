@@ -14,7 +14,12 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot = {
+        enable = lib.mkForce false;
+        # lanzaboote reuses the systemd-boot module's option surface
+        # (including this one) even though it does its own signed installation.
+        configurationLimit = 10;
+      };
       efi.canTouchEfiVariables = true;
     };
     lanzaboote = {

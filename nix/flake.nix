@@ -78,6 +78,7 @@
         packageManagers = ./system/package-managers.nix;
         docker = ./system/docker.nix;
         laptop = ./system/laptop.nix;
+        nixGc = ./system/nix-gc.nix;
       };
 
       inherit (hostOutputs) nixosConfigurations homeConfigurations;

@@ -19,6 +19,7 @@
       monitoring
       security
       packageManagers
+      nixGc
     ])
     ++ [
       lanzaboote.nixosModules.lanzaboote

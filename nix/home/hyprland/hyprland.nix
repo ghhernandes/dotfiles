@@ -285,6 +285,7 @@
         touchpad = {
           natural_scroll = true;
           tap-to-click = true;
+          scroll_factor = 0.4; # multiplier on scroll distance; 1.0 overshoots on this trackpad
         };
       };
 

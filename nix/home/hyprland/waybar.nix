@@ -8,7 +8,7 @@ _:
       mainBar = {
         layer = "top";
         position = "top";
-        height = 33;
+        height = 26;
         spacing = 0;
         reload_style_on_change = true;
 
@@ -180,8 +180,8 @@ _:
         };
 
         tray = {
-          icon-size = 16;
-          spacing = 15;
+          icon-size = 13;
+          spacing = 12;
         };
 
         "custom/focus" = {
@@ -205,7 +205,7 @@ _:
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font", "JetBrainsMono Nerd Font Propo", "DejaVu Sans", sans-serif;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 500;
         border: none;
         border-radius: 0;
@@ -218,18 +218,18 @@ _:
       }
 
       .modules-left {
-        margin-left: 10px;
+        margin-left: 8px;
       }
 
       .modules-right {
-        margin-right: 10px;
+        margin-right: 8px;
       }
 
       #workspaces button {
         all: initial;
-        padding: 0 8px;
+        padding: 0 6px;
         margin: 0 2px;
-        min-width: 11px;
+        min-width: 9px;
         color: #888888;
       }
 
@@ -254,7 +254,7 @@ _:
       #bluetooth,
       #custom-focus,
       #custom-caffeine {
-        margin: 0 9px;
+        margin: 0 7px;
       }
 
       #custom-focus {
@@ -266,11 +266,11 @@ _:
       }
 
       #tray {
-        margin-right: 20px;
+        margin-right: 16px;
       }
 
       #custom-expand-icon {
-        margin-right: 15px;
+        margin-right: 12px;
       }
 
       #battery.warning {

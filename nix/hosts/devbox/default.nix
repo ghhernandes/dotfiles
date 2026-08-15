@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     audio
     security
+    nixGc
   ];
 
   users.users.gh = {

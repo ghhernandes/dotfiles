@@ -7,9 +7,7 @@
     git
     zsh
     dev
-    claude
-    opencode
-    gemini
+    ai
   ];
 
   programs.firefox.enable = true;

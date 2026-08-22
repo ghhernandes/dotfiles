@@ -8,9 +8,7 @@
     zsh
     dev
     reverseEngineering
-    claude
-    opencode
-    gemini
+    ai
   ];
 
   # SSH: callisto uses gcr-ssh-agent (GNOME Keyring) as its SSH agent.

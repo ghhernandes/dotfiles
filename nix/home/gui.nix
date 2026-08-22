@@ -13,6 +13,7 @@
     # Editors/IDEs
     pkgs.vscode
     pkgs.obsidian
+    pkgs.antigravity
 
     # Media
     pkgs.spotify

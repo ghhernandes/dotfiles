@@ -1,5 +1,8 @@
 Prefer small, focused changes. Explain trade-offs when they matter.
 
+@MEMORY.md
+@SELF_IMPROVE.md
+
 ## Comments
 
 Comments explain the code as it stands, not its history. A comment may capture

@@ -39,11 +39,13 @@
     resumeDevice = "/dev/disk/by-uuid/6e438b3a-e057-4755-8d0c-a9236ce62932";
   };
 
-  # A closed lid always suspends, and hibernates once the delay expires. The
-  # three cases are spelled out because their defaults disagree: Docked is
-  # "ignore" *and* applies whenever more than one display is connected, so
-  # leaving it would mean the lid does nothing with an external monitor
-  # attached. (laptop.nix sets the first two as mkDefault, so plain values win.)
+  # A closed lid always suspends when undocked, and hibernates once the delay
+  # expires. Docked (systemd's own definition: more than one display
+  # connected) is left at "ignore" so closing the lid with the external
+  # monitor attached keeps the machine running instead of sleeping — the
+  # Hyprland switch binding (home/hyprland/hyprland.nix) turns off just the
+  # internal panel in that case. (laptop.nix sets the first two as
+  # mkDefault, so plain values win.)
   #
   # LidSwitchIgnoreInhibited defaults to "yes", meaning the lid ignores
   # high-level inhibitors; "no" makes it respect them, which is what lets
@@ -52,7 +54,7 @@
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchExternalPower = "suspend-then-hibernate";
-    HandleLidSwitchDocked = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "ignore";
     LidSwitchIgnoreInhibited = "no";
   };
 

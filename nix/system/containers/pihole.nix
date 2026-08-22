@@ -2,6 +2,13 @@
 
 {
   config = lib.mkIf config.containerServices.pihole.enable {
+    # Unlike docker, podman doesn't auto-create missing bind-mount host
+    # directories — it fails with "statfs ...: no such file or directory".
+    systemd.tmpfiles.rules = [
+      "d /var/lib/pihole/etc-pihole 0755 root root - -"
+      "d /var/lib/pihole/etc-dnsmasq.d 0755 root root - -"
+    ];
+
     virtualisation.oci-containers.containers.pihole = {
       # Pinned release tag — never `latest` for a network-facing service;
       # check hub.docker.com/r/pihole/pihole/tags before bumping.

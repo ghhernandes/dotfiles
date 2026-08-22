@@ -1,6 +1,12 @@
 { pkgs, lib, ... }:
 
 {
+  # Windows' out-of-box default is Fn-lock off (top row sends media/brightness
+  # keys directly, Fn+F1-F12 sends the real function keys); ZenBooks running
+  # Linux otherwise boot with Fn-lock on. This restores that default at every
+  # boot, overriding whatever state the EC/BIOS carried over.
+  boot.extraModprobeConfig = "options asus_wmi fnlock_default=0";
+
   services = {
     # Power profile switching (balanced/performance/power-saver), plus asusd
     # which extends it with ASUS-specific controls: battery charge limit,

@@ -246,6 +246,14 @@
         # also cover the case where sleeping is inhibited.
         ", switch:on:Lid Switch, exec, pidof hyprlock || hyprlock"
 
+        # Docked (external monitor connected — HandleLidSwitchDocked=ignore
+        # keeps the system running), turn off just the internal panel instead
+        # of sleeping. Reopening the lid runs a full config reload rather than
+        # hardcoding eDP-1's mode here, so it always matches whatever the
+        # monitor block currently says.
+        ", switch:on:Lid Switch, exec, [ \"$(hyprctl monitors -j | jq length)\" -gt 1 ] && hyprctl keyword monitor 'eDP-1, disable'"
+        ", switch:off:Lid Switch, exec, hyprctl reload"
+
         # Audio controls (swayosd shows an on-screen indicator)
         ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
         ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"

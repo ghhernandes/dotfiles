@@ -20,6 +20,8 @@
       security
       packageManagers
       nixGc
+      podman
+      containers
     ])
     ++ [
       lanzaboote.nixosModules.lanzaboote
@@ -40,4 +42,6 @@
   networking.networkmanager.enable = true;
 
   programs.zsh.enable = true;
+
+  containerServices.pihole.enable = true;
 }

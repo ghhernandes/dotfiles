@@ -75,8 +75,10 @@
         security = ./system/security.nix;
         packageManagers = ./system/package-managers.nix;
         docker = ./system/docker.nix;
+        podman = ./system/podman.nix;
         laptop = ./system/laptop.nix;
         nixGc = ./system/nix-gc.nix;
+        containers = ./system/containers;
       };
 
       inherit (hostOutputs) nixosConfigurations homeConfigurations;

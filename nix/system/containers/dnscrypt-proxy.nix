@@ -43,8 +43,11 @@ let
 in
 {
   config = lib.mkIf config.containerServices.dnscryptProxy.enable {
+    # Image runs as nonroot (65532:65532); a root-owned dir means it can't
+    # write its resolver-list cache, forcing a re-fetch/re-validate over the
+    # network on every restart instead of using a persisted cache.
     systemd.tmpfiles.rules = [
-      "d /var/lib/dnscrypt-proxy/cache 0755 root root - -"
+      "d /var/lib/dnscrypt-proxy/cache 0755 65532 65532 - -"
     ];
 
     virtualisation.oci-containers.containers.dnscrypt-proxy = {

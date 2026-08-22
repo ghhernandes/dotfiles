@@ -95,6 +95,7 @@
   services.tailscale.enable = true;
 
   containerServices.pihole.enable = true;
+  containerServices.dnscryptProxy.enable = true;
 
   # The keyboard backlight LED resets to 0 on boot. Restore it to low (1 of 3)
   # each boot; the Fn keys (wired in home/hyprland) still adjust it live.

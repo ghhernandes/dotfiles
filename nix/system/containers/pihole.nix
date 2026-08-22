@@ -23,11 +23,22 @@
         # 8080 instead of the default 80, to leave port 80 free for other
         # services on this host. "o" = don't fail startup if the port's taken.
         FTLCONF_webserver_port = "8080o,443os,[::]:8080o,[::]:443os";
+      }
+      # Pihole itself only speaks plain DNS upstream; route through the
+      # dnscrypt-proxy sidecar (127.0.0.1, since both are --network=host)
+      # for actual DoH to Cloudflare when it's enabled.
+      // lib.optionalAttrs config.containerServices.dnscryptProxy.enable {
+        FTLCONF_dns_upstreams = "127.0.0.1#5053";
       };
       volumes = [
         "/var/lib/pihole/etc-pihole:/etc/pihole"
         "/var/lib/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
       ];
+    };
+
+    systemd.services.podman-pihole = lib.mkIf config.containerServices.dnscryptProxy.enable {
+      after = [ "podman-dnscrypt-proxy.service" ];
+      wants = [ "podman-dnscrypt-proxy.service" ];
     };
 
     # Scoped to the tailnet only — global allowedTCPPorts/allowedUDPPorts

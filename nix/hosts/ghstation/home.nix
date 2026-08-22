@@ -14,9 +14,7 @@
     dev
     hyprland
     rofi
-    claude
-    opencode
-    gemini
+    ai
   ];
 
   wayland.windowManager.hyprland.settings.monitor = lib.mkForce [

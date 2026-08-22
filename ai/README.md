@@ -1,48 +1,39 @@
 # AI tool configs
 
-Home-manager-managed configuration for AI tools, shared across all hosts with
-per-host overrides. Today this tree only contains `claude/` (Claude Code);
-siblings like `aider/`, `codex/`, etc. can be added later under the same
-`ai/<tool>/` layout.
-
-The nix glue lives in `../nix/home/ai/` and is wired into every host through
-`homeModules.ai` in `../nix/flake.nix`.
+Home-manager-managed configuration for AI tools, shared identically across
+every host. The nix glue lives in `../nix/home/ai/` and is wired into hosts
+through the single `homeModules.ai` in `../nix/flake.nix`.
 
 ## Layout
 
 ```
 ai/
-└── claude/
-    ├── CLAUDE.md           # shared global instructions (base)
-    ├── settings.json       # shared base settings.json
-    ├── statusline.sh       # custom statusline script (live-edit)
-    ├── hooks/              # PreToolUse / PostToolUse hook scripts (live-edit)
-    │   ├── protect-secrets.sh
-    │   └── nixfmt-on-write.sh
-    ├── agents/             # custom subagents (live-edit, empty until populated)
-    ├── skills/             # custom skills (live-edit, empty until populated)
-    ├── commands/           # slash commands (live-edit, empty until populated)
-    └── hosts/
-        ├── callisto/       # per-host overrides (optional)
-        │   ├── CLAUDE.md       # appended to the shared base
-        │   └── settings.json   # recursiveUpdate-merged on top of base
-        ├── ghstation/
-        └── devbox/
+├── claude/
+│   ├── CLAUDE.md           # global instructions
+│   ├── settings.json       # settings.json
+│   ├── statusline.sh       # custom statusline script (live-edit)
+│   ├── hooks/              # PreToolUse / PostToolUse hook scripts (live-edit)
+│   │   ├── protect-secrets.sh
+│   │   └── nixfmt-on-write.sh
+│   ├── agents/              # custom subagents (live-edit, empty until populated)
+│   ├── skills/                # custom skills (live-edit, empty until populated)
+│   └── commands/                # slash commands (live-edit, empty until populated)
+└── opencode/
+    ├── opencode.json
+    └── tui.json
 ```
 
-## Two kinds of files
+Every host gets the same files — there is no per-host override directory.
+If a host ever needs to skip a tool entirely, set `ai.<tool>.enable = false;`
+in that host's `home.nix` (see `../nix/home/ai/default.nix` for the options).
 
-The module handles two categories differently on purpose:
+## Two kinds of files (Claude Code)
 
 ### Store-baked (require `home-manager switch` to update)
 
-- `CLAUDE.md` — shared base, concatenated with `hosts/<host>/CLAUDE.md` at
-  build time.
-- `settings.json` — shared base, `lib.recursiveUpdate`-merged with
-  `hosts/<host>/settings.json` at build time (host wins on conflicts).
-
-These land in the nix store and `~/.claude/CLAUDE.md` / `~/.claude/settings.json`
-are read-only symlinks into the store. Edit them in `ai/claude/` and rebuild.
+- `CLAUDE.md`, `settings.json` — copied into the nix store;
+  `~/.claude/CLAUDE.md` / `~/.claude/settings.json` are read-only symlinks
+  into the store. Edit them in `ai/claude/` and rebuild.
 
 ### Live-edit (symlinks straight to the repo, no rebuild needed)
 
@@ -59,19 +50,6 @@ place and are fine. Editors that do atomic-replace-on-save may replace the
 symlink itself with a regular file, breaking the live link until the next
 `home-manager switch`. If in doubt, edit under `~/.dotfiles/ai/claude/`
 directly — that's where you'd run `git` anyway.
-
-## Per-host overrides
-
-Any file under `hosts/<hostname>/` is optional. The module checks existence
-and silently skips missing files.
-
-- `hosts/<host>/CLAUDE.md` → appended to the shared base with a blank-line
-  separator. Use it for host-specific environment notes (`callisto` carries
-  the WSL + rebuild commands, for example).
-- `hosts/<host>/settings.json` → `lib.recursiveUpdate base hostOverride`,
-  so the host file only needs to name the keys it wants to change.
-
-To add a new host override, just create the file; no nix edits needed.
 
 ## Bundled hook scripts
 
@@ -103,13 +81,24 @@ rebuild.
 
 ## Changing base settings or shared CLAUDE.md
 
-1. Edit `ai/claude/CLAUDE.md` or `ai/claude/settings.json`.
+1. Edit `ai/claude/CLAUDE.md` or `ai/claude/settings.json` (or the
+   `ai/opencode/*.json` equivalents).
 2. From `~/.dotfiles/nix`:
    ```bash
    home-manager switch --flake .#<host>
    ```
-3. `~/.claude/CLAUDE.md` and `~/.claude/settings.json` will now point at new
-   store paths reflecting the edit.
+
+## Adding a new AI tool
+
+1. Create `ai/<tool>/` with its config files.
+2. Create `nix/home/ai/<tool>.nix` following the shape of `claude.nix` /
+   `opencode.nix`: read files straight out of `ai/<tool>/`, gate the whole
+   `config` block behind `lib.mkIf config.ai.<tool>.enable`.
+3. Add it to `imports` and declare its `enable` option in
+   `nix/home/ai/default.nix`.
+
+No `flake.nix` or per-host `home.nix` edits needed — every host already
+imports the single `ai` module.
 
 ## What is NOT managed
 

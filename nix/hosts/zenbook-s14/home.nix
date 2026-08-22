@@ -14,9 +14,7 @@
     hyprland
     hypridle
     rofi
-    claude
-    opencode
-    gemini
+    ai
   ];
 
   # Fresh install on NixOS 26.05, so adopt the 26.05 home-manager defaults

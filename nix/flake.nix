@@ -61,9 +61,7 @@
         hypridle = ./home/hypridle.nix;
         rofi = ./home/rofi;
         reverseEngineering = ./home/reverse-engineering.nix;
-        claude = ./home/ai/claude.nix;
-        opencode = ./home/ai/opencode.nix;
-        gemini = ./home/ai/gemini.nix;
+        ai = ./home/ai;
       };
 
       systemModules = {

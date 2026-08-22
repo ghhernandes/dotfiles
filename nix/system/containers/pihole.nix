@@ -18,7 +18,8 @@
         TZ = "America/Sao_Paulo";
         # Plain text: accepted risk, exposure limited to the tailnet (see
         # firewall rule below) and this is a trusted single-user machine.
-        WEBPASSWORD = "1234";
+        # WEBPASSWORD is a v5-era name; v6 uses the FTLCONF_ equivalent.
+        FTLCONF_webserver_api_password = "1234";
         # 8080 instead of the default 80, to leave port 80 free for other
         # services on this host. "o" = don't fail startup if the port's taken.
         FTLCONF_webserver_port = "8080o,443os,[::]:8080o,[::]:443os";

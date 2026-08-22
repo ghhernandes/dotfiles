@@ -23,6 +23,9 @@
         # 8080 instead of the default 80, to leave port 80 free for other
         # services on this host. "o" = don't fail startup if the port's taken.
         FTLCONF_webserver_port = "8080o,443os,[::]:8080o,[::]:443os";
+        # Default retention is 365 days; unbounded query history in
+        # pihole-FTL.db is what filled the disk on a previous setup.
+        FTLCONF_database_maxDBdays = "30";
       }
       # Pihole itself only speaks plain DNS upstream; route through the
       # dnscrypt-proxy sidecar (127.0.0.1, since both are --network=host)

@@ -23,6 +23,12 @@
         # 8080 instead of the default 80, to leave port 80 free for other
         # services on this host. "o" = don't fail startup if the port's taken.
         FTLCONF_webserver_port = "8080o,443os,[::]:8080o,[::]:443os";
+        # Default LOCAL mode only accepts queries from subnets matching a
+        # local interface's own prefix -- tailscale0 is /32 (host-only), so
+        # every other tailnet peer gets rejected as "non-local network"
+        # even though they're legitimately reachable. The firewall rule
+        # below is the real security boundary here, not this.
+        FTLCONF_dns_listeningMode = "ALL";
       }
       # Pihole itself only speaks plain DNS upstream; route through the
       # dnscrypt-proxy sidecar (127.0.0.1, since both are --network=host)

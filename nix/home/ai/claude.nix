@@ -48,7 +48,18 @@ in
 
     home.file = liveFiles // {
       ".claude/CLAUDE.md".source = claudeRepo + "/CLAUDE.md";
+      ".claude/MEMORY.md".source = claudeRepo + "/MEMORY.md";
+      ".claude/SELF_IMPROVE.md".source = claudeRepo + "/SELF_IMPROVE.md";
       ".claude/settings.json".source = claudeRepo + "/settings.json";
     };
+
+    # Runtime state, not config -- grows over sessions, so it must stay
+    # writable (a nix store path, unlike the files above, would be
+    # read-only and defeat the whole point). `f` only creates the index if
+    # missing; it never touches it again once memories start accumulating.
+    systemd.user.tmpfiles.rules = [
+      "d %h/.gh/global-memory 0755 - - - -"
+      "f %h/.gh/global-memory/MEMORY.md 0644 - - - -"
+    ];
   };
 }

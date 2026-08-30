@@ -117,8 +117,8 @@
           format-wifi = "{icon}";
           format-ethernet = "󰀂";
           format-disconnected = "󰤮";
-          tooltip-format-wifi = "{essid} ({signalStrength}%)";
-          tooltip-format-ethernet = "Connected";
+          tooltip-format-wifi = "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\n{frequency} GHz";
+          tooltip-format-ethernet = "{ifname}\n{ipaddr}/{cidr}";
           tooltip-format-disconnected = "Disconnected";
           interval = 5;
           on-click = config.desktop.floats.impala.launch;
@@ -143,7 +143,10 @@
         };
 
         bluetooth = {
-          format = "";
+          # Base format: powered on, controller present, nothing connected.
+          # Was "" (invisible) — only the format-* state variants had icons,
+          # so the module rendered nothing whenever no device was connected.
+          format = "󰂯";
           format-off = "󰂲";
           format-disabled = "󰂲";
           format-connected = "󰂱";

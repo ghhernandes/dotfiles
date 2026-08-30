@@ -7,5 +7,6 @@
     ./dunst.nix
     ./hyprlock.nix
     ./scripts.nix
+    ./feature.nix
   ];
 }

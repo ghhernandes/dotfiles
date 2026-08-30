@@ -20,7 +20,6 @@ _:
         ];
         modules-right = [
           "custom/caffeine"
-          "custom/focus"
           "group/tray-expander"
           "bluetooth"
           "network"
@@ -184,14 +183,6 @@ _:
           spacing = 12;
         };
 
-        "custom/focus" = {
-          exec = "focus-mode status";
-          interval = 2;
-          format = "{}";
-          tooltip-format = "Focus mode (Do Not Disturb) active";
-          on-click = "focus-mode toggle";
-        };
-
         "custom/caffeine" = {
           exec = "caffeine status";
           interval = 2;
@@ -252,13 +243,8 @@ _:
       #network,
       #pulseaudio,
       #bluetooth,
-      #custom-focus,
       #custom-caffeine {
         margin: 0 7px;
-      }
-
-      #custom-focus {
-        color: #f9e2af;
       }
 
       #custom-caffeine {

@@ -30,11 +30,6 @@ in
       pkgs.rofi
       pkgs.systemd
     ])
-    (mkScript "focus-mode" [
-      pkgs.dunst
-      pkgs.libnotify
-      pkgs.coreutils
-    ])
     (mkScript "caffeine" [
       pkgs.systemd
       pkgs.procps

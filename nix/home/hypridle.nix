@@ -21,6 +21,16 @@ _:
           on-timeout = "loginctl lock-session";
         }
         {
+          # ASUS keyboard backlight (asus::kbd_backlight); no-op elsewhere.
+          # Fixed values rather than brightnessctl -s/-r (save/restore): this
+          # listener's on-resume always snaps back to 1, the same default the
+          # boot service (kbd-backlight-default) restores, so it stays correct
+          # even if another actor also touched the LED while idle.
+          timeout = 60; # 1 min: keyboard backlight off
+          on-timeout = "brightnessctl -d asus::kbd_backlight set 0";
+          on-resume = "brightnessctl -d asus::kbd_backlight set 1";
+        }
+        {
           timeout = 360; # 6 min: screen off
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";

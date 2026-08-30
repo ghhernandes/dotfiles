@@ -23,7 +23,6 @@
           "bluetooth"
           "network"
           "pulseaudio"
-          "cpu"
           "memory"
           "battery"
         ];
@@ -58,13 +57,6 @@
           format = "{:L%a %H:%M}";
           format-alt = "{:L%d %b W%V %Y}";
           tooltip = false;
-        };
-
-        cpu = {
-          interval = 5;
-          format = "󰻠";
-          tooltip-format = "CPU {usage}%";
-          on-click = config.desktop.floats.btop.launch;
         };
 
         memory = {
@@ -228,7 +220,6 @@
       }
 
       #clock,
-      #cpu,
       #memory,
       #battery,
       #network,

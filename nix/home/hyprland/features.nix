@@ -67,6 +67,52 @@
     };
   };
 
+  desktop.features.screenshot = {
+    runtimeInputs = with pkgs; [
+      grim
+      slurp
+      wl-clipboard
+      jq
+      hyprland
+      coreutils
+    ];
+    subcommands = [
+      "full"
+      "region"
+      "clipboard"
+      "window"
+    ];
+    binds = [
+      {
+        mods = "";
+        key = "Print";
+        run = "full";
+      }
+      {
+        mods = "SHIFT";
+        key = "Print";
+        run = "region";
+      }
+      {
+        mods = "CTRL";
+        key = "Print";
+        run = "clipboard";
+      }
+      {
+        key = "Print";
+        run = "window";
+      }
+    ];
+  };
+
+  desktop.features.rofi-power = {
+    runtimeInputs = with pkgs; [
+      rofi
+      systemd
+    ];
+    binds = [ { key = "M"; } ]; # bare invocation, no subcommand: rofi-power.sh takes no args
+  };
+
   # Floating scratch windows: one class string shared between the windowrule
   # that centers them and whoever launches them, instead of duplicating it.
   desktop.floats = {

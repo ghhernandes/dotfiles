@@ -153,16 +153,9 @@
         "$mod SHIFT, slash, exec, ${config.desktop.floats."1password".launch}"
 
         "$mod, backslash, exec, hyprlock"
-        "$mod, M, exec, rofi-power"
         "$mod, B, exec, ${config.desktop.floats.bluetui.launch}"
         "$mod, period, exec, rofimoji --selector rofi --action copy"
         "$mod SHIFT, V, exec, cliphist list | rofi -dmenu -theme custom | cliphist decode | wl-copy"
-
-        # Screenshots
-        ", Print, exec, screenshot full"
-        "SHIFT, Print, exec, screenshot region"
-        "CTRL, Print, exec, screenshot clipboard"
-        "$mod, Print, exec, screenshot window"
 
         # Move focus with mod + hjkl or arrow keys
         "$mod, H, movefocus, l"

@@ -1,4 +1,4 @@
-_:
+{ config, ... }:
 
 {
   programs.waybar = {
@@ -64,14 +64,14 @@ _:
           interval = 5;
           format = "󰻠";
           tooltip-format = "CPU {usage}%";
-          on-click = "kitty --class btop-float btop";
+          on-click = config.desktop.floats.btop.launch;
         };
 
         memory = {
           interval = 5;
           format = "󰍛";
           tooltip-format = "RAM {percentage}% ({used:0.1f}G / {total:0.1f}G)";
-          on-click = "kitty --class btop-float btop";
+          on-click = config.desktop.floats.btop.launch;
         };
 
         battery = {
@@ -129,7 +129,7 @@ _:
           tooltip-format-ethernet = "Connected";
           tooltip-format-disconnected = "Disconnected";
           interval = 5;
-          on-click = "kitty --class impala-float impala";
+          on-click = config.desktop.floats.impala.launch;
         };
 
         pulseaudio = {
@@ -146,7 +146,7 @@ _:
           };
           scroll-step = 5;
           tooltip-format = "Playing at {volume}%";
-          on-click = "pavucontrol";
+          on-click = config.desktop.floats.pavucontrol.launch;
           on-click-right = "pamixer -t";
         };
 
@@ -157,7 +157,7 @@ _:
           format-connected = "󰂱";
           format-no-controller = "";
           tooltip-format = "Devices connected: {num_connections}";
-          on-click = "kitty --class bluetui-float bluetui";
+          on-click = config.desktop.floats.bluetui.launch;
         };
 
         "group/tray-expander" = {

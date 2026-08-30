@@ -66,4 +66,25 @@
       tooltip = "Caffeine: lid close and idle sleep disabled\nRight-click to set a duration";
     };
   };
+
+  # Floating scratch windows: one class string shared between the windowrule
+  # that centers them and whoever launches them, instead of duplicating it.
+  desktop.floats = {
+    btop = {
+      command = "btop";
+      size = "1000 700";
+    };
+    bluetui.command = "bluetui";
+    impala.command = "impala";
+    pavucontrol = {
+      terminal = false;
+      class = "org.pulseaudio.pavucontrol";
+      command = "pavucontrol";
+    };
+    "1password" = {
+      terminal = false;
+      class = "1password";
+      command = "1password";
+    };
+  };
 }

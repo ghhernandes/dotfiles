@@ -124,33 +124,11 @@
         "NIXOS_OZONE_WL,1"
       ];
 
-      # Window rules for fixed workspaces
+      # Window rules for fixed workspaces. The float/center/size rules for
+      # btop, bluetui, impala, pavucontrol, and 1password are generated from
+      # desktop.floats (nix/home/hyprland/feature.nix) instead of hand-written
+      # here, so their class string can't drift from the one that launches them.
       windowrule = [
-        # 1Password: Floating and centered
-        "float on, match:class ^(1password)$"
-        "center on, match:class ^(1password)$"
-        "size 800 600, match:class ^(1password)$"
-
-        # Volume control: Floating and centered
-        "float on, match:class ^(org.pulseaudio.pavucontrol)$"
-        "center on, match:class ^(org.pulseaudio.pavucontrol)$"
-        "size 800 600, match:class ^(org.pulseaudio.pavucontrol)$"
-
-        # Bluetui: Floating and centered
-        "float on, match:class ^(bluetui-float)$"
-        "center on, match:class ^(bluetui-float)$"
-        "size 800 600, match:class ^(bluetui-float)$"
-
-        # Impala: Floating and centered
-        "float on, match:class ^(impala-float)$"
-        "center on, match:class ^(impala-float)$"
-        "size 800 600, match:class ^(impala-float)$"
-
-        # btop: Floating and centered
-        "float on, match:class ^(btop-float)$"
-        "center on, match:class ^(btop-float)$"
-        "size 1000 700, match:class ^(btop-float)$"
-
         # Gaming: Auto fullscreen
         "fullscreen on, match:class ^(steam_app_).*"
         "fullscreen on, match:class ^(Wine)$"
@@ -172,11 +150,11 @@
         "$mod SHIFT, M, exec, spotify"
         "$mod SHIFT, D, exec, vesktop"
         "$mod SHIFT, G, exec, signal-desktop"
-        "$mod SHIFT, slash, exec, 1password"
+        "$mod SHIFT, slash, exec, ${config.desktop.floats."1password".launch}"
 
         "$mod, backslash, exec, hyprlock"
         "$mod, M, exec, rofi-power"
-        "$mod, B, exec, kitty --class bluetui-float bluetui"
+        "$mod, B, exec, ${config.desktop.floats.bluetui.launch}"
         "$mod, period, exec, rofimoji --selector rofi --action copy"
         "$mod SHIFT, V, exec, cliphist list | rofi -dmenu -theme custom | cliphist decode | wl-copy"
 

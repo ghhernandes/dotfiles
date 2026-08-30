@@ -30,13 +30,5 @@ in
       pkgs.rofi
       pkgs.systemd
     ])
-    (mkScript "caffeine" [
-      pkgs.systemd
-      pkgs.procps
-      pkgs.libnotify
-      pkgs.coreutils
-      pkgs.gnugrep
-      pkgs.rofi
-    ])
   ];
 }

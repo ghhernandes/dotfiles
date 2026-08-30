@@ -177,8 +177,6 @@
         "$mod, backslash, exec, hyprlock"
         "$mod, M, exec, rofi-power"
         "$mod, B, exec, kitty --class bluetui-float bluetui"
-        "$mod, C, exec, caffeine toggle"
-        "$mod SHIFT, C, exec, caffeine menu"
         "$mod, period, exec, rofimoji --selector rofi --action copy"
         "$mod SHIFT, V, exec, cliphist list | rofi -dmenu -theme custom | cliphist decode | wl-copy"
 

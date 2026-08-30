@@ -30,4 +30,40 @@
       id = "focus"; # matches the pre-existing waybar module id / CSS class
     };
   };
+
+  desktop.features.caffeine = {
+    runtimeInputs = with pkgs; [
+      systemd
+      procps
+      libnotify
+      coreutils
+      gnugrep
+      rofi
+    ];
+    subcommands = [
+      "toggle"
+      "menu"
+      "on"
+      "off"
+      "status"
+    ];
+    binds = [
+      {
+        key = "C";
+        run = "toggle";
+      }
+      {
+        mods = "$mod SHIFT";
+        key = "C";
+        run = "menu";
+      }
+    ];
+    widget = {
+      order = 10;
+      color = "#a6e3a1";
+      onClick = "toggle";
+      onClickRight = "menu";
+      tooltip = "Caffeine: lid close and idle sleep disabled\nRight-click to set a duration";
+    };
+  };
 }

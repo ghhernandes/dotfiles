@@ -19,7 +19,6 @@ _:
           "clock"
         ];
         modules-right = [
-          "custom/caffeine"
           "group/tray-expander"
           "bluetooth"
           "network"
@@ -183,14 +182,6 @@ _:
           spacing = 12;
         };
 
-        "custom/caffeine" = {
-          exec = "caffeine status";
-          interval = 2;
-          format = "{}";
-          tooltip-format = "Caffeine: lid close and idle sleep disabled\nRight-click to set a duration";
-          on-click = "caffeine toggle";
-          on-click-right = "caffeine menu";
-        };
       };
     };
     style = ''
@@ -242,13 +233,8 @@ _:
       #battery,
       #network,
       #pulseaudio,
-      #bluetooth,
-      #custom-caffeine {
+      #bluetooth {
         margin: 0 7px;
-      }
-
-      #custom-caffeine {
-        color: #a6e3a1;
       }
 
       #tray {

@@ -8,5 +8,6 @@
     ./hyprlock.nix
     ./scripts.nix
     ./feature.nix
+    ./features.nix
   ];
 }

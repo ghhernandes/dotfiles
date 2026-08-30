@@ -13,35 +13,10 @@ let
 in
 {
   home.packages = [
-    (mkScript "screenshot" [
-      pkgs.grim
-      pkgs.slurp
-      pkgs.wl-clipboard
-      pkgs.jq
-      pkgs.hyprland
-      pkgs.coreutils
-    ])
     (mkScript "keybinds" [
       pkgs.hyprland
       pkgs.jq
       pkgs.util-linux
-    ])
-    (mkScript "rofi-power" [
-      pkgs.rofi
-      pkgs.systemd
-    ])
-    (mkScript "focus-mode" [
-      pkgs.dunst
-      pkgs.libnotify
-      pkgs.coreutils
-    ])
-    (mkScript "caffeine" [
-      pkgs.systemd
-      pkgs.procps
-      pkgs.libnotify
-      pkgs.coreutils
-      pkgs.gnugrep
-      pkgs.rofi
     ])
   ];
 }

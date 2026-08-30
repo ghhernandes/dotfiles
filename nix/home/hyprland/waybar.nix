@@ -1,4 +1,4 @@
-_:
+{ config, ... }:
 
 {
   programs.waybar = {
@@ -19,8 +19,6 @@ _:
           "clock"
         ];
         modules-right = [
-          "custom/caffeine"
-          "custom/focus"
           "group/tray-expander"
           "bluetooth"
           "network"
@@ -66,14 +64,14 @@ _:
           interval = 5;
           format = "󰻠";
           tooltip-format = "CPU {usage}%";
-          on-click = "kitty --class btop-float btop";
+          on-click = config.desktop.floats.btop.launch;
         };
 
         memory = {
           interval = 5;
           format = "󰍛";
           tooltip-format = "RAM {percentage}% ({used:0.1f}G / {total:0.1f}G)";
-          on-click = "kitty --class btop-float btop";
+          on-click = config.desktop.floats.btop.launch;
         };
 
         battery = {
@@ -131,7 +129,7 @@ _:
           tooltip-format-ethernet = "Connected";
           tooltip-format-disconnected = "Disconnected";
           interval = 5;
-          on-click = "kitty --class impala-float impala";
+          on-click = config.desktop.floats.impala.launch;
         };
 
         pulseaudio = {
@@ -148,7 +146,7 @@ _:
           };
           scroll-step = 5;
           tooltip-format = "Playing at {volume}%";
-          on-click = "pavucontrol";
+          on-click = config.desktop.floats.pavucontrol.launch;
           on-click-right = "pamixer -t";
         };
 
@@ -159,7 +157,7 @@ _:
           format-connected = "󰂱";
           format-no-controller = "";
           tooltip-format = "Devices connected: {num_connections}";
-          on-click = "kitty --class bluetui-float bluetui";
+          on-click = config.desktop.floats.bluetui.launch;
         };
 
         "group/tray-expander" = {
@@ -184,22 +182,6 @@ _:
           spacing = 12;
         };
 
-        "custom/focus" = {
-          exec = "focus-mode status";
-          interval = 2;
-          format = "{}";
-          tooltip-format = "Focus mode (Do Not Disturb) active";
-          on-click = "focus-mode toggle";
-        };
-
-        "custom/caffeine" = {
-          exec = "caffeine status";
-          interval = 2;
-          format = "{}";
-          tooltip-format = "Caffeine: lid close and idle sleep disabled\nRight-click to set a duration";
-          on-click = "caffeine toggle";
-          on-click-right = "caffeine menu";
-        };
       };
     };
     style = ''
@@ -251,18 +233,8 @@ _:
       #battery,
       #network,
       #pulseaudio,
-      #bluetooth,
-      #custom-focus,
-      #custom-caffeine {
+      #bluetooth {
         margin: 0 7px;
-      }
-
-      #custom-focus {
-        color: #f9e2af;
-      }
-
-      #custom-caffeine {
-        color: #a6e3a1;
       }
 
       #tray {

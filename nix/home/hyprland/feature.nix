@@ -41,66 +41,74 @@ let
     };
   };
 
-  widgetType = types.submodule {
-    options = {
-      enable = mkOption {
-        type = types.bool;
-        default = true;
-      };
-      # Waybar's module id; the CSS selector (#custom-<id>) is derived from
-      # the same value, so the two can't drift apart.
-      id = mkOption { type = types.str; };
-      bar = mkOption {
-        type = types.enum [
-          "left"
-          "center"
-          "right"
-        ];
-        default = "right";
-      };
-      order = mkOption {
-        type = types.int;
-        default = 50;
-      };
-      status = mkOption {
-        type = types.str;
-        default = "status";
-      }; # subcommand printing the indicator
-      interval = mkOption {
-        type = types.int;
-        default = 2;
-      };
-      tooltip = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-      onClick = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-      onClickRight = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-      color = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-      margin = mkOption {
-        type = types.str;
-        default = "0 7px";
-      };
-      # Escape hatches: waybar has ~40 per-module keys, this models 8 of them.
-      settings = mkOption {
-        type = types.attrsOf types.anything;
-        default = { };
-      };
-      css = mkOption {
-        type = types.lines;
-        default = "";
+  # Takes the enclosing feature's name so `id` can default to it without the
+  # self-referential `config.widget` read that caused infinite recursion when
+  # this default lived in featureType's own `config` block instead.
+  widgetType =
+    featureName:
+    types.submodule {
+      options = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+        };
+        # Waybar's module id; the CSS selector (#custom-<id>) is derived from
+        # the same value, so the two can't drift apart.
+        id = mkOption {
+          type = types.str;
+          default = featureName;
+        };
+        bar = mkOption {
+          type = types.enum [
+            "left"
+            "center"
+            "right"
+          ];
+          default = "right";
+        };
+        order = mkOption {
+          type = types.int;
+          default = 50;
+        };
+        status = mkOption {
+          type = types.str;
+          default = "status";
+        }; # subcommand printing the indicator
+        interval = mkOption {
+          type = types.int;
+          default = 2;
+        };
+        tooltip = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        onClick = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        onClickRight = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        color = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        margin = mkOption {
+          type = types.str;
+          default = "0 7px";
+        };
+        # Escape hatches: waybar has ~40 per-module keys, this models 8 of them.
+        settings = mkOption {
+          type = types.attrsOf types.anything;
+          default = { };
+        };
+        css = mkOption {
+          type = types.lines;
+          default = "";
+        };
       };
     };
-  };
 
   featureType = types.submodule (
     { name, config, ... }:
@@ -135,7 +143,7 @@ let
           default = [ ];
         };
         widget = mkOption {
-          type = types.nullOr widgetType;
+          type = types.nullOr (widgetType name);
           default = null;
         };
         package = mkOption {
@@ -144,7 +152,6 @@ let
         };
       };
       config = {
-        widget = lib.mkIf (config.widget != null) { id = lib.mkDefault name; };
         package = pkgs.writeShellApplication {
           inherit (config) name runtimeInputs;
           text = builtins.readFile config.source;

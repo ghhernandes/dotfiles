@@ -24,6 +24,9 @@ let
 
     force_tcp = false
     timeout = 5000
+    # Upstream's Go default is 5s, well under typical gaps between browser
+    # DNS lookups, forcing a fresh TLS handshake (~500ms) on most queries.
+    keepalive = 30
 
     bootstrap_resolvers = ['9.9.9.9:53', '8.8.8.8:53']
     ignore_system_dns = true

@@ -63,8 +63,14 @@
   # them to `journalctl --user -u <name>` — none of which applies to the
   # exec-once entries they replace.
   services = {
-    # On-screen display for volume/brightness/caps-lock changes.
-    swayosd.enable = true;
+    # On-screen display for volume/brightness/caps-lock changes. Custom style
+    # because the package default themes itself off GTK's @theme_fg_color/
+    # @theme_bg_color, which resolve to black with no GTK theme installed here
+    # — rendering black icon/text on a black background.
+    swayosd = {
+      enable = true;
+      stylePath = ./swayosd-style.css;
+    };
 
     hyprpolkitagent.enable = true; # GUI polkit auth prompts
 

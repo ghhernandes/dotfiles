@@ -15,6 +15,7 @@
     hypridle
     rofi
     ai
+    reverseEngineering
   ];
 
   # Fresh install on NixOS 26.05, so adopt the 26.05 home-manager defaults
@@ -44,4 +45,20 @@
 
     ",preferred,auto-up,1"
   ];
+
+  # XWayland can't do fractional scaling itself, so at scale 1.25/1.5 it
+  # renders X11 clients (GIMP, yubioath-flutter, Ghidra's Swing UI, ...) at 1x
+  # and lets the compositor bilinear-upscale them, which blurs text.
+  # force_zero_scaling tells XWayland to always render at 1x and let Hyprland
+  # handle the scaling; pairing it with GDK_SCALE,2 makes GTK clients render
+  # at 2x instead, so the compositor is downscaling a sharper source instead
+  # of upscaling a blurry one. XCURSOR_SIZE is doubled to match, since the
+  # cursor theme is drawn by the same 2x-then-downscale path.
+  wayland.windowManager.hyprland.settings = {
+    xwayland.force_zero_scaling = true;
+    env = lib.mkAfter [
+      "GDK_SCALE,2"
+      "XCURSOR_SIZE,48"
+    ];
+  };
 }

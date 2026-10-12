@@ -61,7 +61,7 @@
         hypridle = ./home/hypridle.nix;
         rofi = ./home/rofi;
         reverseEngineering = ./home/reverse-engineering.nix;
-        ai = ./home/ai;
+        ai = ./home/ai.nix;
       };
 
       systemModules = {

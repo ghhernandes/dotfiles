@@ -22,6 +22,10 @@
     x11.enable = true;
   };
 
+  # Plasma's GTK integration rewrites ~/.gtkrc-2.0 behind home-manager's back,
+  # which would otherwise block every activation.
+  gtk.gtk2.force = true;
+
   # gui.nix points Qt at the GTK look; Plasma supplies its own platform theme.
   qt.enable = lib.mkForce false;
 
@@ -111,18 +115,16 @@
 
     shortcuts = {
       kwin = builtins.listToAttrs (
-        builtins.concatMap
-          (n: [
-            {
-              name = "Switch to Desktop ${toString n}";
-              value = "Meta+${toString n}";
-            }
-            {
-              name = "Window to Desktop ${toString n}";
-              value = "Meta+Shift+${toString n}";
-            }
-          ])
-          (lib.range 1 4)
+        builtins.concatMap (n: [
+          {
+            name = "Switch to Desktop ${toString n}";
+            value = "Meta+${toString n}";
+          }
+          {
+            name = "Window to Desktop ${toString n}";
+            value = "Meta+Shift+${toString n}";
+          }
+        ]) (lib.range 1 4)
       );
       "services/org.kde.krunner.desktop"."_launch" = "Meta+Space";
     };

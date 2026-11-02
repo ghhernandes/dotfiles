@@ -10,6 +10,7 @@
     (with self.systemModules; [
       security
       docker
+      ollama
       nixGc
     ])
     ++ [
@@ -45,6 +46,10 @@
   };
 
   programs.zsh.enable = true;
+
+  # CPU-only: no reliable GPU passthrough from this WSL distro, tiny default
+  # model (nix/system/ollama.nix) keeps CPU inference usable regardless.
+  ai.ollama.enable = true;
 
   services.tailscale.enable = true;
 

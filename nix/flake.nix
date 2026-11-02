@@ -82,6 +82,7 @@
         monitoring = ./system/monitoring.nix;
         security = ./system/security.nix;
         packageManagers = ./system/package-managers.nix;
+        ollama = ./system/ollama.nix;
         docker = ./system/docker.nix;
         podman = ./system/podman.nix;
         laptop = ./system/laptop.nix;

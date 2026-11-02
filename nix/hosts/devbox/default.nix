@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     audio
     security
+    ollama
     nixGc
   ];
 
@@ -29,6 +30,8 @@
   };
 
   programs.zsh.enable = true;
+
+  ai.ollama.enable = true; # CPU-only VM, tiny default model (nix/system/ollama.nix)
 
   services = {
     printing.enable = true;

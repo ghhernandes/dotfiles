@@ -15,6 +15,7 @@
     virtualization
     security
     packageManagers
+    ollama
     laptop
     nixGc
     containers
@@ -69,6 +70,11 @@
     HibernateDelaySec = "30min";
     HibernateOnACPower = "no";
   };
+
+  # CPU-only: the iGPU has no well-supported Ollama acceleration backend
+  # here, and the tiny default model (nix/system/ollama.nix) is small enough
+  # that CPU inference stays usable.
+  ai.ollama.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.graphics = {

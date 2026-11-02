@@ -19,6 +19,7 @@
       monitoring
       security
       packageManagers
+      ollama
       nixGc
       podman
       containers
@@ -44,4 +45,11 @@
   programs.zsh.enable = true;
 
   containerServices.pihole.enable = true;
+
+  # Only desktop with a real GPU (amdgpu, see hardware-configuration.nix), so
+  # it's the one host where ROCm acceleration is worth the extra build time.
+  # `services.ollama.package` comes straight from the upstream ollama module;
+  # `ai.ollama.enable`/`.model` (nix/system/ollama.nix) drive everything else.
+  ai.ollama.enable = true;
+  services.ollama.package = pkgs.ollama-rocm;
 }

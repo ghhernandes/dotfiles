@@ -75,7 +75,7 @@
         };
       };
       virtualDesktops = {
-        number = 10;
+        number = 4;
         rows = 1;
       };
     };
@@ -110,33 +110,21 @@
       };
 
     shortcuts = {
-      kwin = {
-        "Window Close" = "Meta+Q";
-        "Window Fullscreen" = "Meta+F";
-        "Switch Window Left" = "Meta+H";
-        "Switch Window Right" = "Meta+L";
-        "Switch Window Up" = "Meta+K";
-        "Switch Window Down" = "Meta+J";
-      }
-      // builtins.listToAttrs (
+      kwin = builtins.listToAttrs (
         builtins.concatMap
           (n: [
             {
               name = "Switch to Desktop ${toString n}";
-              value = "Meta+${toString (lib.mod n 10)}";
+              value = "Meta+${toString n}";
             }
             {
               name = "Window to Desktop ${toString n}";
-              value = "Meta+Shift+${toString (lib.mod n 10)}";
+              value = "Meta+Shift+${toString n}";
             }
           ])
-          (lib.range 1 10)
+          (lib.range 1 4)
       );
       "services/org.kde.krunner.desktop"."_launch" = "Meta+Space";
-      ksmserver."Lock Session" = [
-        "Meta+\\"
-        "Screensaver"
-      ];
     };
 
     spectacle.shortcuts = {

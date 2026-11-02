@@ -41,6 +41,13 @@
       wants = [ "podman-dnscrypt-proxy.service" ];
     };
 
+    # The host resolves through its own pihole (host-networked, so DNS is on
+    # 127.0.0.1:53). NetworkManager must not push DHCP DNS over it, and
+    # resolved is off because FTL binds 0.0.0.0:53.
+    services.resolved.enable = false;
+    networking.networkmanager.dns = "none";
+    networking.nameservers = [ "127.0.0.1" ];
+
     # Scoped to the tailnet only — global allowedTCPPorts/allowedUDPPorts
     # would open DNS + the cleartext admin login on every network this
     # laptop joins (home, coffee shop, ...), not just trusted devices.

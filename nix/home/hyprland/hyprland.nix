@@ -280,9 +280,9 @@
 
       # Look & feel adapted from Omarchy (basecamp/omarchy default/hypr/looknfeel.conf).
       general = {
-        gaps_in = 2;
-        gaps_out = 4;
-        border_size = 2;
+        gaps_in = 4;
+        gaps_out = 8;
+        border_size = 3;
         # Matches the active-workspace accent in the waybar style.
         "col.active_border" = "rgba(33ccffee)";
         "col.inactive_border" = "rgba(595959aa)";
@@ -292,7 +292,7 @@
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 4;
         blur = {
           enabled = true;
           size = 2;

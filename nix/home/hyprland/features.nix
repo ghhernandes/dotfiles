@@ -105,6 +105,20 @@
     ];
   };
 
+  # No widget: waybar.nix wires this into a hand-written image#tailscale
+  # module instead, since the feature/widget system only generates text
+  # (custom/*) modules and this one renders the real Tailscale logo.
+  desktop.features.tailscale-widget = {
+    runtimeInputs = with pkgs; [
+      tailscale
+      jq
+    ];
+    subcommands = [
+      "toggle"
+      "status"
+    ];
+  };
+
   desktop.features.rofi-power = {
     runtimeInputs = with pkgs; [
       rofi

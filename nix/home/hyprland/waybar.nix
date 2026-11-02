@@ -20,10 +20,11 @@
         ];
         modules-right = [
           "group/tray-expander"
-          "bluetooth"
-          "network"
+          "image#tailscale"
           "pulseaudio"
           "memory"
+          "network"
+          "bluetooth"
           "battery"
         ];
 
@@ -122,6 +123,13 @@
           tooltip-format-disconnected = "Disconnected";
           interval = 5;
           on-click = config.desktop.floats.impala.launch;
+        };
+
+        "image#tailscale" = {
+          exec = "${config.desktop.features.tailscale-widget.package}/bin/tailscale-widget status ${./icons/tailscale.svg} ${./icons/tailscale-off.svg}";
+          on-click = "${config.desktop.features.tailscale-widget.package}/bin/tailscale-widget toggle";
+          interval = 5;
+          size = 22;
         };
 
         pulseaudio = {
@@ -227,7 +235,8 @@
       #battery,
       #network,
       #pulseaudio,
-      #bluetooth {
+      #bluetooth,
+      #image.tailscale {
         margin: 0 7px;
       }
 

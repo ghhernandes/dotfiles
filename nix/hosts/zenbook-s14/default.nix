@@ -1,5 +1,6 @@
 {
   self,
+  lib,
   pkgs,
   ...
 }:
@@ -9,7 +10,7 @@
     ./hardware-configuration.nix
     audio
     bluetooth
-    hyprland
+    plasma
     podman
     virtualization
     security
@@ -43,15 +44,15 @@
   # A closed lid always suspends when undocked, and hibernates once the delay
   # expires. Docked (systemd's own definition: more than one display
   # connected) is left at "ignore" so closing the lid with the external
-  # monitor attached keeps the machine running instead of sleeping — the
-  # Hyprland switch binding (home/hyprland/hyprland.nix) turns off just the
-  # internal panel in that case. (laptop.nix sets the first two as
-  # mkDefault, so plain values win.)
+  # monitor attached keeps the machine running instead of sleeping. Plasma's
+  # PowerDevil enforces the same policy while a session runs
+  # (home/plasma); these settings cover the login screen. (laptop.nix sets
+  # the first two as mkDefault, so plain values win.)
   #
   # LidSwitchIgnoreInhibited defaults to "yes", meaning the lid ignores
-  # high-level inhibitors; "no" makes it respect them, which is what lets
-  # `caffeine` keep the machine awake through a lid close. Hyprland locks the
-  # session separately on lid close, so it still locks when sleep is inhibited.
+  # high-level inhibitors; "no" makes it respect them, so a sleep-blocking
+  # inhibitor (Plasma's "block sleep" toggle) keeps the machine awake through
+  # a lid close.
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchExternalPower = "suspend-then-hibernate";
@@ -94,13 +95,16 @@
 
   programs.zsh.enable = true;
 
+  # Plasma ships Bluedevil; Blueman would add a second tray applet.
+  services.blueman.enable = lib.mkForce false;
+
   services.tailscale.enable = true;
 
   containerServices.pihole.enable = true;
   containerServices.dnscryptProxy.enable = true;
 
   # The keyboard backlight LED resets to 0 on boot. Restore it to low (1 of 3)
-  # each boot; the Fn keys (wired in home/hyprland) still adjust it live.
+  # each boot; the Fn keys (handled by PowerDevil) still adjust it live.
   systemd.services.kbd-backlight-default = {
     description = "Default keyboard backlight to low at boot";
     wantedBy = [ "multi-user.target" ];

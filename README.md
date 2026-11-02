@@ -8,14 +8,14 @@ NixOS + home-manager flake-based configurations for multiple hosts.
 ai/            # AI tool configs (Claude Code, future siblings), see ai/README.md
 nix/
 ├── flake.nix     # Inputs, exports homeModules/systemModules, wires hosts
-├── system/       # NixOS system modules (audio, docker, hyprland, ...)
-├── home/         # home-manager modules (cli, gui, dev, ai, hyprland, ...)
+├── system/       # NixOS system modules (audio, docker, hyprland, plasma, ...)
+├── home/         # home-manager modules (cli, gui, dev, ai, hyprland, plasma, ...)
 └── hosts/        # Per-host configs; each subdir auto-discovered
     ├── configuration.nix   # Shared base system config
     ├── callisto/           # WSL dev environment
     ├── ghstation/          # Hyprland desktop / gaming workstation
     ├── devbox/             # Minimal GNOME dev box
-    └── zenbook-s14/        # Hyprland laptop (ASUS Zenbook S 14, LUKS)
+    └── zenbook-s14/        # KDE Plasma laptop (ASUS Zenbook S 14, LUKS)
 ```
 
 ## Hosts
@@ -23,7 +23,7 @@ nix/
 - **callisto** — NixOS-WSL, CLI + dev + reverse-engineering
 - **ghstation** — Full Hyprland desktop, gaming, virtualization, secure boot
 - **devbox** — Minimal GNOME dev box
-- **zenbook-s14** — Full Hyprland laptop, LUKS-encrypted, ASUS power tooling
+- **zenbook-s14** — Full KDE Plasma laptop, LUKS-encrypted, ASUS power tooling
 
 ## Modules
 

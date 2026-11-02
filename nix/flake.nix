@@ -23,6 +23,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     systems.url = "github:nix-systems/default";
   };
 
@@ -58,6 +64,7 @@
         fonts = ./home/fonts.nix;
         dev = ./home/dev;
         hyprland = ./home/hyprland;
+        plasma = ./home/plasma;
         hypridle = ./home/hypridle.nix;
         rofi = ./home/rofi;
         reverseEngineering = ./home/reverse-engineering.nix;
@@ -70,6 +77,7 @@
         gaming = ./system/gaming.nix;
         virtualization = ./system/virtualization.nix;
         hyprland = ./system/hyprland.nix;
+        plasma = ./system/plasma.nix;
         remoteAccess = ./system/remote-access.nix;
         monitoring = ./system/monitoring.nix;
         security = ./system/security.nix;

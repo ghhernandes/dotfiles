@@ -16,6 +16,7 @@
     security
     packageManagers
     ollama
+    gaming
     laptop
     nixGc
     containers
